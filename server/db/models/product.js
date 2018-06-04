@@ -18,9 +18,6 @@ const Product = db.define('product', {
   width: {
     type: Sequelize.DECIMAL(10, 2)
   },
-  height: {
-    type: Sequelize.DECIMAL(10, 2)
-  },
   type: {
     type: Sequelize.STRING
   },
@@ -37,6 +34,9 @@ const Product = db.define('product', {
     type: Sequelize.DECIMAL(10, 1)
   },
   manufacturer: {
+    type: Sequelize.STRING
+  },
+  model: {
     type: Sequelize.STRING
   }
 });
