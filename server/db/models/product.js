@@ -13,10 +13,10 @@ const Product = db.define('product', {
     type: Sequelize.STRING
   },
   length: {
-    type: Sequelize.DECIMAL(10, 2)
+    type: Sequelize.INTEGER
   },
   width: {
-    type: Sequelize.DECIMAL(10, 2)
+    type: Sequelize.INTEGER
   },
   type: {
     type: Sequelize.STRING
@@ -28,10 +28,10 @@ const Product = db.define('product', {
     type: Sequelize.INTEGER
   },
   bedrooms: {
-    type: Sequelize.DECIMAL(10, 1)
+    type: Sequelize.INTEGER
   },
   bathrooms: {
-    type: Sequelize.DECIMAL(10, 1)
+    type: Sequelize.INTEGER
   },
   manufacturer: {
     type: Sequelize.STRING
