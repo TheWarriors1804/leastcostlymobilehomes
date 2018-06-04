@@ -1,4 +1,4 @@
-const { db, User, Order, Product } = require('./models/index')
+const { db, User, Order, Product } = require("./models/index");
 
 const users = [
   {
@@ -33,7 +33,7 @@ const users = [
     address: "9 Corporate",
     password: "lowe"
   }
-]
+];
 
 const orders = [
   {
@@ -71,7 +71,7 @@ const orders = [
     initiatedDate: "2018-06-04 12:40:23",
     purchaseDate: "2018-06-04 10:20:20"
   }
-]
+];
 
 const products = [
   {
@@ -301,29 +301,28 @@ const products = [
 // ]
 
 const seed = async () => {
-  await Promise.all(users.map(user => User.create(user)))
-  await Promise.all(orders.map(order => Order.create(order)))
+  await Promise.all(users.map(user => User.create(user)));
+  await Promise.all(orders.map(order => Order.create(order)));
   // await Promise.all(orderItems.map(orderitem => orderItem.create(orderitem)))
-  await Promise.all(products.map((product) => Product.create(product)))
-  console.log('db seeding completed')
-}
+  await Promise.all(products.map(product => Product.create(product)));
+  console.log("db seeding completed");
+};
 
 const main = () => {
-  console.log('db syncing')
-  db
-    .sync({force: true})
+  console.log("db syncing");
+  db.sync({ force: true })
     .then(() => {
-      console.log('db seeding')
+      console.log("db seeding");
       return seed();
     })
     .catch(err => {
-      console.log('error while seeding')
-      console.log(err.stack)
+      console.log("error while seeding");
+      console.log(err.stack);
     })
     .then(() => {
-      db.close()
+      db.close();
       return null;
-    })
-}
+    });
+};
 
 main();
