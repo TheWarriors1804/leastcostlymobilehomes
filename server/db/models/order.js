@@ -1,10 +1,10 @@
-const Sequelize = require('sequelize')
-const db = require('../db')
+const Sequelize = require('sequelize');
+const db = require('../db');
 
 const Order = db.define('order', {
   sessionId: {
     type: Sequelize.STRING,
-    allowNull: false,
+    allowNull: false
   },
   status: {
     type: Sequelize.ENUM('incomplete', 'complete'),
@@ -13,9 +13,11 @@ const Order = db.define('order', {
   initiatedDate: {
     type: Sequelize.DATE,
     defaultValue: Sequelize.NOW,
-    allowNull: false,
+    allowNull: false
   },
   purchaseDate: {
-    type: Sequelize.DATE,
-  },
-})
+    type: Sequelize.DATE
+  }
+});
+
+module.exports = Order;
