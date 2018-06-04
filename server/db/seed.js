@@ -1,4 +1,4 @@
-const db = require('./server/db/db')
+const { db, User, Order, Product } = require("./models/index");
 
 const users = [
   {
@@ -33,40 +33,45 @@ const users = [
     address: "9 Corporate",
     password: "lowe"
   }
-]
+];
 
 const orders = [
   {
     userId: 2,
     status: "complete",
+    sessionId: "sdfasf",
     initiatedDate: "2018-06-03 12:40:23",
     purchaseDate: "2018-06-04 10:20:20"
   },
   {
     userId: 3,
     status: "incomplete",
+    sessionId: "sdfasf",
     initiatedDate: "2018-06-03 09:40:13",
     purchaseDate: "2018-06-04 08:20:20"
   },
   {
     userId: 1,
     status: "incomplete",
+    sessionId: "sdfasf",
     initiatedDate: "2018-06-02 10:40:23",
     purchaseDate: "2018-06-04 09:50:20"
   },
   {
     userId: 4,
     status: "incomplete",
+    sessionId: "sdfasf",
     initiatedDate: "2018-06-01 10:40:23",
     purchaseDate: "2018-06-04 09:20:20"
   },
   {
     userId: 2,
     status: "incomplete",
+    sessionId: "sdfasf",
     initiatedDate: "2018-06-04 12:40:23",
     purchaseDate: "2018-06-04 10:20:20"
   }
-]
+];
 
 const products = [
   {
@@ -252,73 +257,72 @@ const products = [
   }
 ];
 
-const orderItems = [
-  {
-    orderId: 1,
-    productId: 5
-  },
-  {
-    orderId: 1,
-    productId: 3
-  },
-  {
-    orderId: 2,
-    productId: 10
-  },
-  {
-    orderId: 3,
-    productId: 5
-  },
-  {
-    orderId: 4,
-    productId: 9
-  },
-  {
-    orderId: 4,
-    productId: 2
-  },
-  {
-    orderId: 4,
-    productId: 6
-  },
-  {
-    orderId: 4,
-    productId: 7
-  },
-  {
-    orderId: 5,
-    productId: 1
-  },
-  {
-    orderId: 5,
-    productId: 12
-  }
-]
+// const orderItems = [
+//   {
+//     orderId: 1,
+//     productId: 5
+//   },
+//   {
+//     orderId: 1,
+//     productId: 3
+//   },
+//   {
+//     orderId: 2,
+//     productId: 10
+//   },
+//   {
+//     orderId: 3,
+//     productId: 5
+//   },
+//   {
+//     orderId: 4,
+//     productId: 9
+//   },
+//   {
+//     orderId: 4,
+//     productId: 2
+//   },
+//   {
+//     orderId: 4,
+//     productId: 6
+//   },
+//   {
+//     orderId: 4,
+//     productId: 7
+//   },
+//   {
+//     orderId: 5,
+//     productId: 1
+//   },
+//   {
+//     orderId: 5,
+//     productId: 12
+//   }
+// ]
 
 const seed = async () => {
-  await Promise.all(users.map(user => User.create(user)))
-  await Promise.all(orders.map(order => Order.create(order)))
-  await Promise.all(orderItems.map(orderitem => orderItem.create(orderitem)))
-  await Promise.all(products.map((product) => Product.create(product)))
-  console.log('db seeding completed')
-}
+  await Promise.all(users.map(user => User.create(user)));
+  await Promise.all(orders.map(order => Order.create(order)));
+  // await Promise.all(orderItems.map(orderitem => orderItem.create(orderitem)))
+  await Promise.all(products.map(product => Product.create(product)));
+  console.log("db seeding completed");
+};
 
 const main = () => {
-  console.log('db syncing')
-  db
-    .sync({force: true})
+  console.log("db syncing");
+  db.sync({ force: true })
     .then(() => {
-      console.log('db seeding')
+      console.log("db seeding");
       return seed();
     })
     .catch(err => {
-      console.log('error while seeding')
-      console.log(err.stack)
+      console.log("error while seeding");
+      console.log(err.stack);
     })
     .then(() => {
-      db.close()
+      db.close();
       return null;
-    })
-}
+    });
+};
 
 main();
