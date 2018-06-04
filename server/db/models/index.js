@@ -33,5 +33,6 @@ Order.belongsToMany(Product, {
 module.exports = {
   User,
   Order,
-  Product
+  Product,
+  db
 };
