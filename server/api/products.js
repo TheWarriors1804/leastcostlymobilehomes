@@ -5,7 +5,7 @@ module.exports = router
 router.get('/', async (req, res, next) => {
   try {
     const products = await Product.findAll({
-      include: [{model: Order}]
+      include: [{all: true}]
     })
   res.json(products)
   } catch (err)
