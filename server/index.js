@@ -31,8 +31,7 @@ passport.deserializeUser((id, done) =>
   db.models.user
     .findById(id)
     .then(user => done(null, user))
-    .catch(done)
-);
+    .catch(done));
 
 const createApp = () => {
   // logging middleware
@@ -91,8 +90,7 @@ const createApp = () => {
 const startListening = () => {
   // start listening (and create a 'server' object representing our server)
   const server = app.listen(PORT, () =>
-    console.log(`Mixing it up on port ${PORT}`)
-  );
+    console.log(`Mixing it up on port ${PORT}`));
 
   // set up our socket control center
   const io = socketio(server);
@@ -101,7 +99,7 @@ const startListening = () => {
 
 const syncDb = () =>
   db.sync({
-    force: true
+    force: false
   });
 
 // This evaluates as true when this file is run directly from the command line,
