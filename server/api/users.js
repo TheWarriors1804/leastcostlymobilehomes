@@ -21,7 +21,7 @@ router.get('/:id', async (req, res, next) => {
       where: {
         id
       },
-      // include: {model: Product}
+      include: [{all: true}]
     })
     res.json(newUser)
   } catch (err)
