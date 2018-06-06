@@ -10,9 +10,11 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
       <div className="navTitle navSpace">
         <img src="Logo.png" className="navImg" />
       </div>
-      <div className="navFlexContainer">
+      <div className="flexContainer">
         <p className="navButton">Home</p>
-        <p className="navButton">Shop for Homes</p>
+        <Link to="/singleHome">
+          <p className="navButton">Shop for Homes</p>
+        </Link>
         <h2 />
         <nav>
           {isLoggedIn ? (
@@ -36,7 +38,6 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
           )}
         </nav>
       </div>
-      {/* <div className="navSpace" /> */}
     </div>
     <div className="navSpace" />
   </div>
