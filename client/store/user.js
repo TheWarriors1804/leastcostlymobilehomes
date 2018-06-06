@@ -16,6 +16,7 @@ const defaultUser = {};
 /**
  * ACTION CREATORS
  */
+
 const getUser = user => ({ type: GET_USER, user });
 const removeUser = () => ({ type: REMOVE_USER });
 const updatedUser = user => ({ type: UPDATE_USER, user });
@@ -73,7 +74,7 @@ export default function(state = defaultUser, action) {
     case REMOVE_USER:
       return defaultUser;
     case UPDATE_USER:
-      return updatedUser;
+      return action.updated;
     default:
       return state;
   }
