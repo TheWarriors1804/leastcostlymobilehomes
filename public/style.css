@@ -41,6 +41,11 @@ form div {
   align-items: center;
 }
 
+hr {
+  width: 90vw;
+  margin-bottom: 40px;
+}
+
 /* NavBar CSS: */
 
 .navDiv {
@@ -124,4 +129,26 @@ form div {
 
 .homeInfo select {
   width: 62px;
+}
+
+.titleHeight {
+  height: 110px;
+}
+
+.homeTitle {
+  justify-content: space-between;
+  width: 60vw;
+  margin-left: 10vw;
+  font-size: 24px;
+  padding-top: 20px;
+  padding-bottom: 10px;
+}
+
+.homeImage {
+  height: 350px;
+}
+
+.homeDescrip {
+  font-size: 16px;
+  width: 80vw;
 }
