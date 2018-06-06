@@ -1,7 +1,7 @@
-const router = require('express').Router()
-const {User} = require('../db/models')
-const {Product} = require('../db/models/product')
-module.exports = router
+const router = require('express').Router();
+const { User } = require('../db/models');
+const { Product } = require('../db/models/product');
+module.exports = router;
 
 router.get('/', (req, res, next) => {
   User.findAll({
@@ -11,19 +11,45 @@ router.get('/', (req, res, next) => {
     attributes: ['id', 'email']
   })
     .then(users => res.json(users))
-    .catch(next)
-})
+    .catch(next);
+});
 
+// get solo user
 router.get('/:id', async (req, res, next) => {
   try {
-    const id = req.params.id
+    const id = req.params.id;
     const newUser = await User.find({
       where: {
         id
       },
-      include: [{all: true}]
-    })
-    res.json(newUser)
-  } catch (err)
-    {next(err)}
-})
+      include: [{ all: true }]
+    });
+    res.json(newUser);
+  } catch (err) {
+    next(err);
+  }
+});
+
+// update User
+router.put('/:id', async (req, res, next) => {
+  try {
+    const user = await User.findById(req.params.id);
+    const updated = await user.update(req.body);
+    res.json(updated);
+  } catch (err) {
+    console.error(err);
+  }
+});
+
+// delete user
+router.delete('/:id', async (req, res, next) => {
+  try {
+    await User.destroy({
+      where: {
+        id: req.params.id
+      }
+    }).then(() => res.status(204).end());
+  } catch (err) {
+    next(err);
+  }
+});
