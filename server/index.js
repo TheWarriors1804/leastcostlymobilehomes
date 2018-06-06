@@ -36,7 +36,7 @@ Note how passport contains user and user contains the id.
 Some thoughts:
 Should we store data for individuals who are not logged in?
 Is there data in req.session for non-logged in users?
-Is there data on req.user?
+Does deserializeUser store user data on req.user? If so, how do we pass this to components? Thunk?
 
 I found this to be useful reading: http://toon.io/understanding-passportjs-authentication-flow/
 */

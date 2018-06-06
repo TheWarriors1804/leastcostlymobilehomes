@@ -45,6 +45,19 @@ const User = db.define('user', {
 
 module.exports = User
 
+/* SOME NOTES ON SALT AND HASHES
+If you look at the seeded users table, passwords look like this:
+3b649989f9b54e673806f9d8c575e242487241f1ec058327b5997320b953c24e
+
+They have been hashed and salted. This is a one-way process and cannot be reversed. The actual passwords are never stored on the server. When a user logs in, the salt and hash are reapplied to the inputted pw to get the encrypted one. The two passwords are then compared.
+
+Hashing alone is not secure because hackers can use brute force (millions of logins with common PWs) If two users have the same pw, they will have the same hash. This leads to security vulnerabilities as PWs are more predictable.
+
+A salt is a random sequence that is created when a user makes or changes a PW. Each user has a unique salt. This random sequence is prepended to the password before hashing occurs. As a result, all hashed pw's are different and thus harder to predict.
+
+Reading: https://crackstation.net/hashing-security.htm
+*/
+
 /**
  * instanceMethods
  */
