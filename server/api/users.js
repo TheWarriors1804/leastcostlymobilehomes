@@ -1,55 +1,55 @@
-const router = require('express').Router();
-const { User } = require('../db/models');
-const { Product } = require('../db/models/product');
-module.exports = router;
+const router = require('express').Router()
+const {User} = require('../db/models')
+const {Product} = require('../db/models/product')
+module.exports = router
 
 router.get('/', (req, res, next) => {
   User.findAll({
     // explicitly select only the id and email fields - even though
     // users' passwords are encrypted, it won't help if we just
     // send everything to anyone who asks!
-    attributes: ['id', 'email'],
+    attributes: ['id', 'email']
   })
     .then(users => res.json(users))
-    .catch(next);
-});
+    .catch(next)
+})
 
 // get solo user
 router.get('/:id', async (req, res, next) => {
   try {
-    const id = req.params.id;
+    const id = req.params.id
     const newUser = await User.find({
       where: {
-        id,
+        id
       },
-      include: [{ all: true }],
-    });
-    res.json(newUser);
+      include: [{all: true}]
+    })
+    res.json(newUser)
   } catch (err) {
-    next(err);
+    next(err)
   }
-});
+})
 
 // update User
 router.put('/:id', async (req, res, next) => {
   try {
-    const user = await User.findById(req.params.id);
-    const updated = await user.update(req.body);
-    res.json(updated);
+    const user = await User.findById(req.params.id)
+    const updated = await user.update(req.body)
+    res.json(updated)
   } catch (err) {
-    next(err);
+    next(err)
   }
-});
+})
 
 // delete user
 router.delete('/:id', async (req, res, next) => {
   try {
     await User.destroy({
       where: {
-        id: req.params.id,
-      },
-    }).then(() => res.status(204).end());
+        id: req.params.id
+      }
+    }).then(() => res.status(204).end())
   } catch (err) {
-    next(err);
+    next(err)
   }
-});
+})
