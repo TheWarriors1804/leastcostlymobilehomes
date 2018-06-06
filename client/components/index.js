@@ -8,9 +8,7 @@ export { default as UserHome } from './user-home';
 export { default as SingleHome } from './single-home';
 export { default as HomeInfo } from './home-info';
 export { default as HomeTitle } from './home-title';
-
+export { default as HomeSearch } from './Home-Search';
 export { default as HomeSearchCard } from './Home-Search-Card';
-
 export { default as HomeContent } from './home-content';
-
 export { Login, Signup } from './auth-form';
