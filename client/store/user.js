@@ -72,6 +72,8 @@ export default function(state = defaultUser, action) {
       return action.user;
     case REMOVE_USER:
       return defaultUser;
+    case UPDATE_USER:
+      return updatedUser;
     default:
       return state;
   }
