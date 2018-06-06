@@ -16,6 +16,9 @@ router.post('/login', (req, res, next) => {
     .catch(next)
 })
 
+//correctPassword is a prototypal method that hashes the submitted password & compares it to the one in db
+//Passport creates a login function on req; when the login process is complete, req.user is set to user
+
 router.post('/signup', (req, res, next) => {
   User.create(req.body)
     .then(user => {
@@ -41,3 +44,4 @@ router.get('/me', (req, res) => {
 })
 
 router.use('/google', require('./google'))
+
