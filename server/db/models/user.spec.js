@@ -20,9 +20,15 @@ describe('User model', () => {
           email: 'cody@puppybook.com',
           password: 'bones'
         }).then(user => {
+<<<<<<< HEAD
           cody = user;
         });
       });
+=======
+          cody = user
+        })
+      })
+>>>>>>> boilermaker/master
 
       it('returns true if the password is correct', () => {
         expect(cody.correctPassword('bones')).to.be.equal(true);
