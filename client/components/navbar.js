@@ -12,8 +12,11 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
       </div>
       <div className="flexContainer">
         <p className="navButton">Home</p>
-        <Link to="/singleHome">
+        <Link to="/HomeSearch">
           <p className="navButton">Shop for Homes</p>
+        </Link>
+        <Link to="/singleHome">
+          <p className="navButton">View Home</p>
         </Link>
         <h2 />
         <nav>
@@ -60,7 +63,10 @@ const mapDispatch = dispatch => {
   };
 };
 
-export default connect(mapState, mapDispatch)(Navbar);
+export default connect(
+  mapState,
+  mapDispatch
+)(Navbar);
 
 /**
  * PROP TYPES

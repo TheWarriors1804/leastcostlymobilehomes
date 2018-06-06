@@ -1,5 +1,5 @@
 body {
-  font-family: "Source Sans Pro", sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
 }
 
 a {
@@ -151,4 +151,17 @@ hr {
 .homeDescrip {
   font-size: 16px;
   width: 80vw;
+}
+
+/*
+Search window Css
+*/
+
+.searchCardImage {
+  height: 180px;
+}
+
+.searchCard {
+  width: 600px;
+  justify-content: space-between;
 }
