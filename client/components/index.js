@@ -8,4 +8,5 @@ export { default as UserHome } from './user-home';
 export { default as SingleHome } from './single-home';
 export { default as HomeInfo } from './home-info';
 export { default as HomeTitle } from './home-title';
+export { default as HomeContent } from './home-content';
 export { Login, Signup } from './auth-form';

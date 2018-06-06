@@ -8,6 +8,7 @@ const GET_USER = 'GET_USER';
 const REMOVE_USER = 'REMOVE_USER';
 const UPDATE_USER = 'UPDATE_USER';
 
+
 /**
  * INITIAL STATE
  */
@@ -16,9 +17,11 @@ const defaultUser = {};
 /**
  * ACTION CREATORS
  */
+
 const getUser = user => ({ type: GET_USER, user });
 const removeUser = () => ({ type: REMOVE_USER });
 const updatedUser = user => ({ type: UPDATE_USER, user });
+
 
 /**
  * THUNK CREATORS
@@ -63,6 +66,16 @@ export const deleteUser = id => async dispatch => {
   dispatch(removeUser());
 };
 
+export const updateUser = (user) => async dispatch => {
+  const updated = await axios.put(`/api/users`, user)
+  dispatch(updatedUser(updated))
+}
+
+export const deleteUser = id => async dispatch => {
+  await axios.delete(`/api/users/${id}`)
+  dispatch(removeUser())
+}
+
 /**
  * REDUCER
  */
@@ -71,7 +84,9 @@ export default function(state = defaultUser, action) {
     case GET_USER:
       return action.user;
     case REMOVE_USER:
-      return defaultUser;
+      return defaultUser
+    case UPDATE_USER:
+      return action.updated
     default:
       return state;
   }
