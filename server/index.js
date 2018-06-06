@@ -22,11 +22,25 @@ module.exports = app;
  * Node process on process.env
  */
 
-//Couldnt load secrets file
-// if (process.env.NODE_ENV !== 'production') require('../secrets');
+if (process.env.NODE_ENV !== 'production') require('../secrets');
 
 // passport registration
 passport.serializeUser((user, done) => done(null, user.id));
+
+/* SOME NOTES ON PASSPORT/SESSIONS
+serialUser is called on successful login and stores user.id to req.session.passport.user
+this can be seen in the Session table, where there is a column called data. Sample of column contents:
+{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"passport":{"user":2}}
+Note how passport contains user and user contains the id.
+
+Some thoughts:
+Ways to store data for non-logged-in users: either saveUninitialized: true or modify req.session after items are added to the cart. Without these, req.session is created but not saved for non-logged in users. Logged in users are saved because req.session is modified.
+
+Does deserializeUser store user data on req.user? If so, how do we pass this to components? Thunk?
+
+I found this to be useful reading: http://toon.io/understanding-passportjs-authentication-flow/
+*/
+
 passport.deserializeUser((id, done) =>
   db.models.user
     .findById(id)
@@ -91,7 +105,6 @@ const startListening = () => {
   // start listening (and create a 'server' object representing our server)
   const server = app.listen(PORT, () =>
     console.log(`Mixing it up on port ${PORT}`));
-
   // set up our socket control center
   const io = socketio(server);
   require('./socket')(io);

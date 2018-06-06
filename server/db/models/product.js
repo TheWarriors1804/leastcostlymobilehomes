@@ -38,6 +38,7 @@ const Product = db.define('product', {
   },
   model: {
     type: Sequelize.STRING
+    //this is the product name field
   }
 });
 
