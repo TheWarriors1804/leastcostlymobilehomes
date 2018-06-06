@@ -4,20 +4,20 @@ const db = require('../db');
 const Order = db.define('order', {
   sessionId: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
   },
   status: {
-    type: Sequelize.ENUM('incomplete', 'complete'),
-    allowNull: false
+    type: Sequelize.BOOLEAN,
+    allowNull: false,
   },
   initiatedDate: {
     type: Sequelize.DATE,
     defaultValue: Sequelize.NOW,
-    allowNull: false
+    allowNull: false,
   },
   purchaseDate: {
-    type: Sequelize.DATE
-  }
+    type: Sequelize.DATE,
+  },
 });
 
 module.exports = Order;

@@ -5,7 +5,7 @@ const request = require('supertest');
 const db = require('../db');
 const app = require('../index');
 const User = db.model('user');
-const Product = db.model('product')
+const Product = db.model('product');
 
 describe('User GET User routes', () => {
   beforeEach(() => {
@@ -13,12 +13,12 @@ describe('User GET User routes', () => {
   });
 
   describe('/api/users/', () => {
-    const doloresEmail = 'dolores@westworld.com'
+    const doloresEmail = 'dolores@westworld.com';
     beforeEach(() => {
       return User.create({
         firstName: 'Dolores',
         lastName: 'Abernathy',
-        email: doloresEmail
+        email: doloresEmail,
       });
     });
 
@@ -34,12 +34,12 @@ describe('User GET User routes', () => {
   }); // end describe('/api/users')
 
   describe('/api/users/:id', () => {
-    const teddyEmail = 'teddy@westworld.com'
+    const teddyEmail = 'teddy@westworld.com';
     beforeEach(() => {
       return User.create({
         firstName: 'Teddy',
         lastName: 'Flood',
-        email: teddyEmail
+        email: teddyEmail,
       });
     });
 
@@ -53,25 +53,21 @@ describe('User GET User routes', () => {
         });
     });
   });
-
-
-
 }); // end describe('User routes')
-
 
 describe('User GET Product Routes', () => {
   beforeEach(() => {
-    return db.sync({force: true})
-  })
+    return db.sync({ force: true });
+  });
 
   describe('GET /api/products', () => {
-    const price1 = 500.99
+    const price1 = 500.99;
     beforeEach(() => {
       return Product.create({
         price: price1,
-        model: 'XXXX'
-      })
-    })
+        model: 'XXXX',
+      });
+    });
 
     it('GET /api/products', () => {
       return request(app)
@@ -79,20 +75,21 @@ describe('User GET Product Routes', () => {
         .expect(200)
         .then(res => {
           expect(res.body).to.be.an('array');
-          console.log('console.log', res.body)
-          expect(res.body[0].price).to.be.equal('500.99')
-        })
-    })
-
+          expect(res.body[0].price).to.be.equal('500.99');
+        });
+    });
   });
 
   describe('GET /api/products/:id', () => {
     beforeEach(() => {
-      return Product.bulkCreate([{
-        price: 99.99,
-        model: 'X01'
-      }, {price: 100.50, model: 'X02'}])
-    })
+      return Product.bulkCreate([
+        {
+          price: 99.99,
+          model: 'X01',
+        },
+        { price: 100.5, model: 'X02' },
+      ]);
+    });
 
     it('GET /api/products/1', () => {
       return request(app)
@@ -100,9 +97,9 @@ describe('User GET Product Routes', () => {
         .expect(200)
         .then(res => {
           expect(res.body).to.be.an('object');
-          expect(res.body.price).to.be.equal('99.99')
-        })
-    })
+          expect(res.body.price).to.be.equal('99.99');
+        });
+    });
 
     it('GET /api/products/2', () => {
       return request(app)
@@ -110,10 +107,8 @@ describe('User GET Product Routes', () => {
         .expect(200)
         .then(res => {
           expect(res.body).to.be.an('object');
-          expect(res.body.price).to.be.equal('100.50')
-        })
-    })
-
-  })
-
-})
+          expect(res.body.price).to.be.equal('100.50');
+        });
+    });
+  });
+});
