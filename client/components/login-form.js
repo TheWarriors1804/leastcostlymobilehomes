@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
 
+
 /**
  * COMPONENT
  */
@@ -25,7 +26,7 @@ const AuthForm = (props) => {
         </div>
         {error && error.response && <div> {error.response.data} </div>}
       </form>
-      <a href="/auth/google">{displayName} with Google</a>
+      <a href="/auth/google"><img className="google-btn" src="http://www.setyourowntests.com/_/rsrc/1468869481521/help/accounts/btn_google_signin_dark_normal_web%402x.png" /></a>
     </div>
   )
 }
@@ -45,14 +46,6 @@ const mapLogin = (state) => {
   }
 }
 
-const mapSignup = (state) => {
-  return {
-    name: 'signup',
-    displayName: 'Sign Up',
-    error: state.user.error
-  }
-}
-
 const mapDispatch = (dispatch) => {
   return {
     handleSubmit (evt) {
@@ -65,8 +58,7 @@ const mapDispatch = (dispatch) => {
   }
 }
 
-export const Login = connect(mapLogin, mapDispatch)(AuthForm)
-export const Signup = connect(mapSignup, mapDispatch)(AuthForm)
+export default connect(mapLogin, mapDispatch)(AuthForm)
 
 /**
  * PROP TYPES

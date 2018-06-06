@@ -11,4 +11,5 @@ export { default as HomeTitle } from './home-title';
 export { default as HomeSearch } from './Home-Search';
 export { default as HomeSearchCard } from './Home-Search-Card';
 export { default as HomeContent } from './home-content';
-export { Login, Signup } from './auth-form';
+export { default as Login } from './login-form';
+export { default as Signup } from './signup-form';

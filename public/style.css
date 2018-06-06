@@ -165,3 +165,8 @@ Search window Css
   width: 600px;
   justify-content: space-between;
 }
+
+.google-btn {
+  width: 170px;
+  height: auto
+}
