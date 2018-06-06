@@ -17,17 +17,11 @@ router.post('/:id', async (req, res, next) => {
   try {
     const newOrder = await Order.findById(req.params.id, {
       include: [{ all: true }],
-    })
-    res.json(newOrder)
+    });
+    res.json(newOrder);
   } catch (err) {
-    next(err)
+    next(err);
   }
 });
 
-router.put('/:id', async (req, res, next) => {
-  try {
-    const orderList
-  } catch (err) {
-    next(err)
-  }
-})
+//
