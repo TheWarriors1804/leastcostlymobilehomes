@@ -1,5 +1,5 @@
 body {
-  font-family: sans-serif;
+  font-family: "Source Sans Pro", sans-serif;
 }
 
 a {
@@ -18,4 +18,110 @@ nav a {
 form div {
   margin: 1em;
   display: inline-block;
+}
+
+.flexContainer {
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-justify-content: space-around;
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+  -webkit-align-content: flex-start;
+  -ms-flex-line-pack: start;
+  align-content: flex-start;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+/* NavBar CSS: */
+
+.navDiv {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: 10;
+  background-color: #5c0931;
+  border: 1px solid #440a26;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+  margin: 0em;
+  width: 100%;
+  display: flex;
+  height: 60px;
+}
+
+.navSpace {
+  height: 60px;
+}
+
+.navImg {
+  width: 250px;
+}
+
+.navButton {
+  color: #fff;
+  font-size: 1.25em;
+  padding-top: 16px;
+  padding-bottom: 14px;
+  padding-right: 30px;
+  padding-left: 30px;
+  margin: 0;
+  margin-top: 5px;
+  text-shadow: 2px 2px 8px #000;
+}
+
+.navButtonSmall {
+  font-size: 0.875em;
+  padding-top: 22px;
+  padding-bottom: 16px;
+}
+
+.navButton:hover {
+  opacity: 40%;
+  background: gray;
+  transition: 0.25s;
+  transition-timing-function: ease-in;
+}
+
+.navDiv > .flexContainer {
+  position: absolute;
+  right: 0px;
+  width: 40vw;
+}
+
+.navTitle {
+  width: 50vw;
+}
+
+/* Single Home CSS: */
+
+/* Home Info CSS: */
+
+.info {
+  padding: 5px;
+}
+
+.info > .title {
+  font-weight: bold;
+}
+
+.info > .content {
+  padding-left: 10px;
+}
+
+.homeInfo {
+  width: 180px;
+  border: 1px solid #000;
+  padding-bottom: 10px;
+}
+
+.homeInfo select {
+  width: 62px;
 }
