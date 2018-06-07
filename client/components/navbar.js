@@ -37,6 +37,12 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
               <Link to="/signup" className="navButton navButtonSmall">
                 Sign Up
               </Link>
+              <Link to="/checkout">
+                <img
+                  className="cart"
+                  src="https://cdn3.iconfinder.com/data/icons/shopping-2/256/Add_to_Cart-512.png"
+                />
+              </Link>
             </div>
           )}
         </div>
