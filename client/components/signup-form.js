@@ -9,19 +9,27 @@ const SignupForm = (props) => {
     <div>
       <form onSubmit={handleSubmit} name={name}>
         <div>
-          <label htmlFor="firstName"><small>First Name</small></label>
+          <label htmlFor="firstName"><small>First Name</small><span className="red"> **</span></label>
           <input name="firstName" type="text" />
         </div>
         <div>
-          <label htmlFor="lastName"><small>Last Name</small></label>
+          <label htmlFor="lastName"><small>Last Name</small><span className="red"> **</span></label>
           <input name="lastName" type="text" />
         </div>
         <div>
-          <label htmlFor="email"><small>Email</small></label>
+          <label htmlFor="email"><small>Email</small><span className="red"> **</span></label>
           <input name="email" type="text" />
         </div>
         <div>
-          <label htmlFor="password"><small>Password</small></label>
+          <label htmlFor="phone"><small>Phone Number</small></label>
+          <input name="phone" type="text" />
+        </div>
+        <div>
+          <label htmlFor="address"><small>Address</small></label>
+          <input name="address" type="text" />
+        </div>
+        <div>
+          <label htmlFor="password"><small>Password</small><span className="red"> **</span></label>
           <input name="password" type="password" />
         </div>
         <div>
@@ -29,6 +37,7 @@ const SignupForm = (props) => {
         </div>
         {error && error.response && <div> {error.response.data} </div>}
       </form>
+      <div><small><span className="red">**</span> denotes required fields</small></div>
     </div>
   )
 }
