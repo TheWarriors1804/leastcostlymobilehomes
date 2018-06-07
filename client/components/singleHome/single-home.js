@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {HomeInfo, HomeTitle, HomeContent} from './index'
+import {HomeInfo, HomeTitle, HomeContent} from '../index'
 
 /**
  * COMPONENT

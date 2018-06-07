@@ -1,7 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {HomeSearchCard} from './index'
+import {HomeSearchCard} from '../index'
+
 /**
  * COMPONENT
  */
@@ -20,7 +21,8 @@ export const HomeSearch = props => {
 
   return (
     <div>
-      <HomeSearchCard info={state} />
+      {/* <HomeSearchCard info={state} /> */}
+      {'bob'}
     </div>
   )
 }
