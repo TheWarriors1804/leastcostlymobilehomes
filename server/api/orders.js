@@ -29,7 +29,7 @@ router.get('/cart/:userid', async (req, res, next) => {
     const order = await Order.findAll({
       where: {
         userId: req.params.userid,
-        status: 'incomplete'
+        complete: false
       },
       include: [{model: Product}]
     })
@@ -51,7 +51,7 @@ router.post('/', async (req, res, next) => {
   try {
     const makeorder = await Order.create({
       sessionId: 'test4',
-      status: 'complete'
+      complete: true
     })
     console.log('makeorder', makeorder.dataValues)
     console.log('makeorder.dataValues.id', makeorder.dataValues.id)
@@ -81,7 +81,7 @@ router.post('/:userid/:productid', async (req, res, next) => {
   const quantity = req.body.quantity
   try {
     const neworder = await Order.findOrCreate({
-      where: {userId: req.params.userid, status: 'incomplete'}
+      where: {userId: req.params.userid, complete: false}
     })
     const newproduct = await Product.findById(req.params.productid)
     const association = await Order.findAll({
@@ -124,9 +124,9 @@ router.post('/:userid/:productid', async (req, res, next) => {
 router.put('/:userid', async (req, res, next) => {
   try {
     const order = await Order.findAll({
-      where: {userId: req.params.userid, status: 'incomplete'}
+      where: {userId: req.params.userid, complete: false}
     })
-    const updatedorder = await order[0].update({status: 'complete'})
+    const updatedorder = await order[0].update({complete: true})
     res.json(updatedorder)
   } catch (err) {
     next(err)
@@ -137,7 +137,7 @@ router.put('/:userid', async (req, res, next) => {
 router.delete('/:userid', async (req, res, next) => {
   try {
     const order = await Order.findAll({
-      where: {userId: req.params.userid, status: 'incomplete'}
+      where: {userId: req.params.userid, complete: false}
     })
     console.log('order', order[0])
     await order[0].destroy()
