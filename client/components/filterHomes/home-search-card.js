@@ -1,18 +1,19 @@
-import {Link} from 'react-dom'
+import {Link} from 'react-router-dom'
 import React from 'react'
 
 const HomeSearchCard = props => {
   const {
     bedrooms,
     bathrooms,
+    id,
     year,
     price,
     manufacturer,
     model,
     imageUrl
-  } = props.info
+  } = props.product
 
-  const formatPrice = price.toLocaleString('en', {
+  const formatPrice = Number(price).toLocaleString('en', {
     style: 'currency',
     currency: 'USD'
   })
@@ -21,7 +22,9 @@ const HomeSearchCard = props => {
     <div className="row">
       <div className="card horizontal col s12 m8 l6">
         <div className="card-image">
-          <img src={imageUrl} />
+          <Link to={`/singleHome/${id}`}>
+            <img src={imageUrl} />
+          </Link>
         </div>
         <div className="card-stacked">
           <div className="card-content">

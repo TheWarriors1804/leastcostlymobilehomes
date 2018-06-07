@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import {Login, Signup, UserHome, SingleHome, HomeSearch} from './components'
 import {me} from './store'
 import CheckOut from './components/checkOut'
+import {getProducts} from './store/product'
 
 /**
  * COMPONENT
@@ -22,7 +23,7 @@ class Routes extends Component {
         {/* Routes placed here are available to all visitors */}
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
-        <Route path="/singleHome" component={SingleHome} />
+        <Route path="/singleHome/:id" component={SingleHome} />
         <Route path="/HomeSearch" component={HomeSearch} />
         <Route path="/checkout" component={CheckOut} />
         {isLoggedIn && (
@@ -53,6 +54,7 @@ const mapDispatch = dispatch => {
   return {
     loadInitialData() {
       dispatch(me())
+      dispatch(getProducts())
     }
   }
 }
