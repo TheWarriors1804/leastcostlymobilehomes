@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { HomeSearchCard } from './index';
+import React from 'react'
+import PropTypes from 'prop-types'
+import {connect} from 'react-redux'
+import {HomeSearchCard} from './index'
 /**
  * COMPONENT
  */
@@ -16,14 +16,14 @@ export const HomeSearch = props => {
     model: 'STU-845CX',
     price: 85750.0,
     id: 1
-  };
+  }
 
   return (
     <div>
       <HomeSearchCard info={state} />
     </div>
-  );
-};
+  )
+}
 
 /**
  * CONTAINER
@@ -31,10 +31,10 @@ export const HomeSearch = props => {
 const mapState = state => {
   return {
     info: state.products
-  };
-};
+  }
+}
 
-export default connect(mapState)(HomeSearch);
+export default connect(mapState)(HomeSearch)
 
 /**
  * PROP TYPES
