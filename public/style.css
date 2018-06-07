@@ -97,6 +97,9 @@ hr {
 .navTitle {
   flex-grow: 1;
 }
+.cart {
+  height: 40px;
+}
 
 /* Single Home CSS: */
 
@@ -163,8 +166,4 @@ Search window Css
 
 .red {
   color: red;
-}
-
-.cart {
-  height: 40px;
 }
