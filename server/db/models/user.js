@@ -16,6 +16,10 @@ const User = db.define('user', {
     unique: true,
     allowNull: false
   },
+  imageUrl: {
+    type: Sequelize.STRING,
+    defaultValue: 'redneck.jpg'
+  },
   phone: {
     type: Sequelize.STRING
   },

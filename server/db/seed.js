@@ -4,6 +4,7 @@ const users = [
   {
     firstName: 'Dolores',
     lastName: 'Abernathy',
+    imageUrl: 'dolores.jpg',
     email: 'dolores@westworld.com',
     phone: '555-389-2341',
     address: '3 Sweetwater',
@@ -12,6 +13,7 @@ const users = [
   {
     firstName: 'Teddy',
     lastName: 'Flood',
+    imageUrl: 'teddy.jpg',
     email: 'teddy@westworld.com',
     phone: '555-230-3691',
     address: '8 Sweetwater',
@@ -20,6 +22,7 @@ const users = [
   {
     firstName: 'Maeve',
     lastName: 'Millay',
+    imageUrl: 'maeve.jpg',
     email: 'maeve@westworld.com',
     phone: '555-923-1283',
     address: '2 Sweetwater',
@@ -28,6 +31,7 @@ const users = [
   {
     firstName: 'Bernard',
     lastName: 'Lowe',
+    imageUrl: 'bernard.jpg',
     email: 'bernard@westworld.com',
     phone: '555-023-1102',
     address: '9 Corporate',
