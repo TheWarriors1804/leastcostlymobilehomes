@@ -18,20 +18,22 @@ const HomeSearchCard = props => {
   });
 
   return (
-    <div className="flexContainer searchCard">
-      <div>
-        <img className="searchCardImage" src={imageUrl} />
-      </div>
-      <div>
-        <div className="flexContainer">
-          <div>{manufacturer + ' - '}</div>
-          <div>{model}</div>
-          <div>{formatPrice}</div>
+    <div className="row">
+      <div className="card horizontal col s12 m8 l6">
+        <div className="card-image">
+          <img src={imageUrl} />
         </div>
-        <div>
-          <div>Bedrooms: {bedrooms}</div>
-          <div>Bathrooms: {bathrooms}</div>
-          <div>Year: {year}</div>
+        <div className="card-stacked">
+          <div className="card-content">
+            <div>Model: {model}</div>
+            <div>Price: {formatPrice}</div>
+            <div>Bedrooms: {bedrooms}</div>
+            <div>Bathrooms: {bathrooms}</div>
+            <div>Year: {year}</div>
+          </div>
+          <div className="card-action">
+            <a href="#buy-house">Buy Now</a>
+          </div>
         </div>
       </div>
     </div>
