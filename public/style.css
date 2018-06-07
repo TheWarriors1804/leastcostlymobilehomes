@@ -15,9 +15,8 @@ nav a {
   margin: 1em;
 }
 
-form div {
-  margin: 1em;
-  display: inline-block;
+form {
+  padding: 40px;
 }
 
 .flexContainer {
@@ -151,10 +150,6 @@ hr {
 Search window Css
 */
 
-.searchCardImage {
-  height: 180px;
-}
-
 .searchCard {
   width: 600px;
   justify-content: space-between;
@@ -162,7 +157,8 @@ Search window Css
 
 .google-btn {
   width: 170px;
-  height: auto
+  height: auto;
+  margin: auto 30px;
 }
 
 .red {
