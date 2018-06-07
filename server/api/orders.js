@@ -50,24 +50,19 @@ router.post('/', async (req, res, next) => {
   const target = req.body
   try {
     const makeorder = await Order.create({
-      sessionId: 'test4',
-      complete: true
-    })
-    console.log('makeorder', makeorder.dataValues)
-    console.log('makeorder.dataValues.id', makeorder.dataValues.id)
+
+      sessionId: "test4",
+      complete: "true"
+    });
     for (const key in target) {
       if (target.hasOwnProperty(key)) {
-        const product = await Product.findById(key)
-        // makeorder.addProducts(product);
-        // product.addOrders(makeorder);
-        const makeorderid = makeorder.dataValues.id
-        console.log('makeorderid', makeorderid)
+        const makeorderid = makeorder.dataValues.id;
+
         const orderitem = await OrderItem.create({
           orderId: makeorderid,
           productId: key,
           quantity: target[key]
         })
-        console.log('orderitem', orderitem)
       }
     }
     res.json(makeorder)
@@ -139,7 +134,6 @@ router.delete('/:userid', async (req, res, next) => {
     const order = await Order.findAll({
       where: {userId: req.params.userid, complete: false}
     })
-    console.log('order', order[0])
     await order[0].destroy()
     res.status(204).end()
   } catch (err) {
