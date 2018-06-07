@@ -95,14 +95,8 @@ hr {
   transition-timing-function: ease-in;
 }
 
-.navDiv > .flexContainer {
-  position: absolute;
-  right: 0px;
-  width: 40vw;
-}
-
 .navTitle {
-  width: 50vw;
+  flex-grow: 1;
 }
 
 /* Single Home CSS: */
@@ -169,4 +163,8 @@ Search window Css
 .google-btn {
   width: 170px;
   height: auto
+}
+
+.red {
+  color: red;
 }
