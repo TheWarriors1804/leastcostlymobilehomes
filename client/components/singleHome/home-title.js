@@ -1,12 +1,12 @@
-import React from 'react';
+import React from 'react'
 
 const HomeTitle = props => {
-  const { price, manufacturer, model } = props.info;
+  const {price, manufacturer, model} = props.info
 
   const formatPrice = price.toLocaleString('en', {
     style: 'currency',
     currency: 'USD'
-  });
+  })
 
   return (
     <div className="titleHeight">
@@ -19,7 +19,7 @@ const HomeTitle = props => {
       </div>
       <hr />
     </div>
-  );
-};
+  )
+}
 
-export default HomeTitle;
+export default HomeTitle

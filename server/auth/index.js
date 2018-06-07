@@ -12,6 +12,7 @@ router.post("/login", (req, res, next) => {
         res.status(401).send("User not found");
       } else if (!user.correctPassword(req.body.password)) {
         res.status(401).send("Incorrect password");
+
       } else {
         //add localStorage to db here
         // const cart = localStorage.cart
@@ -79,4 +80,6 @@ router.get("/me", (req, res) => {
 
 //Looks like it is possible to use the route above to send user data to client side.
 
+
 router.use("/google", require("./google"));
+

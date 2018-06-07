@@ -1,4 +1,4 @@
-const { db, User, Order, Product } = require('./models/index');
+const {db, User, Order, Product} = require('./models/index')
 
 const users = [
   {
@@ -33,45 +33,40 @@ const users = [
     address: '9 Corporate',
     password: 'lowe'
   }
-];
+]
 
 const orders = [
   {
     userId: 2,
-    status: 'complete',
-    sessionId: 'sdfasf',
+    complete: true,
     initiatedDate: '2018-06-03 12:40:23',
     purchaseDate: '2018-06-04 10:20:20'
   },
   {
     userId: 3,
-    status: 'incomplete',
-    sessionId: 'sdfasf',
+    complete: false,
     initiatedDate: '2018-06-03 09:40:13',
     purchaseDate: '2018-06-04 08:20:20'
   },
   {
     userId: 1,
-    status: 'incomplete',
-    sessionId: 'sdfasf',
+    complete: false,
     initiatedDate: '2018-06-02 10:40:23',
     purchaseDate: '2018-06-04 09:50:20'
   },
   {
     userId: 4,
-    status: 'incomplete',
-    sessionId: 'sdfasf',
+    complete: false,
     initiatedDate: '2018-06-01 10:40:23',
     purchaseDate: '2018-06-04 09:20:20'
   },
   {
     userId: 2,
-    status: 'incomplete',
-    sessionId: 'sdfasf',
+    complete: false,
     initiatedDate: '2018-06-04 12:40:23',
     purchaseDate: '2018-06-04 10:20:20'
   }
-];
+]
 
 const products = [
   {
@@ -255,7 +250,7 @@ const products = [
     manufacturer: 'Wind River Tiny Homes',
     model: 'THE ACADIA'
   }
-];
+]
 
 // const orderItems = [
 //   {
@@ -301,28 +296,29 @@ const products = [
 // ]
 
 const seed = async () => {
-  await Promise.all(users.map(user => User.create(user)));
-  await Promise.all(orders.map(order => Order.create(order)));
+  await Promise.all(users.map(user => User.create(user)))
+  await Promise.all(orders.map(order => Order.create(order)))
   // await Promise.all(orderItems.map(orderitem => orderItem.create(orderitem)))
-  await Promise.all(products.map(product => Product.create(product)));
-  console.log('db seeding completed');
-};
+  await Promise.all(products.map(product => Product.create(product)))
+  console.log('db seeding completed')
+}
 
 const main = () => {
-  console.log('db syncing');
-  db.sync({ force: true })
+  console.log('db syncing')
+  db
+    .sync({force: true})
     .then(() => {
-      console.log('db seeding');
-      return seed();
+      console.log('db seeding')
+      return seed()
     })
     .catch(err => {
-      console.log('error while seeding');
-      console.log(err.stack);
+      console.log('error while seeding')
+      console.log(err.stack)
     })
     .then(() => {
-      db.close();
-      return null;
-    });
-};
+      db.close()
+      return null
+    })
+}
 
-main();
+main()

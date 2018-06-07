@@ -1,7 +1,7 @@
-import React from 'react';
+import React from 'react'
 
 const HomeInfo = props => {
-  const { bedrooms, bathrooms, type, length, year, location } = props.info;
+  const {bedrooms, bathrooms, type, length, year, location} = props.info
 
   return (
     <div className="homeInfo">
@@ -52,7 +52,7 @@ const HomeInfo = props => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default HomeInfo;
+export default HomeInfo
