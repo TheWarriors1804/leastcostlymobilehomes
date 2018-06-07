@@ -3,7 +3,7 @@ const User = require('../db/models/user')
 module.exports = router
 
 router.post('/login', (req, res, next) => {
-  User.findOne({where: {email: req.body.email}, include: [{ all: true }]})
+  User.findOne({where: {email: req.body.email}, include: [{all: true}]})
     .then(user => {
       if (!user) {
         console.log('No such user found:', req.body.email)
@@ -49,4 +49,3 @@ router.get('/me', (req, res) => {
 //Looks like it is possible to use the route above to send user data to client side.
 
 router.use('/google', require('./google'))
-

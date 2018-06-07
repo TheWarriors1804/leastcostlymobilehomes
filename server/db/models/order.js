@@ -1,5 +1,5 @@
-const Sequelize = require('sequelize');
-const db = require('../db');
+const Sequelize = require('sequelize')
+const db = require('../db')
 
 const Order = db.define('order', {
   status: {
@@ -14,6 +14,6 @@ const Order = db.define('order', {
   purchaseDate: {
     type: Sequelize.DATE
   }
-});
+})
 
-module.exports = Order;
+module.exports = Order
