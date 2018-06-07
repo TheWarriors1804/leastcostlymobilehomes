@@ -19,7 +19,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           <p className="navButton">View Home</p>
         </Link>
         <h2 />
-        <nav>
+        <div>
           {isLoggedIn ? (
             <div>
               {/* The navbar will show these links after you log in */}
@@ -39,7 +39,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
               </Link>
             </div>
           )}
-        </nav>
+        </div>
       </div>
     </div>
     <div className="navSpace" />
