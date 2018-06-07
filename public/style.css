@@ -1,5 +1,5 @@
 body {
-  font-family: "Source Sans Pro", sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
 }
 
 a {
@@ -15,9 +15,8 @@ nav a {
   margin: 1em;
 }
 
-form div {
-  margin: 1em;
-  display: inline-block;
+form {
+  padding: 40px;
 }
 
 .flexContainer {
@@ -95,14 +94,8 @@ hr {
   transition-timing-function: ease-in;
 }
 
-.navDiv > .flexContainer {
-  position: absolute;
-  right: 0px;
-  width: 40vw;
-}
-
 .navTitle {
-  width: 50vw;
+  flex-grow: 1;
 }
 
 /* Single Home CSS: */
@@ -151,4 +144,23 @@ hr {
 .homeDescrip {
   font-size: 16px;
   width: 80vw;
+}
+
+/*
+Search window Css
+*/
+
+.searchCard {
+  width: 600px;
+  justify-content: space-between;
+}
+
+.google-btn {
+  width: 170px;
+  height: auto;
+  margin: auto 30px;
+}
+
+.red {
+  color: red;
 }

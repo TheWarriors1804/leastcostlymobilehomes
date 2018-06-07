@@ -12,11 +12,14 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
       </div>
       <div className="flexContainer">
         <p className="navButton">Home</p>
-        <Link to="/singleHome">
+        <Link to="/HomeSearch">
           <p className="navButton">Shop for Homes</p>
         </Link>
+        <Link to="/singleHome">
+          <p className="navButton">View Home</p>
+        </Link>
         <h2 />
-        <nav>
+        <div>
           {isLoggedIn ? (
             <div>
               {/* The navbar will show these links after you log in */}
@@ -36,7 +39,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
               </Link>
             </div>
           )}
-        </nav>
+        </div>
       </div>
     </div>
     <div className="navSpace" />
@@ -60,7 +63,10 @@ const mapDispatch = dispatch => {
   };
 };
 
-export default connect(mapState, mapDispatch)(Navbar);
+export default connect(
+  mapState,
+  mapDispatch
+)(Navbar);
 
 /**
  * PROP TYPES
