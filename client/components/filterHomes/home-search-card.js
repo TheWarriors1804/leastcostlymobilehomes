@@ -1,5 +1,5 @@
-import { Link } from 'react-dom';
-import React from 'react';
+import {Link} from 'react-dom'
+import React from 'react'
 
 const HomeSearchCard = props => {
   const {
@@ -10,12 +10,12 @@ const HomeSearchCard = props => {
     manufacturer,
     model,
     imageUrl
-  } = props.info;
+  } = props.info
 
   const formatPrice = price.toLocaleString('en', {
     style: 'currency',
     currency: 'USD'
-  });
+  })
 
   return (
     <div className="row">
@@ -37,7 +37,7 @@ const HomeSearchCard = props => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default HomeSearchCard;
+export default HomeSearchCard

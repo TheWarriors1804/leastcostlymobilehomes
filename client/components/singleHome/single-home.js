@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { HomeInfo, HomeTitle, HomeContent } from '../index';
+import React from 'react'
+import PropTypes from 'prop-types'
+import {connect} from 'react-redux'
+import {HomeInfo, HomeTitle, HomeContent} from './index'
 
 /**
  * COMPONENT
@@ -22,11 +22,11 @@ export const SingleHome = props => {
     price: 85750.0,
     imageUrl:
       'https://static1.squarespace.com/static/556def68e4b0fb59709c7d04/59f7cf8c0d92972b61a51365/59f7dd146926704f35548f70/1509901300163/DSCF4735.jpg?format=1500w'
-  };
+  }
 
   const handleSubmit = () => {
-    console.log('submitted here');
-  };
+    console.log('submitted here')
+  }
 
   return (
     <div>
@@ -37,8 +37,8 @@ export const SingleHome = props => {
       </div>
       <HomeContent info={state} />
     </div>
-  );
-};
+  )
+}
 
 /**
  * CONTAINER
@@ -46,14 +46,14 @@ export const SingleHome = props => {
 const mapState = state => {
   return {
     info: state.products
-  };
-};
+  }
+}
 
-export default connect(mapState)(SingleHome);
+export default connect(mapState)(SingleHome)
 
 /**
  * PROP TYPES
  */
 SingleHome.propTypes = {
   email: PropTypes.string
-};
+}
