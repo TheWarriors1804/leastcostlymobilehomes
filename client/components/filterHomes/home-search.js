@@ -21,8 +21,7 @@ export const HomeSearch = props => {
 
   return (
     <div>
-      {/* <HomeSearchCard info={state} /> */}
-      {'bob'}
+      <HomeSearchCard info={state} />
     </div>
   )
 }
