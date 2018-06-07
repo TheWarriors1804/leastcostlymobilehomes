@@ -51,7 +51,7 @@ router.post("/", async (req, res, next) => {
   try {
     const makeorder = await Order.create({
       sessionId: "test4",
-      status: "complete"
+      complete: "true"
     });
     for (const key in target) {
       if (target.hasOwnProperty(key)) {
