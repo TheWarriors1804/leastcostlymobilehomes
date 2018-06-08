@@ -125,7 +125,7 @@ hr {
 }
 
 select {
-  width: 62px;
+  width: 80%;
   margin: 10px 20px;
 }
 
@@ -156,7 +156,7 @@ Search window Css
 */
 
 .searchCard {
-  width: 600px;
+  width: 700px;
   justify-content: space-between;
 }
 
@@ -172,4 +172,15 @@ Search window Css
 
 .card {
   overflow: visible;
+}
+
+.searchPageContainer {
+  display: flex;
+}
+
+.searchFilterContainer {
+}
+
+.searchTileContainer {
+  flex-grow: 1;
 }
