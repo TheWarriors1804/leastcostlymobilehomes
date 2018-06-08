@@ -97,6 +97,9 @@ hr {
 .navTitle {
   flex-grow: 1;
 }
+.cart {
+  height: 40px;
+}
 
 /* Single Home CSS: */
 
@@ -115,13 +118,15 @@ hr {
 }
 
 .homeInfo {
-  width: 180px;
+  width: 200px;
+  height: auto;
   border: 1px solid #000;
   padding-bottom: 10px;
 }
 
-.homeInfo select {
-  width: 62px;
+select {
+  width: 80%;
+  margin: 10px 20px;
 }
 
 .titleHeight {
@@ -151,7 +156,7 @@ Search window Css
 */
 
 .searchCard {
-  width: 600px;
+  width: 700px;
   justify-content: space-between;
 }
 
@@ -165,10 +170,26 @@ Search window Css
   color: red;
 }
 
+
 /*
 User CSS
 */
 
 .userInfo {
   width: 400px;
+}
+
+.card {
+  overflow: visible;
+}
+
+.searchPageContainer {
+  display: flex;
+}
+
+.searchFilterContainer {
+}
+
+.searchTileContainer {
+  flex-grow: 1;
 }

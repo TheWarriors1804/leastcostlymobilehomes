@@ -4,6 +4,7 @@ const users = [
   {
     firstName: 'Dolores',
     lastName: 'Abernathy',
+    imageUrl: 'dolores.jpg',
     email: 'dolores@westworld.com',
     phone: '555-389-2341',
     address: '3 Sweetwater',
@@ -12,6 +13,7 @@ const users = [
   {
     firstName: 'Teddy',
     lastName: 'Flood',
+    imageUrl: 'teddy.jpg',
     email: 'teddy@westworld.com',
     phone: '555-230-3691',
     address: '8 Sweetwater',
@@ -20,6 +22,7 @@ const users = [
   {
     firstName: 'Maeve',
     lastName: 'Millay',
+    imageUrl: 'maeve.jpg',
     email: 'maeve@westworld.com',
     phone: '555-923-1283',
     address: '2 Sweetwater',
@@ -28,6 +31,7 @@ const users = [
   {
     firstName: 'Bernard',
     lastName: 'Lowe',
+    imageUrl: 'bernard.jpg',
     email: 'bernard@westworld.com',
     phone: '555-023-1102',
     address: '9 Corporate',
@@ -38,31 +42,31 @@ const users = [
 const orders = [
   {
     userId: 2,
-    status: 'complete',
+    complete: true,
     initiatedDate: '2018-06-03 12:40:23',
     purchaseDate: '2018-06-04 10:20:20'
   },
   {
     userId: 3,
-    status: 'incomplete',
+    complete: false,
     initiatedDate: '2018-06-03 09:40:13',
     purchaseDate: '2018-06-04 08:20:20'
   },
   {
     userId: 1,
-    status: 'incomplete',
+    complete: false,
     initiatedDate: '2018-06-02 10:40:23',
     purchaseDate: '2018-06-04 09:50:20'
   },
   {
     userId: 4,
-    status: 'incomplete',
+    complete: false,
     initiatedDate: '2018-06-01 10:40:23',
     purchaseDate: '2018-06-04 09:20:20'
   },
   {
     userId: 2,
-    status: 'incomplete',
+    complete: false,
     initiatedDate: '2018-06-04 12:40:23',
     purchaseDate: '2018-06-04 10:20:20'
   }

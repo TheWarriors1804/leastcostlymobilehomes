@@ -7300,6 +7300,7 @@ input[type='checkbox']:not(:disabled).tabbed:focus ~ .lever::before {
 
 /* Select Field
    ========================================================================== */
+
 select {
   display: 1;
 }

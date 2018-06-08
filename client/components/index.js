@@ -7,6 +7,7 @@ export {default as Navbar} from './navbar'
 
 export {default as Login} from './login-form'
 export {default as Signup} from './signup-form'
+export {default as CheckOut} from './checkOut'
 
 // User components
 
@@ -24,3 +25,4 @@ export {default as HomeContent} from './singleHome/home-content'
 
 export {default as HomeSearch} from './filterHomes/home-search'
 export {default as HomeSearchCard} from './filterHomes/home-search-card'
+

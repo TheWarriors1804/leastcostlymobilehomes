@@ -11,6 +11,8 @@ import {
   UserInfo
 } from './components'
 import {me} from './store'
+import CheckOut from './components/checkOut'
+import {getProducts} from './store/product'
 
 /**
  * COMPONENT
@@ -31,6 +33,8 @@ class Routes extends Component {
         <Route path="/singleHome" component={SingleHome} />
         <Route path="/homeSearch" component={HomeSearch} />
         <Route path="/userInfo" component={UserInfo} />
+      <Route path="/checkout" component={CheckOut} />
+
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
@@ -59,6 +63,7 @@ const mapDispatch = dispatch => {
   return {
     loadInitialData() {
       dispatch(me())
+      dispatch(getProducts())
     }
   }
 }
