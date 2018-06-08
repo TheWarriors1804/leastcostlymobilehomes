@@ -164,3 +164,11 @@ Search window Css
 .red {
   color: red;
 }
+
+/*
+User CSS
+*/
+
+.userInfo {
+  width: 400px;
+}
