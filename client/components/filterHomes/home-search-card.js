@@ -28,7 +28,7 @@ const HomeSearchCard = props => {
 
   return (
     <div className="row">
-      <div className="card horizontal col s12 m8 l6">
+      <div className="card horizontal col s12 m10 l8">
         <div className="card-image">
           <Link to={`/singleHome/${id}`}>
             <img src={imageUrl} />
