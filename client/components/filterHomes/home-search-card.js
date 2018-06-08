@@ -1,5 +1,7 @@
 import {Link} from 'react-router-dom'
 import React from 'react'
+import {connect} from 'react-redux'
+import {addItemLoggedIn, addItemGuest} from '../../store/order'
 
 const HomeSearchCard = props => {
   const {
@@ -17,6 +19,12 @@ const HomeSearchCard = props => {
     style: 'currency',
     currency: 'USD'
   })
+
+  const handleSubmit = event => {
+    event.preventDefault()
+    const method = props.user.id ? props.addItemLoggedIn : props.addItemGuest
+    method()
+  }
 
   return (
     <div className="row">
@@ -61,5 +69,16 @@ const HomeSearchCard = props => {
     </div>
   )
 }
+
+const mapStateToProps = state => ({
+  user: state.user
+})
+
+const mapDispatchToProps = dispatch => ({
+  addItemGuest: (productId, quantity) =>
+    dispatch(addItemGuest(productId, quantity)),
+  addItemLoggedIn: (userId, productId, quantity) =>
+    dispatch(addItemLoggedIn(userId, productId, quantity))
+})
 
 export default HomeSearchCard
