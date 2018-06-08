@@ -1,16 +1,17 @@
 import React from 'react'
+import {connect} from 'react-redux'
 
 const UserInfo = props => {
-  //const {bedrooms, bathrooms, type, length, year, location} = props.info
-
-  const fName = 'Bob'
-  const lName = 'Saget'
-  const email = 'bob.saget@bobsaget.com'
-  const address1 = '1709 Broderick Street'
-  const address2 = ''
-  const city = 'San Francisco'
-  const state = 'California'
-  const zip = 94115
+  const {
+    firstName,
+    lastName,
+    email,
+    address,
+    address2,
+    city,
+    stateAdd,
+    zip
+  } = props
 
   const handleChange = event => {
     console.log(event.target.value)
@@ -25,24 +26,24 @@ const UserInfo = props => {
       <form className="col s12">
         <div className="row">
           <div className="input-field col s6">
-            <label htmlFor="fName" className="active">
+            <label htmlFor="firstName" className="active">
               First Name
             </label>
             <input
               onChange={handleChange}
-              value={fName}
+              value={firstName}
               id="first_name"
               type="text"
               className="validate"
             />
           </div>
           <div className="input-field col s6">
-            <label htmlFor="lName" className="active">
+            <label htmlFor="lastName" className="active">
               Last Name
             </label>
             <input
               onChange={handleChange}
-              value={lName}
+              value={lastName}
               id="last_name"
               type="text"
               className="validate"
@@ -70,7 +71,7 @@ const UserInfo = props => {
             </label>
             <input
               onChange={handleChange}
-              value={address1}
+              value={address}
               id="address1"
               type="text"
               className="validate"
@@ -105,7 +106,7 @@ const UserInfo = props => {
         </div>
         <div className="row">
           <div className="inputField col s6">
-            <label htmlFor="state" className="active">
+            <label htmlFor="stateAdd" className="active">
               State
             </label>
             <select onSubmit={handleSubmit}>
@@ -179,4 +180,13 @@ const UserInfo = props => {
   )
 }
 
-export default UserInfo
+const mapState = state => {
+  return {
+    firstName: state.user.firstName,
+    lastName: state.user.lastName,
+    email: state.user.email,
+    address: state.user.address
+  }
+}
+
+export default connect(mapState)(UserInfo)
