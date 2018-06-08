@@ -32,6 +32,7 @@ export const me = () => dispatch =>
 
 //thunk for login
 export const auth = (email, password, method, cart, firstName, lastName) => {
+  console.log('in the auth thunker', email, password, method, cart)
   return dispatch =>
     axios
       .post(`/auth/${method}`, {email, password, cart})

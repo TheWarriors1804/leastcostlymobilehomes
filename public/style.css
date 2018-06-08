@@ -16,7 +16,7 @@ nav a {
 }
 
 form {
-  padding: 40px;
+  margin: 20px;
 }
 
 .flexContainer {
@@ -125,7 +125,7 @@ hr {
 }
 
 select {
-  width: 80%;
+  width: 100px;
   margin: 10px 20px;
 }
 
@@ -169,7 +169,6 @@ Search window Css
 .red {
   color: red;
 }
-
 
 /*
 User CSS
