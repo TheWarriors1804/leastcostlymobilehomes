@@ -4,13 +4,25 @@
  * having to figure out which file they belong to!
  */
 export {default as Navbar} from './navbar'
-export {default as UserHome} from './user/user-home'
-export {default as SingleHome} from './singleHome/single-home'
-export {default as HomeInfo} from './singleHome/home-info'
-export {default as HomeTitle} from './singleHome/home-title'
-export {default as HomeSearch} from './filterHomes/home-search'
-export {default as HomeSearchCard} from './filterHomes/home-search-card'
-export {default as HomeContent} from './singleHome/home-content'
+
 export {default as Login} from './login-form'
 export {default as Signup} from './signup-form'
 export {default as CheckOut} from './checkOut'
+
+// User components
+
+export {default as UserHome} from './user/user-home'
+export {default as UserInfo} from './user/user-info'
+
+// Single home components
+
+export {default as SingleHome} from './singleHome/single-home'
+export {default as HomeInfo} from './singleHome/home-info'
+export {default as HomeTitle} from './singleHome/home-title'
+export {default as HomeContent} from './singleHome/home-content'
+
+// Home search components
+
+export {default as HomeSearch} from './filterHomes/home-search'
+export {default as HomeSearchCard} from './filterHomes/home-search-card'
+

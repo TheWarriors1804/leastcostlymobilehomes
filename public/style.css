@@ -170,6 +170,15 @@ Search window Css
   color: red;
 }
 
+
+/*
+User CSS
+*/
+
+.userInfo {
+  width: 400px;
+}
+
 .card {
   overflow: visible;
 }
