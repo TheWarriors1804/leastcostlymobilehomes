@@ -11,13 +11,17 @@ export class HomeSearch extends React.Component {
     super()
     this.state = {
       type: 'all',
-      maxPrice: 'all',
+      price: 'all',
       bedrooms: 'all',
       bathrooms: 'all'
     }
   }
 
-  onChange(event) {}
+  onChange(event) {
+    this.setState({
+      [event.target.name]: event.target.value
+    })
+  }
 
   render() {
     return (
@@ -46,7 +50,7 @@ export class HomeSearch extends React.Component {
             </form>
             <form>
               <div>Maximum Price</div>
-              <select name="maxPrice" onChange={event => this.onChange(event)}>
+              <select name="price" onChange={event => this.onChange(event)}>
                 <option defaultValue value="all">
                   View all
                 </option>
@@ -73,10 +77,10 @@ export class HomeSearch extends React.Component {
                 <option defaultValue value="all">
                   View all
                 </option>
+                <option value="1">0</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
-                <option value="4">4</option>
               </select>
             </form>
           </div>
@@ -84,15 +88,14 @@ export class HomeSearch extends React.Component {
         <div className="col s12 m10 l11 searchTileContainer">
           {this.props.products
             .filter(product => {
-              console.log(product.price, this.state.maxPrice >= product.price)
               return (
                 (this.state.type === product.type ||
                   this.state.type === 'all') &&
-                (Number(this.state.maxPrice) >= product.price ||
-                  this.state.maxPrice === 'all') &&
-                (this.state.bedrooms === product.bedrooms ||
+                (Number(this.state.price) >= product.price ||
+                  this.state.price === 'all') &&
+                (Number(this.state.bedrooms) === product.bedrooms ||
                   this.state.bedrooms === 'all') &&
-                (this.state.bathrooms === product.bathrooms ||
+                (Number(this.state.bathrooms) === product.bathrooms ||
                   this.state.bathrooms === 'all')
               )
             })
