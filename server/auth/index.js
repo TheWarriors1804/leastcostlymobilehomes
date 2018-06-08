@@ -18,7 +18,7 @@ router.post("/login", (req, res, next) => {
         // const cart = localStorage.cart
         const cart = {2:10, 1:10, 4:10, 3:12}
         const userorder = await Order.findAll({
-          where: { userId: user.id, status: "incomplete" },
+          where: { userId: user.id, complete: false },
           include: [{ model: Product }]
         });
         for (const id in cart) {
