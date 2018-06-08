@@ -35,7 +35,8 @@ class AuthForm extends Component {
     const formName = evt.target.name
     const email = evt.target.email.value
     const password = evt.target.password.value
-    this.props.auth(email, password, formName)
+    console.log('this.state.cart', this.props.cart)
+    this.props.auth(email, password, formName, this.props.cart)
     console.log('submit handled', this.state)
   }
 
@@ -106,8 +107,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    auth: (email, password, formName) =>
-      dispatch(auth(email, password, formName)),
+    auth: (email, password, formName, cart) =>
+      dispatch(auth(email, password, formName, cart)),
     getCart: async () => await dispatch(fetchCartFromLocalStorage())
   }
 }

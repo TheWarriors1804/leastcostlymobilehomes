@@ -9,14 +9,15 @@ import {Link} from 'react-router-dom'
 export class HomeSearch extends React.Component {
   constructor() {
     super()
-    this.state = {}
+    this.state = {
+      type: 'all',
+      maxPrice: 'all',
+      bedrooms: 'all',
+      bathrooms: 'all'
+    }
   }
 
   onChange(event) {}
-
-  onSubmit(event) {
-    event.preventDefault()
-  }
 
   render() {
     return (
@@ -26,29 +27,28 @@ export class HomeSearch extends React.Component {
             <span className="card-title">Modify Results</span>
             <form onChange={event => this.onChange(event)}>
               <div>Type</div>
-              <label htmlFor="all">
-                <input type="radio" name="type" value="all" defaultChecked />
+              <label>
+                <input type="radio" name="type" value="all" />
                 <span>All homes</span>
               </label>
-              <label htmlFor="singleWide">
-                <input type="radio" name="type" value="singleWide" />
+              <label>
+                <input type="radio" name="type" value="Single Wide" />
                 <span>Single Wide</span>
               </label>
-              <label htmlFor="doubleWide">
-                <input type="radio" name="type" value="doubleWide" />
+              <label>
+                <input type="radio" name="type" value="Double Wide" />
                 <span>Double Wide</span>
               </label>
-              <label htmlFor="tinyHome">
-                <input type="radio" name="type" value="tinyHome" />
+              <label>
+                <input type="radio" name="type" value="Tiny Home" />
                 <span>Tiny Home</span>
               </label>
             </form>
             <form>
               <div>Maximum Price</div>
               <select name="maxPrice" onChange={event => this.onChange(event)}>
-                <option disabled defaultValue value>
-                  {' '}
-                  --select--
+                <option defaultValue value="all">
+                  View all
                 </option>
                 <option value="60000">$60,000</option>
                 <option value="80000">$80,000</option>
@@ -58,40 +58,47 @@ export class HomeSearch extends React.Component {
             <form>
               <div>Bedrooms</div>
               <select name="bedrooms" onChange={event => this.onChange(event)}>
-                <option disabled defaultValue value>
-                  {' '}
-                  --select--
+                <option defaultValue value="all">
+                  View all
                 </option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
-                <option value="4">4+</option>
+                <option value="4">4</option>
               </select>
             </form>
             <form>
               <div>Bathrooms</div>
               <select name="bathrooms" onChange={event => this.onChange(event)}>
-                <option disabled defaultValue value>
-                  --select--
+                <option defaultValue value="all">
+                  View all
                 </option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
-                <option value="4">4+</option>
+                <option value="4">4</option>
               </select>
             </form>
-            <input
-              type="submit"
-              value="Submit"
-              className="btn waves-effect waves-light green"
-              onSubmit={event => this.onSubmit(event)}
-            />
           </div>
         </div>
         <div className="col s12 m10 l11 searchTileContainer">
-          {this.props.product.map(oneProduct => (
-            <HomeSearchCard product={oneProduct} key={oneProduct.id} />
-          ))}
+          {this.props.products
+            .filter(product => {
+              console.log(product.price, this.state.maxPrice >= product.price)
+              return (
+                (this.state.type === product.type ||
+                  this.state.type === 'all') &&
+                (Number(this.state.maxPrice) >= product.price ||
+                  this.state.maxPrice === 'all') &&
+                (this.state.bedrooms === product.bedrooms ||
+                  this.state.bedrooms === 'all') &&
+                (this.state.bathrooms === product.bathrooms ||
+                  this.state.bathrooms === 'all')
+              )
+            })
+            .map(product => (
+              <HomeSearchCard product={product} key={product.id} />
+            ))}
         </div>
       </div>
     )
@@ -103,7 +110,7 @@ export class HomeSearch extends React.Component {
  */
 const mapState = state => {
   return {
-    product: state.product
+    products: state.product
   }
 }
 
