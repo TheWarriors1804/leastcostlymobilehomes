@@ -7,8 +7,8 @@ const initialProducts = []
 const gotProducts = products => ({type: GET_ALL_PRODUCTS, products})
 
 export const getProducts = () => async dispatch => {
-  const allProducts = await axios.get(`api/products`)
-  dispatch(gotProducts(allProducts))
+  const {data} = await axios.get(`api/products`)
+  dispatch(gotProducts(data))
 }
 
 export default function(state = initialProducts, action) {

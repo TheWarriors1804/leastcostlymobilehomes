@@ -30,20 +30,25 @@ export const me = () => dispatch =>
     .then(res => dispatch(getUser(res.data || defaultUser)))
     .catch(err => console.log(err))
 
-export const auth = (email, password, method) => dispatch =>
-  axios
-    .post(`/auth/${method}`, {email, password})
-    .then(
-      res => {
-        dispatch(getUser(res.data))
-        history.push('/home')
-      },
-      authError => {
-        // rare example: a good use case for parallel (non-catch) error handler
-        dispatch(getUser({error: authError}))
-      }
-    )
-    .catch(dispatchOrHistoryErr => console.error(dispatchOrHistoryErr))
+//thunk for login
+export const auth = (email, password, method, firstName, lastName) => {
+  const cart = localStorage
+  // console.log('localStorage', localStorage)
+  return dispatch =>
+    axios
+      .post(`/auth/${method}`, {email, password})
+      .then(
+        res => {
+          dispatch(getUser(res.data))
+          history.push('/home')
+        },
+        authError => {
+          // rare example: a good use case for parallel (non-catch) error handler
+          dispatch(getUser({error: authError}))
+        }
+      )
+      .catch(dispatchOrHistoryErr => console.error(dispatchOrHistoryErr))
+}
 
 export const logout = () => dispatch =>
   axios

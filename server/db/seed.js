@@ -42,31 +42,31 @@ const users = [
 const orders = [
   {
     userId: 2,
-    status: 'complete',
+    complete: true,
     initiatedDate: '2018-06-03 12:40:23',
     purchaseDate: '2018-06-04 10:20:20'
   },
   {
     userId: 3,
-    status: 'incomplete',
+    complete: false,
     initiatedDate: '2018-06-03 09:40:13',
     purchaseDate: '2018-06-04 08:20:20'
   },
   {
     userId: 1,
-    status: 'incomplete',
+    complete: false,
     initiatedDate: '2018-06-02 10:40:23',
     purchaseDate: '2018-06-04 09:50:20'
   },
   {
     userId: 4,
-    status: 'incomplete',
+    complete: false,
     initiatedDate: '2018-06-01 10:40:23',
     purchaseDate: '2018-06-04 09:20:20'
   },
   {
     userId: 2,
-    status: 'incomplete',
+    complete: false,
     initiatedDate: '2018-06-04 12:40:23',
     purchaseDate: '2018-06-04 10:20:20'
   }

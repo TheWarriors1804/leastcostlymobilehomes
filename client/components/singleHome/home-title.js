@@ -3,7 +3,7 @@ import React from 'react'
 const HomeTitle = props => {
   const {price, manufacturer, model} = props.info
 
-  const formatPrice = price.toLocaleString('en', {
+  const formatPrice = Number(price).toLocaleString('en', {
     style: 'currency',
     currency: 'USD'
   })
