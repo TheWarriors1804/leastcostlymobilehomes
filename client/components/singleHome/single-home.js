@@ -8,7 +8,6 @@ import {HomeInfo, HomeTitle, HomeContent} from '../index'
  */
 export const SingleHome = props => {
   const handleSubmit = () => {}
-  console.log(props.products)
 
   const current =
     props.products.find(product => {
