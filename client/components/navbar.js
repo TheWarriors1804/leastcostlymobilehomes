@@ -9,7 +9,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
     <div className="navDiv">
       <div className="navTitle navSpace">
         <Link to="/">
-          <img src="Logo.png" className="navImg" />
+          <img src="/Logo.png" className="navImg" />
         </Link>
       </div>
       <div className="flexContainer">
@@ -18,9 +18,6 @@ const Navbar = ({handleClick, isLoggedIn}) => (
         </Link>
         <Link to="/homeSearch">
           <p className="navButton">Shop for Homes</p>
-        </Link>
-        <Link to="/singleHome">
-          <p className="navButton">View Home</p>
         </Link>
         <h2 />
         <div className="">
@@ -51,7 +48,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           )}
         </div>
         <Link to="/checkout">
-          <img className="cartIcon" src="./cart.png" />
+          <img className="cartIcon" src="/cart.png" />
         </Link>
       </div>
     </div>

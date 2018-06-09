@@ -14,6 +14,7 @@ export const SingleHome = props => {
         return product.id === +props.match.params.id
       })
     : []
+
   if (current) {
     return (
       <div>
