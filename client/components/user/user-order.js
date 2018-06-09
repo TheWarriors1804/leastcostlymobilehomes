@@ -1,12 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {UserInfo, UserOrder} from '../index'
+import {UserInfo} from '../index'
 
 /**
  * COMPONENT
  */
-export const UserHome = props => {
+export const UserOrder = props => {
   const {firstName, lastName, imageUrl} = props
 
   return (
@@ -26,7 +26,7 @@ export const UserHome = props => {
       </div>
       <div className="row">
         <div className="card horizontal col s10 m10 l10">
-          <UserOrder />
+          <h2> Previous Orders </h2>
         </div>
       </div>
     </div>
