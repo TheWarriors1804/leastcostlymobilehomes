@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 import {auth} from '../store'
 import {fetchCartFromLocalStorage} from '../store/order'
 
-
 /**
  * COMPONENT
  */
@@ -43,7 +42,6 @@ class AuthForm extends Component {
   handleChange(evt) {
     this.props.getCart()
     console.log('cart begotten', this.props)
-
   }
 
   render() {
@@ -57,7 +55,7 @@ class AuthForm extends Component {
               <label htmlFor="email">
                 <small>Email</small>
               </label>
-              <input name="email" type="text" onChange={this.handleChange}/>
+              <input name="email" type="text" onChange={this.handleChange} />
             </div>
           </div>
           <div className="row">
