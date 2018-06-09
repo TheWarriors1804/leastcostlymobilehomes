@@ -4,7 +4,7 @@
  * having to figure out which file they belong to!
  */
 export {default as Navbar} from './navbar'
-
+export {default as HomePage} from './homepage'
 export {default as Login} from './login-form'
 export {default as Signup} from './signup-form'
 export {default as CheckOut} from './checkOut'
