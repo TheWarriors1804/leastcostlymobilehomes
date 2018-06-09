@@ -22,11 +22,6 @@ class HomeSearchCard extends Component {
       console.log('im a guest')
       this.props.addItemGuest({2:10})
     }
-    // if(!this.props.user.id) {
-    //   console.log('im a guest')
-    // }
-    // const method = props.user.id ? props.addItemLoggedIn : props.addItemGuest
-    // method()
   }
 
   render() {

@@ -52,8 +52,8 @@ hr {
   top: 0px;
   left: 0px;
   z-index: 10;
-  background-color: #5c0931;
-  border: 1px solid #440a26;
+  background-color: #183879;
+  border: 1px solid #0d2c69;
   box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
   margin: 0em;
   width: 100%;
@@ -72,33 +72,38 @@ hr {
 .navButton {
   color: #fff;
   font-size: 1.25em;
-  padding-top: 16px;
-  padding-bottom: 14px;
-  padding-right: 30px;
-  padding-left: 30px;
   margin: 0;
-  margin-top: 5px;
+  margin-right: 30px;
+  margin-left: 30px;
   text-shadow: 2px 2px 8px #000;
 }
 
+.flexCenter {
+  align-items: center;
+  display: flex;
+  margin-top: 3px;
+  margin-right: 20px;
+}
+
 .navButtonSmall {
+  margin-right: 10px;
+  margin-left: 10px;
   font-size: 0.875em;
-  padding-top: 22px;
-  padding-bottom: 16px;
+}
+
+.cartIcon {
+  margin-right: 30px;
+  height: 40px;
 }
 
 .navButton:hover {
-  opacity: 40%;
-  background: gray;
+  padding-top: 15px;
   transition: 0.25s;
   transition-timing-function: ease-in;
 }
 
 .navTitle {
   flex-grow: 1;
-}
-.cart {
-  height: 40px;
 }
 
 /* Single Home CSS: */
@@ -170,7 +175,6 @@ Search window Css
   color: red;
 }
 
-
 /*
 User CSS
 */
@@ -192,4 +196,54 @@ User CSS
 
 .searchTileContainer {
   flex-grow: 1;
+}
+
+.homepage-header {
+  padding-top: 60px;
+  height: 30vw;
+  background: linear-gradient(
+      rgba(108, 129, 176, 0.4),
+      rgba(108, 129, 176, 0.8)
+    ),
+    url('https://www.housingwire.com/ext/resources/images/editorial/A-New-Big-Images/houses/mobilehomes.jpg?1474649224')
+      no-repeat fixed;
+  background-size: cover;
+}
+
+.homepage-container h1 {
+  color: white;
+  font-size: 4vw;
+  text-shadow: 2px 2px 5px #000;
+  text-align: center;
+}
+
+.homepage-container h2 {
+  color: white;
+  font-size: 2.5vw;
+  text-shadow: 2px 2px 5px #000;
+  text-align: center;
+}
+
+.searchCardTitle {
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.manufacturer {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.homepage-content {
+  padding: 50px;
+}
+
+.card-title {
+  color: white;
+  text-shadow: 2px 2px 5px #000;
+}
+
+.homepage-cards {
+  padding: 3vw;
 }

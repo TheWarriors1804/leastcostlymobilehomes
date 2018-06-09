@@ -8,7 +8,8 @@ import {
   UserHome,
   SingleHome,
   HomeSearch,
-  UserInfo
+  UserInfo,
+  HomePage
 } from './components'
 import {me} from './store'
 import CheckOut from './components/checkOut'
@@ -28,12 +29,13 @@ class Routes extends Component {
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
+        <Route path="/" exact component={HomePage} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route path="/singleHome" component={SingleHome} />
         <Route path="/homeSearch" component={HomeSearch} />
         <Route path="/userInfo" component={UserInfo} />
-      <Route path="/checkout" component={CheckOut} />
+        <Route path="/checkout" component={CheckOut} />
 
         {isLoggedIn && (
           <Switch>
