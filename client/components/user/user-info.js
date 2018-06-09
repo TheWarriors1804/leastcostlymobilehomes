@@ -180,7 +180,7 @@ const UserInfo = props => {
   )
 }
 
-const mapState = state => {
+const mapStateToProps = state => {
   return {
     firstName: state.user.firstName,
     lastName: state.user.lastName,
@@ -189,4 +189,4 @@ const mapState = state => {
   }
 }
 
-export default connect(mapState)(UserInfo)
+export default connect(mapStateToProps)(UserInfo)
