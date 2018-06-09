@@ -31,12 +31,11 @@ export const me = () => dispatch =>
     .catch(err => console.log(err))
 
 //thunk for login
-export const auth = (email, password, method, firstName, lastName) => {
-  const cart = localStorage
-  // console.log('localStorage', localStorage)
+export const auth = (email, password, method, cart, firstName, lastName) => {
+  console.log('in the auth thunker', email, password, method, cart)
   return dispatch =>
     axios
-      .post(`/auth/${method}`, {email, password})
+      .post(`/auth/${method}`, {email, password, cart})
       .then(
         res => {
           dispatch(getUser(res.data))

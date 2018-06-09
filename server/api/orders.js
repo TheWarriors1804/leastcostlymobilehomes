@@ -50,13 +50,12 @@ router.post('/', async (req, res, next) => {
   const target = req.body
   try {
     const makeorder = await Order.create({
-
-      sessionId: "test4",
-      complete: "true"
-    });
+      sessionId: 'test4',
+      complete: true
+    })
     for (const key in target) {
       if (target.hasOwnProperty(key)) {
-        const makeorderid = makeorder.dataValues.id;
+        const makeorderid = makeorder.dataValues.id
 
         const orderitem = await OrderItem.create({
           orderId: makeorderid,
