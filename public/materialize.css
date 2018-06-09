@@ -1092,11 +1092,11 @@
 }
 
 .green {
-  background-color: #4caf50 !important;
+  background-color: #209c71 !important;
 }
 
 .green-text {
-  color: #4caf50 !important;
+  color: #209c71 !important;
 }
 
 .green.lighten-5 {
@@ -3493,7 +3493,7 @@ table span.badge {
 }
 
 .col .row {
-  margin-left: -0.75rem;
+  margin-left: 0.5rem;
   margin-right: -0.75rem;
 }
 
@@ -3515,9 +3515,9 @@ table span.badge {
 }
 
 .row {
-  margin-left: auto;
+  margin-left: 0.5rem;
   margin-right: auto;
-  margin-bottom: 20px;
+  margin-bottom: 0;
 }
 
 .row:after {
@@ -4912,12 +4912,15 @@ small {
 }
 
 .card.horizontal .card-image {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
   max-width: 50%;
 }
 
 .card.horizontal .card-image img {
   border-radius: 2px 0 0 2px;
   max-width: 100%;
+  max-height: 250px;
   width: auto;
 }
 

@@ -28,7 +28,7 @@ const HomeSearchCard = props => {
 
   return (
     <div className="row">
-      <div className="card horizontal col s12 m10 l8">
+      <div className="card horizontal col s12 m10 l11">
         <div className="card-image">
           <Link to={`/singleHome/${id}`}>
             <img src={imageUrl} />
@@ -36,8 +36,13 @@ const HomeSearchCard = props => {
         </div>
         <div className="card-stacked">
           <div className="card-content">
-            <div>Model: {model}</div>
-            <div>Price: {formatPrice}</div>
+            <div className="flexContainer searchCardTitle">
+              <div className="flexContainer searchCardTitle">
+                <div className="manufacturer">{manufacturer + ' - '}</div>
+                <div>{model}</div>
+              </div>
+              <div>{formatPrice}</div>
+            </div>
             <div>Bedrooms: {bedrooms}</div>
             <div>Bathrooms: {bathrooms}</div>
             <div>Year: {year}</div>
