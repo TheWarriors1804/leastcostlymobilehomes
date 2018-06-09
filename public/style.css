@@ -170,7 +170,6 @@ Search window Css
   color: red;
 }
 
-
 /*
 User CSS
 */
@@ -192,4 +191,28 @@ User CSS
 
 .searchTileContainer {
   flex-grow: 1;
+}
+
+.homepage-container {
+  padding-top: 60px;
+  height: 400px;
+  background: linear-gradient(
+      rgba(108, 129, 176, 0.4),
+      rgba(108, 129, 176, 0.8)
+    ),
+    url('https://www.housingwire.com/ext/resources/images/editorial/A-New-Big-Images/houses/mobilehomes.jpg?1474649224')
+      no-repeat fixed;
+  background-size: cover;
+  padding: 30px 250px;
+}
+
+.homepage-container h1 {
+  color: white;
+  text-shadow: 2px 2px 5px #000;
+}
+
+.homepage-container h2 {
+  color: white;
+  font-size: 3rem;
+  text-shadow: 2px 2px 5px #000;
 }

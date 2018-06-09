@@ -8,10 +8,14 @@ const Navbar = ({handleClick, isLoggedIn}) => (
   <div>
     <div className="navDiv">
       <div className="navTitle navSpace">
-        <img src="Logo.png" className="navImg" />
+        <Link to="/">
+          <img src="Logo.png" className="navImg" />
+        </Link>
       </div>
       <div className="flexContainer">
-        <p className="navButton">Home</p>
+        <Link to="/" className="navButton">
+          Home
+        </Link>
         <Link to="/homeSearch">
           <p className="navButton">Shop for Homes</p>
         </Link>
