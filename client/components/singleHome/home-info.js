@@ -45,9 +45,9 @@ const HomeInfo = props => {
             <option value="10">10</option>
           </select>
           <button
-            type="submit"
+            // type="submit"
             className="btn waves-effect waves-light green"
-            onClick={props.handleSubmit}
+            onClick={() => console.log('THIS BUTTON HAS BEEN CLICKED')}
           >
             Add to Cart
           </button>

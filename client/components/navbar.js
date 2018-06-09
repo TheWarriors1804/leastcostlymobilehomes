@@ -9,7 +9,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
     <div className="navDiv">
       <div className="navTitle navSpace">
         <Link to="/">
-          <img src="Logo.png" className="navImg" />
+          <img src="/Logo.png" className="navImg" />
         </Link>
       </div>
       <div className="flexContainer">
@@ -19,16 +19,19 @@ const Navbar = ({handleClick, isLoggedIn}) => (
         <Link to="/homeSearch">
           <p className="navButton">Shop for Homes</p>
         </Link>
-        <Link to="/singleHome">
-          <p className="navButton">View Home</p>
-        </Link>
         <h2 />
         <div className="">
           {isLoggedIn ? (
             <div>
               {/* The navbar will show these links after you log in */}
-              <Link to="/user-home">Profile</Link>
-              <a href="#" onClick={handleClick}>
+              <Link to="/home" className="navButton navButtonSmall">
+                Profile
+              </Link>
+              <a
+                href="#"
+                className="navButton navButtonSmall"
+                onClick={handleClick}
+              >
                 Logout
               </a>
             </div>
@@ -45,7 +48,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           )}
         </div>
         <Link to="/checkout">
-          <img className="cartIcon" src="./cart.png" />
+          <img className="cartIcon" src="/cart.png" />
         </Link>
       </div>
     </div>
