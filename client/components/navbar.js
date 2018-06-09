@@ -8,10 +8,14 @@ const Navbar = ({handleClick, isLoggedIn}) => (
   <div>
     <div className="navDiv">
       <div className="navTitle navSpace">
-        <img src="Logo.png" className="navImg" />
+        <Link to="/">
+          <img src="Logo.png" className="navImg" />
+        </Link>
       </div>
       <div className="flexContainer">
-        <p className="navButton">Home</p>
+        <Link to="/" className="navButton">
+          Home
+        </Link>
         <Link to="/homeSearch">
           <p className="navButton">Shop for Homes</p>
         </Link>
@@ -19,17 +23,23 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           <p className="navButton">View Home</p>
         </Link>
         <h2 />
-        <div>
+        <div className="">
           {isLoggedIn ? (
             <div>
               {/* The navbar will show these links after you log in */}
-              <Link to="/user-home">Profile</Link>
-              <a href="#" onClick={handleClick}>
+              <Link to="/home" className="navButton navButtonSmall">
+                Profile
+              </Link>
+              <a
+                href="#"
+                className="navButton navButtonSmall"
+                onClick={handleClick}
+              >
                 Logout
               </a>
             </div>
           ) : (
-            <div>
+            <div className="flexCenter">
               {/* The navbar will show these links before you log in */}
               <Link to="/login" className="navButton navButtonSmall">
                 Login
@@ -37,15 +47,12 @@ const Navbar = ({handleClick, isLoggedIn}) => (
               <Link to="/signup" className="navButton navButtonSmall">
                 Sign Up
               </Link>
-              <Link to="/checkout">
-                <img
-                  className="cart"
-                  src="https://cdn3.iconfinder.com/data/icons/shopping-2/256/Add_to_Cart-512.png"
-                />
-              </Link>
             </div>
           )}
         </div>
+        <Link to="/checkout">
+          <img className="cartIcon" src="./cart.png" />
+        </Link>
       </div>
     </div>
     <div className="navSpace" />

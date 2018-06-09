@@ -42,7 +42,7 @@ export const completePurchaseGuest = (session, products) => async dispatch => {
 
 export const fetchCartFromLocalStorage = () => dispatch => {
   // const cart = localStorage.cart
-  const cart = {2:1, 3:2, 4:10}
+  const cart = {2: 1, 3: 2, 4: 10}
   dispatch(fetchedCart(cart))
 }
 
