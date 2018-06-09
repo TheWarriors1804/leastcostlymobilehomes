@@ -8,7 +8,7 @@ import {HomeInfo, HomeTitle, HomeContent} from '../index'
  */
 export const SingleHome = props => {
   const handleSubmit = () => {}
-  console.log(props.products)
+  console.log('trying to handle submit',props.products)
   const current = props.products
     ? props.products.find(product => {
         return product.id === +props.match.params.id

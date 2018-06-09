@@ -26,6 +26,7 @@ export const addItemGuest = (productId, quantity) => dispatch => {
       ? localStorage.cart.product.id + quantity
       : 1
   })
+  console.log('localStorage updates to:', localStorage)
   dispatch(addedItem(productId, quantity))
 }
 
