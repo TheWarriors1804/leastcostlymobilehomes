@@ -184,3 +184,14 @@ Search window Css
 .searchTileContainer {
   flex-grow: 1;
 }
+
+.searchCardTitle {
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.manufacturer {
+  font-size: 18px;
+  font-weight: bold;
+}

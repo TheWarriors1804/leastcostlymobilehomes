@@ -85,6 +85,7 @@ export class HomeSearch extends React.Component {
             </form>
           </div>
         </div>
+        {/* <div className="col s12 m10 l11 searchTileContainer" /> */}
         <div className="col s12 m10 l11 searchTileContainer">
           {this.props.products
             .filter(product => {
