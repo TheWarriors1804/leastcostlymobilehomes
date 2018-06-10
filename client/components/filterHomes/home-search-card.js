@@ -4,23 +4,28 @@ import {connect} from 'react-redux'
 import {addItemLoggedIn, addItemGuest} from '../../store/order'
 
 class HomeSearchCard extends Component {
-  constructor() {
+  constructor(props) {
     super()
     this.state = {
-      productId: null,
-      quantity: 0
+      productId: props.product.id,
+      quantity: 1
     }
   }
 
-
+  handleChange = event => {
+    this.setState({
+      [event.target.name]: event.target.value
+    })
+  }
 
   handleSubmit = event => {
+    console.log('state in submit', this.state)
     event.preventDefault()
     if(this.props.user.id) {
-      this.props.addItemLoggedIn()
+      this.props.addItemLoggedIn(this.props.user.id, this.state.productId, this.state.quantity)
     } else {
-      console.log('im a guest')
-      this.props.addItemGuest({2:10})
+      console.log('im a guest', this.props)
+      this.props.addItemGuest(this.state.productId, this.state.quantity)
     }
   }
 
@@ -58,7 +63,7 @@ class HomeSearchCard extends Component {
             </div>
             <div className="card-action">
               <span>Quantity: </span>
-              <select>
+              <select name='quantity' onChange={this.handleChange}>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -87,7 +92,8 @@ class HomeSearchCard extends Component {
 }
 
 const mapStateToProps = state => ({
-  user: state.user
+  user: state.user,
+  products: state.products
 })
 
 const mapDispatchToProps = dispatch => ({

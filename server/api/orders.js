@@ -72,6 +72,7 @@ router.post('/', async (req, res, next) => {
 
 //when the user is logged in, this post route is used to create the order for the user and add products to the order
 router.post('/:userid/:productid', async (req, res, next) => {
+  console.log('in the route', req.body.quantity)
   const quantity = req.body.quantity
   try {
     const neworder = await Order.findOrCreate({

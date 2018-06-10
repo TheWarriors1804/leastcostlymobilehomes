@@ -39,6 +39,7 @@ export const auth = (email, password, method, cart, firstName, lastName) => {
       .then(
         res => {
           dispatch(getUser(res.data))
+          localStorage.clear()
           history.push('/home')
         },
         authError => {
