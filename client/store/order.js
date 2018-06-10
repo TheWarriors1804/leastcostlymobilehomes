@@ -7,7 +7,7 @@ const COMPLETE_PURCHASE = 'COMPLETE_PURCHASE'
 //add quantities for add item
 
 const completedPurchase = () => ({type: COMPLETE_PURCHASE})
-const addedItem = productId => ({type: ADD_ITEM, productId})
+const addedItem = (productId, quantity) => ({type: ADD_ITEM, productId, quantity})
 const fetchedCart = cart => ({type: FETCH_CART, cart})
 
 export const addItemLoggedIn = (
@@ -20,15 +20,14 @@ export const addItemLoggedIn = (
 }
 
 export const addItemGuest = (productId, quantity) => dispatch => {
-  localStorage.setItem('cart', {
-    ...localStorage.cart,
-    productId: localStorage.cart.product[productId]
-      ? localStorage.cart.product.id + quantity
-      : 1
-  })
-  console.log('localStorage updates to:', localStorage)
+  console.log('entered addItemGuest', productId, quantity, localStorage)
+  localStorage.setItem(productId, quantity)
   dispatch(addedItem(productId, quantity))
+  console.log('cart is', localStorage)
 }
+
+// console.log('localStorage updates to:', localStorage)
+// dispatch(addedItem(productId, quantity))
 
 export const completePurchaseLoggedIn = userId => async dispatch => {
   await axios.put(`api/orders/${userId}`)
@@ -41,9 +40,18 @@ export const completePurchaseGuest = (session, products) => async dispatch => {
 }
 
 export const fetchCartFromLocalStorage = () => dispatch => {
-  // const cart = localStorage.cart
-  const cart = {2: 1, 3: 2, 4: 10}
-  dispatch(fetchedCart(cart))
+  const cart = localStorage
+  delete cart['loglevel:webpack-dev-server']
+  // const cart = localStorage
+  const newcart = {}
+  for (const key in localStorage) {
+    if (localStorage.hasOwnProperty(key)) {
+      newcart[key] = localStorage[key]
+    }
+  }
+  console.log('newcart',newcart)
+  dispatch(fetchedCart(newcart))
+  console.log('localstorage in fetching cart from storage is:,', cart)
 }
 
 export const fetchCartFromDb = userId => async dispatch => {
@@ -63,9 +71,7 @@ export default function(state = initialState, action) {
     case ADD_ITEM: {
       return {
         ...state,
-        [action.productId]: state.productId
-          ? state.productId + action.quantity
-          : 1
+        [action.productId]: action.quantity
       }
     }
     case FETCH_CART: {
