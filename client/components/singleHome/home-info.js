@@ -1,8 +1,34 @@
-import React from 'react'
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import {addItemLoggedIn, addItemGuest} from '../../store/order'
 
-const HomeInfo = props => {
-  const {bedrooms, bathrooms, type, length, year, location} = props.info
+class HomeInfo extends Component {
+  constructor(props) {
+    super()
+    this.state = {
+      productId: props.info.id,
+      quantity: 1
+    }
+  }
 
+  handleChange = event => {
+    this.setState({
+      [event.target.name]: event.target.value
+    })
+  }
+
+  handleSubmit = event => {
+    event.preventDefault()
+    if(this.props.user.id) {
+      this.props.addItemLoggedIn(this.props.user.id, this.state.productId, this.state.quantity)
+    } else {
+      console.log('im a guest', this.props)
+      this.props.addItemGuest(this.state.productId, this.state.quantity)
+    }
+  }
+
+  render() {
+    const {bedrooms, bathrooms, type, length, year, location} = this.props.info
   return (
     <div className="homeInfo">
       <div className="info">
@@ -32,7 +58,7 @@ const HomeInfo = props => {
       <div className="flexContainer">
         <div className="info">
           <span>Quantity:</span>
-          <select>
+          <select name='quantity' onChange = {this.handleChange}>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -47,7 +73,7 @@ const HomeInfo = props => {
           <button
             // type="submit"
             className="btn waves-effect waves-light green"
-            onClick={() => console.log('THIS BUTTON HAS BEEN CLICKED')}
+            onClick={(event) => this.handleSubmit(event)}
           >
             Add to Cart
           </button>
@@ -56,5 +82,18 @@ const HomeInfo = props => {
     </div>
   )
 }
+}
 
-export default HomeInfo
+const mapStateToProps = state => ({
+  user: state.user,
+  products: state.products
+})
+
+const mapDispatchToProps = dispatch => ({
+  addItemGuest: (productId, quantity) =>
+    dispatch(addItemGuest(productId, quantity)),
+  addItemLoggedIn: (userId, productId, quantity) =>
+    dispatch(addItemLoggedIn(userId, productId, quantity))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeInfo)
