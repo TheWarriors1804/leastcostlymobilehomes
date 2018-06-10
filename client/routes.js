@@ -34,7 +34,7 @@ class Routes extends Component {
         <Route path="/signup" component={Signup} />
         <Route path="/singleHome/:id" component={SingleHome} />
         <Route path="/homeSearch" component={HomeSearch} />
-        <Route path="/userInfo" component={UserInfo} />
+        <Route path="/userHome" component={UserHome} />
         <Route path="/checkout" component={CheckOut} />
 
         {isLoggedIn && (
