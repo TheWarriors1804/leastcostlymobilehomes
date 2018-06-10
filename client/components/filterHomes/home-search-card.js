@@ -21,8 +21,12 @@ class HomeSearchCard extends Component {
   handleSubmit = event => {
     console.log('state in submit', this.state)
     event.preventDefault()
-    if(this.props.user.id) {
-      this.props.addItemLoggedIn(this.props.user.id, this.state.productId, this.state.quantity)
+    if (this.props.user.id) {
+      this.props.addItemLoggedIn(
+        this.props.user.id,
+        this.state.productId,
+        this.state.quantity
+      )
     } else {
       console.log('im a guest', this.props)
       this.props.addItemGuest(this.state.productId, this.state.quantity)
@@ -63,7 +67,11 @@ class HomeSearchCard extends Component {
             </div>
             <div className="card-action">
               <span>Quantity: </span>
-              <select name='quantity' onChange={this.handleChange}>
+              <select
+                name="quantity"
+                onChange={this.handleChange}
+                value={this.props.quantity ? this.props.quantity : 1}
+              >
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -78,7 +86,7 @@ class HomeSearchCard extends Component {
               <button
                 type="submit"
                 className="btn waves-effect waves-light green"
-                onClick={(event) => this.handleSubmit(event)}
+                onClick={event => this.handleSubmit(event)}
               >
                 Add to Cart
               </button>
@@ -88,7 +96,6 @@ class HomeSearchCard extends Component {
       </div>
     )
   }
-
 }
 
 const mapStateToProps = state => ({
