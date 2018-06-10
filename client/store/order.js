@@ -7,7 +7,11 @@ const COMPLETE_PURCHASE = 'COMPLETE_PURCHASE'
 //add quantities for add item
 
 const completedPurchase = () => ({type: COMPLETE_PURCHASE})
-const addedItem = (productId, quantity) => ({type: ADD_ITEM, productId, quantity})
+const addedItem = (productId, quantity) => ({
+  type: ADD_ITEM,
+  productId,
+  quantity
+})
 const fetchedCart = cart => ({type: FETCH_CART, cart})
 
 export const addItemLoggedIn = (
@@ -15,7 +19,7 @@ export const addItemLoggedIn = (
   productId,
   quantity
 ) => async dispatch => {
-  await axios.post(`api/orders/${userId}/${productId}`, {quantity})
+  await axios.post(`/api/orders/${userId}/${productId}`, {quantity})
   dispatch(addedItem(productId, quantity))
 }
 
@@ -30,12 +34,12 @@ export const addItemGuest = (productId, quantity) => dispatch => {
 // dispatch(addedItem(productId, quantity))
 
 export const completePurchaseLoggedIn = userId => async dispatch => {
-  await axios.put(`api/orders/${userId}`)
+  await axios.put(`/api/orders/${userId}`)
   dispatch(completedPurchase())
 }
 
 export const completePurchaseGuest = (session, products) => async dispatch => {
-  await axios.post(`api/orders`, {session, products})
+  await axios.post(`/api/orders`, {session, products})
   dispatch(completedPurchase())
 }
 
@@ -49,13 +53,13 @@ export const fetchCartFromLocalStorage = () => dispatch => {
       newcart[key] = localStorage[key]
     }
   }
-  console.log('newcart',newcart)
+  console.log('newcart', newcart)
   dispatch(fetchedCart(newcart))
   console.log('localstorage in fetching cart from storage is:,', cart)
 }
 
 export const fetchCartFromDb = userId => async dispatch => {
-  const cart = await axios.get(`api/orders/cart/${userId}`)
+  const cart = await axios.get(`/api/orders/cart/${userId}`)
   //the route above needs to output productId: quantity as keyvalues in an object
   dispatch(fetchedCart(cart))
 }
