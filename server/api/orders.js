@@ -92,6 +92,7 @@ router.post('/:userid/:productid', async (req, res, next) => {
         }
       ]
     })
+    console.log('reached here')
     if (association[0].products[0]) {
       const orderitem = await OrderItem.findAll({
         where: {
@@ -99,15 +100,23 @@ router.post('/:userid/:productid', async (req, res, next) => {
           productId: newproduct.id
         }
       })
+      if (orderitem[0]) {
+        const updatedorderitem = await orderitem[0].update({
+          quantity: quantity
+        })
+        res.json(updatedorderitem)
+      } else {
+        const neworderitem = await OrderItem.create({
+          orderId: neworder[0].id, productId: newproduct.id, quantity: quantity
+        })
+        res.json(neworderitem)
+      }
       // const count = orderitem[0].quantity;
-      const updatedorderitem = await orderitem[0].update({
-        quantity: quantity
-      })
-      res.json(updatedorderitem)
     } else {
-      neworder[0].addProducts(newproduct)
-      newproduct.addOrders(neworder[0])
-      res.json(neworder[0])
+      const neworderitem = await OrderItem.create({
+        orderId: neworder[0].id, productId: newproduct.id, quantity: quantity
+      })
+      res.json(neworderitem)
     }
   } catch (err) {
     next(err)
