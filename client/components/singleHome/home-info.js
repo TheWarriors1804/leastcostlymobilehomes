@@ -1,7 +1,20 @@
 import React from 'react'
+import {connect} from 'react-redux'
+import {addItemLoggedIn, addItemGuest} from '../../store/order'
 
 const HomeInfo = props => {
   const {bedrooms, bathrooms, type, length, year, location} = props.info
+
+  const handleSubmit = event => {
+    event.preventDefault()
+    if (props.user.id) {
+      console.log('im a user', props, localStorage)
+      props.addItemLoggedIn(props.user.id, props.productId, event.target.value)
+    } else {
+      console.log('im a guest', props, localStorage)
+      props.addItemGuest(props.productId, event.target.value)
+    }
+  }
 
   return (
     <div className="homeInfo">
@@ -45,9 +58,9 @@ const HomeInfo = props => {
             <option value="10">10</option>
           </select>
           <button
-            // type="submit"
+            type="submit"
             className="btn waves-effect waves-light green"
-            onClick={() => console.log('THIS BUTTON HAS BEEN CLICKED')}
+            onClick={event => handleSubmit(event)}
           >
             Add to Cart
           </button>
@@ -57,4 +70,16 @@ const HomeInfo = props => {
   )
 }
 
-export default HomeInfo
+const mapStateToProps = state => ({
+  user: state.user,
+  products: state.products
+})
+
+const mapDispatchToProps = dispatch => ({
+  addItemGuest: (productId, quantity) =>
+    dispatch(addItemGuest(productId, quantity)),
+  addItemLoggedIn: (userId, productId, quantity) =>
+    dispatch(addItemLoggedIn(userId, productId, quantity))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeInfo)

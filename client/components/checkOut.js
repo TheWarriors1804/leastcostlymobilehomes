@@ -5,11 +5,14 @@ import {HomeSearchCard} from './index'
 const CheckOut = props => {
   return (
     <div>
-      <div>CheckOut!!!</div>
+      Hello
+      {console.log('props', props)}
+      {console.log('localStorage', localStorage)}
+      {/* <div>CheckOut!!!</div>
       <hr />
       <div>
         <HomeSearchCard />
-      </div>
+      </div> */}
     </div>
   )
 }

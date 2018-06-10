@@ -8,7 +8,7 @@ import {HomeInfo, HomeTitle, HomeContent} from '../index'
  */
 export const SingleHome = props => {
   const handleSubmit = () => {}
-  console.log('trying to handle submit',props.products)
+  console.log('trying to handle submit', props.products)
   const current = props.products
     ? props.products.find(product => {
         return product.id === +props.match.params.id
@@ -21,7 +21,7 @@ export const SingleHome = props => {
         <HomeTitle info={current} />
         <div className="flexContainer">
           <img src={current.imageUrl} className="homeImage" />
-          <HomeInfo info={current} handleSubmit={handleSubmit} />
+          <HomeInfo info={current} productId={props.match.params.id} />
         </div>
         <HomeContent info={current} />
       </div>
