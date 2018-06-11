@@ -45,7 +45,6 @@ class HomeSearchCard extends Component {
       id,
       year,
       price,
-      manufacturer,
       model,
       imageUrl
     } = this.props.product
@@ -56,7 +55,7 @@ class HomeSearchCard extends Component {
     })
     return (
       <div className="row">
-        <div className="card horizontal col s12 m10 l8">
+        <div className="card horizontal col s12 m11 l9">
           <div className="card-image">
             <Link to={`/singleHome/${id}`}>
               <img src={imageUrl} />
@@ -75,7 +74,11 @@ class HomeSearchCard extends Component {
               <select
                 name="quantity"
                 onChange={this.handleChange}
-                defaultValue={this.props.quantity ? this.props.quantity : 1}
+                defaultValue={
+                  this.props.order[this.state.productId]
+                    ? this.props.order[this.state.productId]
+                    : 1
+                }
               >
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -91,11 +94,13 @@ class HomeSearchCard extends Component {
               <button
                 type="submit"
                 className={`btn waves-effect waves-light ${
-                  this.props.quantity ? `blue` : `green`
+                  this.props.order[this.state.productId] ? `blue` : `green`
                 }`}
                 onClick={event => this.handleSubmit(event)}
               >
-                {this.props.quantity ? `Update` : `Add to Cart`}
+                {this.props.order[this.state.productId]
+                  ? `Update Quantity`
+                  : `Add to Cart`}
               </button>
               {this.props.quantity ? <button type='remove' onClick ={event => this.handleRemove(event)}> Remove Item </button> : <div></div>}
             </div>
@@ -108,7 +113,8 @@ class HomeSearchCard extends Component {
 
 const mapStateToProps = state => ({
   user: state.user,
-  products: state.products
+  products: state.products,
+  order: state.order
 })
 
 const mapDispatchToProps = dispatch => ({
