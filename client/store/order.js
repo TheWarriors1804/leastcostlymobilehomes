@@ -65,9 +65,7 @@ export const fetchCartFromLocalStorage = () => dispatch => {
       newcart[key] = localStorage[key]
     }
   }
-  console.log('newcart', newcart)
   dispatch(fetchedCart(newcart))
-  console.log('localstorage in fetching cart from storage is:,', cart)
 }
 
 export const fetchCartFromDb = userId => async dispatch => {

@@ -12,6 +12,11 @@ class CheckOut extends React.Component {
   }
 
   render() {
+    const orderNum = Object.keys(this.props.order).reduce(
+      (acc, curr) => acc + Number(this.props.order[curr]),
+      0
+    )
+
     const orderTotal =
       Object.keys(this.props.order).length && this.props.products.length
         ? Object.keys(this.props.order).reduce((acc, productId) => {
@@ -36,16 +41,13 @@ class CheckOut extends React.Component {
 
     return (
       <div>
-        <div className="flexContainer">
-          <div className="checkout-text">
-            <h1>Shopping Cart</h1>
+        <div className="checkout-container row valign-wrapper">
+          <div className="checkout-text col s12 m6 offset-m1">
+            <h1>SHOPPING CART</h1>
             <h2>
               {`You have `}
-              {Object.keys(this.props.order).reduce(
-                (acc, curr) => acc + this.props.order[curr],
-                0
-              )}
-              {` items in your shopping cart.`}
+              {orderNum}
+              {` ${orderNum === 1 ? `item` : `items`} in your shopping cart.`}
             </h2>
           </div>
           <button
@@ -58,11 +60,11 @@ class CheckOut extends React.Component {
         </div>
 
         <div className="checkout-summary row">
-          <div className="col s12 m10">
-            <div className="card blue-grey">
-              <div className="card-content">
-                <span className="card-title">Order Summary</span>
-                <div className="white-text">
+          <div className="col s12 m10 offset-m1">
+            <div className="card blue-grey lighten-4">
+              <div className="card-content checkout-text">
+                <span className="card-title">ORDER SUMMARY</span>
+                <div>
                   <div>Subtotal: {formatPrice(orderTotal)}</div>
                   <div>Tax: {tax * 100}%</div>
                   <div>Shipping: FREE</div>
@@ -73,24 +75,26 @@ class CheckOut extends React.Component {
           </div>
         </div>
 
-        <div>
-          <h2>View or modify order</h2>
-        </div>
-        <div className="checkout-orders">
-          {Object.keys(this.props.order).length &&
-          this.props.products.length ? (
-            Object.keys(this.props.order).map(productId => (
-              <HomeSearchCard
-                product={this.props.products.find(
-                  product => product.id === Number(productId)
-                )}
-                key={productId}
-                quantity={this.props.order[productId]}
-              />
-            ))
-          ) : (
-            <div />
-          )}
+        <div className="checkout-text checkout-orders-container row">
+          <div className="col s12 m10 offset-m1">
+            <h2>View or modify order</h2>
+            <div className="checkout-orders">
+              {Object.keys(this.props.order).length &&
+              this.props.products.length ? (
+                Object.keys(this.props.order).map(productId => (
+                  <HomeSearchCard
+                    product={this.props.products.find(
+                      product => product.id === Number(productId)
+                    )}
+                    key={productId}
+                    quantity={this.props.order[productId]}
+                  />
+                ))
+              ) : (
+                <div />
+              )}
+            </div>
+          </div>
         </div>
       </div>
     )
