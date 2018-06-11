@@ -60,7 +60,7 @@ export const logout = () => dispatch =>
     .catch(err => console.log(err))
 
 export const updateUser = user => async dispatch => {
-  const updated = await axios.put(`/api/users`, user)
+  const updated = await axios.put(`/api/users/${user.id}`, user)
   dispatch(updatedUser(updated))
 }
 
@@ -79,7 +79,7 @@ export default function(state = defaultUser, action) {
     case REMOVE_USER:
       return defaultUser
     case UPDATE_USER:
-      return action.updated
+      return action.user
     default:
       return state
   }

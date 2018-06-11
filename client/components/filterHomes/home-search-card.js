@@ -1,7 +1,7 @@
 import {Link} from 'react-router-dom'
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {addItemLoggedIn, addItemGuest} from '../../store/order'
+import {addItemLoggedIn, addItemGuest, removeItemLoggedIn, removeItemGuest} from '../../store/order'
 
 class HomeSearchCard extends Component {
   constructor(props) {
@@ -29,6 +29,13 @@ class HomeSearchCard extends Component {
     } else {
       this.props.addItemGuest(this.state.productId, this.state.quantity)
     }
+  }
+
+  handleRemove = event => {
+    this.props.user.id ?
+    this.props.removeItemLoggedIn( this.state.productId, this.props.user.id) :
+    this.props.removeItemGuest( this.state.productId)
+    console.log('trying to handle remove')
   }
 
   render() {
@@ -95,6 +102,7 @@ class HomeSearchCard extends Component {
                   ? `Update Quantity`
                   : `Add to Cart`}
               </button>
+              {this.props.quantity ? <button type='remove' onClick ={event => this.handleRemove(event)}> Remove Item </button> : <div></div>}
             </div>
           </div>
         </div>
@@ -113,7 +121,11 @@ const mapDispatchToProps = dispatch => ({
   addItemGuest: (productId, quantity) =>
     dispatch(addItemGuest(productId, quantity)),
   addItemLoggedIn: (userId, productId, quantity) =>
-    dispatch(addItemLoggedIn(userId, productId, quantity))
+    dispatch(addItemLoggedIn(userId, productId, quantity)),
+    removeItemLoggedIn: (productId, userId) =>
+    dispatch(removeItemLoggedIn(productId, userId)),
+    removeItemGuest: (productId) =>
+    dispatch(removeItemGuest(productId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeSearchCard)
