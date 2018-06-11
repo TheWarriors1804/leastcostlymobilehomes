@@ -201,6 +201,7 @@ User CSS
 
 .searchPageContainer {
   display: flex;
+  margin-top: 10px;
 }
 
 .searchFilterContainer {
