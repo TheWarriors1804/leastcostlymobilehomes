@@ -1,7 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import {withRouter} from 'react-router'
 import {UserInfo, UserOrder, UserEdit} from '../index'
+import {updateUser} from '../../store/user'
 
 /**
  * COMPONENT
@@ -11,11 +13,15 @@ export const UserHome = props => {
   let editing = true
 
   const onEdit = () => {
-    editing = false
+    console.log('clicked', editing)
+    props.updateUser(props.user)
+    editing = true
   }
 
   const onSubmit = () => {
-    editing = true
+    console.log('clicked', editing)
+    props.updateUser(props.user)
+    editing = false
   }
 
   const userInfo = editing ? (
@@ -53,11 +59,18 @@ const mapState = state => {
   return {
     firstName: state.user.firstName,
     lastName: state.user.lastName,
-    imageUrl: state.user.imageUrl
+    imageUrl: state.user.imageUrl,
+    user: state.user
   }
 }
 
-export default connect(mapState)(UserHome)
+const dispatch = dispatch => {
+  return {
+    updateUser: user => dispatch(updateUser(user))
+  }
+}
+
+export default withRouter(connect(mapState, dispatch)(UserHome))
 
 /**
  * PROP TYPES
