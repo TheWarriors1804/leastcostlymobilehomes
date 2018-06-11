@@ -1,11 +1,11 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {HomeSearchCard} from '../index'
-import {Link} from 'react-router-dom'
+
 /**
  * COMPONENT
  */
+
 export class HomeSearch extends React.Component {
   constructor() {
     super()
@@ -99,7 +99,6 @@ export class HomeSearch extends React.Component {
             </form>
           </div>
         </div>
-        {/* <div className="col s12 m10 l11 searchTileContainer" /> */}
         <div className="col s12 m10 l11 searchTileContainer">
           {productsList.length
             ? productsList
@@ -113,6 +112,7 @@ export class HomeSearch extends React.Component {
 /**
  * CONTAINER
  */
+
 const mapState = state => {
   return {
     products: state.product

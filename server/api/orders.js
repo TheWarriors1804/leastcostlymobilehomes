@@ -1,15 +1,6 @@
 const router = require('express').Router()
-const {Order, Product, User, OrderItem} = require('../db/models/index')
+const {Order, Product, OrderItem} = require('../db/models/index')
 module.exports = router
-
-router.get('/', async (req, res, next) => {
-  try {
-    const orders = await Order.findAll()
-    res.json(orders)
-  } catch (err) {
-    next(err)
-  }
-})
 
 //get all the orders for the user
 router.get('/:userid', async (req, res, next) => {
@@ -24,7 +15,7 @@ router.get('/:userid', async (req, res, next) => {
 })
 
 //get all the products in the user's cart
-router.get('/cart/:userid', async (req, res, next) => {
+router.get('/:userid/cart', async (req, res, next) => {
   try {
     const order = await Order.findAll({
       where: {
@@ -65,14 +56,12 @@ router.post('/', async (req, res, next) => {
   const target = req.body
   try {
     const makeorder = await Order.create({
-      sessionId: 'test4',
       complete: true
     })
     for (const key in target) {
       if (target.hasOwnProperty(key)) {
         const makeorderid = makeorder.dataValues.id
-
-        const orderitem = await OrderItem.create({
+        await OrderItem.create({
           orderId: makeorderid,
           productId: key,
           quantity: target[key]
@@ -107,7 +96,6 @@ router.post('/:userid/:productid', async (req, res, next) => {
         }
       ]
     })
-    console.log('reached here')
     if (association[0].products[0]) {
       const orderitem = await OrderItem.findAll({
         where: {
@@ -128,7 +116,6 @@ router.post('/:userid/:productid', async (req, res, next) => {
         })
         res.json(neworderitem)
       }
-      // const count = orderitem[0].quantity;
     } else {
       const neworderitem = await OrderItem.create({
         orderId: neworder[0].id,
@@ -143,7 +130,6 @@ router.post('/:userid/:productid', async (req, res, next) => {
 })
 
 //when the user is logged in, this put route is used to change the order status to complete at checkout
-
 router.put('/:userid', async (req, res, next) => {
   try {
     const order = await Order.findAll({
@@ -180,7 +166,7 @@ router.delete('/:userid/:productid', async (req, res, next) => {
     })
     await item[0].destroy()
     res.status(204).end()
-  } catch(err) {
+  } catch (err) {
     next(err)
   }
 })

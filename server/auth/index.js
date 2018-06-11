@@ -16,23 +16,17 @@ router.post('/login', (req, res, next) => {
       } else if (!user.correctPassword(req.body.password)) {
         res.status(401).send('Incorrect password')
       } else {
-        console.log('I AM IN THE RIGHT ROUTE', req.body)
-        //add localStorage to db here
-        // const cart = localStorage.cart
         const cart = req.body.cart
         const userorder = await Order.findAll({
           where: {userId: user.id, complete: false},
           include: [{model: Product}]
         })
-        console.log('tried to find the users order', userorder)
         if (!userorder[0]) {
           const neworder = await Order.create({
             userId: user.id,
             complete: false
           })
-          console.log('user had no order, creating order', cart)
           for (var key in cart) {
-            console.log('key is', key)
             await OrderItem.create({
               productId: key,
               orderId: neworder.id,

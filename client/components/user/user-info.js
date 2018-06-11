@@ -17,10 +17,6 @@ const UserInfo = props => {
     console.log(event.target.value)
   }
 
-  const handleSubmit = event => {
-    console.log(event.target.value)
-  }
-
   return (
     <div className="row userInfo" onChange={handleChange}>
       <form className="col s12">

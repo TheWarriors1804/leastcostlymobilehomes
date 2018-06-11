@@ -42,10 +42,8 @@ export const addItemLoggedIn = (
 }
 
 export const addItemGuest = (productId, quantity) => dispatch => {
-  console.log('entered addItemGuest', productId, quantity, localStorage)
   localStorage.setItem(productId, quantity)
   dispatch(addedItem(productId, quantity))
-  console.log('cart is', localStorage)
 }
 
 export const removeItemGuest = productId => dispatch => {
@@ -81,7 +79,7 @@ export const fetchCartFromLocalStorage = () => dispatch => {
 }
 
 export const fetchCartFromDb = userId => async dispatch => {
-  const {data} = await axios.get(`/api/orders/cart/${userId}`)
+  const {data} = await axios.get(`/api/orders/${userId}/cart`)
   dispatch(fetchedCart(data))
 }
 
@@ -106,11 +104,9 @@ export default function(state = initialState, action) {
     case REMOVE_ITEM: {
       let updated = {}
       for (var key in state) {
-        console.log('key is: ', key)
         if (key != action.productId) {
           updated[key] = state[key]
         }
-        console.log('the new state after remove is', updated)
       }
       return {
         ...updated
