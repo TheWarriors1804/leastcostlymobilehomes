@@ -60,7 +60,9 @@ export const logout = () => dispatch =>
     .catch(err => console.log(err))
 
 export const updateUser = user => async dispatch => {
+  console.log('before thunk', user)
   const updated = await axios.put(`/api/users/${user.id}`, user)
+  console.log('after thunk', updated)
   dispatch(updatedUser(updated))
 }
 

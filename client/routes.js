@@ -30,11 +30,11 @@ class Routes extends Component {
       <Switch>
         {/* Routes placed here are available to all visitors */}
         <Route path="/" exact component={HomePage} />
+        {/* <Route path="/userHome" exact component={UserHome} /> */}
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route path="/singleHome/:id" component={SingleHome} />
         <Route path="/homeSearch" component={HomeSearch} />
-        <Route path="/userHome" component={UserHome} />
         <Route path="/checkout" component={CheckOut} />
 
         {isLoggedIn && (

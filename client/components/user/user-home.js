@@ -40,13 +40,12 @@ export class UserHome extends Component {
     })
   }
 
-  handleSubmit = event => {
+  handleSubmit = async event => {
     event.preventDefault()
-    this.setState(prevState => ({
-      editing: !prevState.editing
-    }))
+    this.handleEdit()
 
-    this.props.updateUser(this.state.user)
+    const update = await this.props.updateUser(this.state.user)
+    console.log('update: ', update)
   }
 
   handleEdit = () => {
@@ -58,7 +57,9 @@ export class UserHome extends Component {
   render() {
     const {editing, user} = this.state
 
-    console.log(this.state)
+    if (!this.props.user) {
+      return <h3>Loading User Info...</h3>
+    }
 
     const userInfo = editing ? (
       <UserEdit
@@ -69,7 +70,7 @@ export class UserHome extends Component {
     ) : (
       <UserInfo handleEdit={this.handleEdit} user={user} />
     )
-    const {firstName, lastName, imageUrl} = this.props
+    const {firstName, lastName, imageUrl} = this.state.user
     return (
       <div>
         <h3>
