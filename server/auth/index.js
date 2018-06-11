@@ -86,6 +86,7 @@ router.post('/signup', (req, res, next) => {
 })
 
 router.post('/logout', (req, res) => {
+  console.log('IM IN THE LOGOUT ROUTE')
   req.logout()
   req.session.destroy()
   res.redirect('/')

@@ -21,8 +21,20 @@ const User = db.define('user', {
   phone: {
     type: Sequelize.STRING
   },
-  address: {
+  address1: {
     type: Sequelize.STRING
+  },
+  address2: {
+    type: Sequelize.STRING
+  },
+  town: {
+    type: Sequelize.STRING
+  },
+  state: {
+    type: Sequelize.STRING
+  },
+  zip: {
+    type: Sequelize.INTEGER
   },
   password: {
     type: Sequelize.STRING,
