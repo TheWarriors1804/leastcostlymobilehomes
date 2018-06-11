@@ -21,15 +21,6 @@ const UserInfo = props => {
     console.log(event.target.value)
   }
 
-  const firstName1 = 'Robert'
-  const lName1 = 'Nkemdiche'
-  const email1 = 'Robert.N@gmail.com'
-  const address1 = "123 Albertson's Dr."
-  const address21 = ''
-  const city1 = 'San Francisco'
-  const stateAdd1 = 'California'
-  const zip1 = '94102'
-
   return (
     <div className="row userInfo" onChange={handleChange}>
       <form className="col s12">
@@ -39,7 +30,7 @@ const UserInfo = props => {
               First Name
             </label>
             <div className="infoTag">
-              <p>{firstName1}</p>
+              <p>{firstName}</p>
             </div>
           </div>
           <div className="input-field col s6">
@@ -47,7 +38,7 @@ const UserInfo = props => {
               Last Name
             </label>
             <div className="infoTag">
-              <p>{lName1}</p>
+              <p>{lastName}</p>
             </div>
           </div>
         </div>
@@ -57,17 +48,17 @@ const UserInfo = props => {
               Email
             </label>
             <div className="infoTag">
-              <p>{email1}</p>
+              <p>{email}</p>
             </div>
           </div>
         </div>
         <div className="row">
           <div className="input-field col s6">
-            <label htmlFor="address1" className="active">
-              Address 1
+            <label htmlFor="address" className="active">
+              Address
             </label>
             <div className="infoTag">
-              <p>{address1}</p>
+              <p>{address}</p>
             </div>
           </div>
           <div className="input-field col s6">
@@ -75,7 +66,7 @@ const UserInfo = props => {
               Address 2
             </label>
             <div className="infoTag">
-              <p>{address21}</p>
+              <p>{address2}</p>
             </div>
           </div>
         </div>
@@ -85,7 +76,7 @@ const UserInfo = props => {
               Town / City
             </label>
             <div className="infoTag">
-              <p>{city1}</p>
+              <p>{city}</p>
             </div>
           </div>
         </div>
@@ -95,7 +86,7 @@ const UserInfo = props => {
               State
             </label>
             <div className="infoTag">
-              <p>{stateAdd1}</p>
+              <p>{stateAdd}</p>
             </div>
           </div>
           <div className="input-field col s6">
@@ -103,7 +94,7 @@ const UserInfo = props => {
               Zip Code
             </label>
             <div className="infoTag">
-              <p>{zip1}</p>
+              <p>{zip}</p>
             </div>
           </div>
         </div>
@@ -111,7 +102,7 @@ const UserInfo = props => {
           <button
             type="button"
             className="btn waves-effect waves-light col offset-s6 s4"
-            onClick={props.onEdit}
+            onClick={props.onSubmit}
           >
             Edit Information
           </button>
