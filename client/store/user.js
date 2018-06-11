@@ -52,7 +52,7 @@ export const auth = (email, password, method, cart) => {
       .catch(dispatchOrHistoryErr => console.error(dispatchOrHistoryErr))
 }
 
-export const logout = () => dispatch => {
+export const logout = () => dispatch =>
   axios
     .post('/auth/logout')
     .then(_ => {
@@ -60,7 +60,6 @@ export const logout = () => dispatch => {
       history.push('/login')
     })
     .catch(err => console.log(err))
-}
 
 export const updateUser = user => async dispatch => {
   const updated = await axios.put(`/api/users/${user.id}`, user)
