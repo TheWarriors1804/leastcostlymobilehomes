@@ -19,7 +19,6 @@ class HomeSearchCard extends Component {
   }
 
   handleSubmit = event => {
-    console.log('state in submit', this.state)
     event.preventDefault()
     if (this.props.user.id) {
       this.props.addItemLoggedIn(
@@ -28,7 +27,6 @@ class HomeSearchCard extends Component {
         this.state.quantity
       )
     } else {
-      console.log('im a guest', this.props)
       this.props.addItemGuest(this.state.productId, this.state.quantity)
     }
   }
@@ -85,10 +83,12 @@ class HomeSearchCard extends Component {
               </select>
               <button
                 type="submit"
-                className="btn waves-effect waves-light green"
+                className={`btn waves-effect waves-light ${
+                  this.props.quantity ? `blue` : `green`
+                }`}
                 onClick={event => this.handleSubmit(event)}
               >
-                Add to Cart
+                {this.props.quantity ? `Update` : `Add to Cart`}
               </button>
             </div>
           </div>
