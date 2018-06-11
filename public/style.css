@@ -286,3 +286,14 @@ User CSS
 .badge {
   margin-right: 20px;
 }
+
+.remove-item-btn {
+  margin: 20px 0px 0px 20px;
+  background: none;
+  color: rgb(102, 158, 242);
+  border: none;
+  padding: 0;
+  /*border is optional*/
+  border-bottom: 1px solid rgb(102, 158, 242);
+  cursor: pointer;
+}

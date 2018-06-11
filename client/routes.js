@@ -20,8 +20,11 @@ import {fetchCartFromDb, fetchCartFromLocalStorage} from './store/order'
  * COMPONENT
  */
 class Routes extends Component {
-  componentDidMount() {
-    this.props.loadInitialData()
+  async componentDidMount() {
+    await this.props.loadInitialData()
+    this.props.user.id
+      ? this.props.fetchCartFromDb(this.props.user.id)
+      : this.props.fetchCartFromLocalStorage()
   }
 
   componentWillReceiveProps(nextProps) {
