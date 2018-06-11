@@ -22,28 +22,42 @@ export class UserHome extends Component {
   }
 
   componentDidMount = () => {
-    //const user = this.props.user
-    console.log('before', this.props.user)
     this.setState({
       user: this.props.user
     })
-    console.log('after', this.state)
   }
 
-  onSubmit = user => {
+  handleChange = event => {
+    const id = event.target.id
+    const value = event.target.value
+
+    this.setState({
+      user: {
+        ...this.state.user,
+        [id]: value
+      }
+    })
+  }
+
+  handleSubmit = () => {
     this.setState(prevState => ({
-      editing: !prevState.editing,
-      user
+      editing: !prevState.editing
     }))
   }
 
   render() {
     const {editing, user} = this.state
 
+    console.log(this.state)
+
     const userInfo = editing ? (
-      <UserEdit onSubmit={this.onSubmit} user={user} />
+      <UserEdit
+        handleSubmit={this.handleSubmit}
+        handleChange={this.handleChange}
+        user={user}
+      />
     ) : (
-      <UserInfo onSubmit={this.onSubmit} />
+      <UserInfo handleSubmit={this.handleSubmit} />
     )
     const {firstName, lastName, imageUrl} = this.props
     return (

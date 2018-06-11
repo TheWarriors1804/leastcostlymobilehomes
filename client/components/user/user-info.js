@@ -11,7 +11,7 @@ const UserInfo = props => {
     city,
     state,
     zip
-  } = props
+  } = props.user
 
   return (
     <div className="row userInfo">
@@ -94,7 +94,7 @@ const UserInfo = props => {
           <button
             type="button"
             className="btn waves-effect waves-light col offset-s6 s4"
-            onClick={props.onSubmit}
+            onClick={props.handleSubmit}
           >
             Edit Information
           </button>
@@ -106,14 +106,7 @@ const UserInfo = props => {
 
 const mapStateToProps = state => {
   return {
-    firstName: state.user.firstName,
-    lastName: state.user.lastName,
-    email: state.user.email,
-    address: state.user.address,
-    address2: state.user.address2,
-    city: state.user.city,
-    state: state.user.state,
-    zip: state.user.zip
+    user: state.user
   }
 }
 
