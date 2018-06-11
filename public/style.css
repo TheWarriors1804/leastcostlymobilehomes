@@ -92,7 +92,7 @@ hr {
 }
 
 .cartIcon {
-  margin-right: 30px;
+  margin-left: 30px;
   height: 40px;
 }
 
@@ -280,4 +280,8 @@ User CSS
 
 .checkout-summary .card-content {
   margin-left: 2vw;
+}
+
+.badge {
+  margin-right: 20px;
 }
