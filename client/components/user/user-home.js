@@ -1,55 +1,50 @@
-import React from 'react'
+import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {withRouter} from 'react-router'
 import {UserInfo, UserOrder, UserEdit} from '../index'
-import {updateUser} from '../../store/user'
 
 /**
  * COMPONENT
  */
-export const UserHome = props => {
-  const {firstName, lastName, imageUrl} = props
-  let editing = true
-
-  const onEdit = () => {
-    console.log('clicked', editing)
-    props.updateUser(props.user)
-    editing = true
+export class UserHome extends Component {
+  state = {
+    editing: false
   }
 
-  const onSubmit = () => {
-    console.log('clicked', editing)
-    props.updateUser(props.user)
-    editing = false
+  onSubmit = () => {
+    this.setState(prevState => ({
+      editing: !prevState.editing
+    }))
   }
 
-  const userInfo = editing ? (
-    <UserEdit onSubmit={onSubmit} />
-  ) : (
-    <UserInfo onEdit={onEdit} />
-  )
-
-  return (
-    <div>
-      <h3>
-        Welcome, {firstName} {lastName}!
-      </h3>
-      <div className="row">
-        <div className="card horizontal col s11 m11 l11">
-          <div className="card-image">
-            <img src={imageUrl} />
+  render() {
+    const userInfo = this.state.editing ? (
+      <UserEdit onSubmit={this.onSubmit} />
+    ) : (
+      <UserInfo onSubmit={this.onSubmit} />
+    )
+    const {firstName, lastName, imageUrl} = this.props
+    return (
+      <div>
+        <h3>
+          Welcome, {firstName} {lastName}!
+        </h3>
+        <div className="row">
+          <div className="card horizontal col s11 m11 l11">
+            <div className="card-image">
+              <img src={imageUrl} />
+            </div>
+            <div className="card-content">{userInfo}</div>
           </div>
-          <div className="card-content">{userInfo}</div>
+        </div>
+        <div className="row">
+          <div className="card horizontal col s11 m11 l11">
+            <UserOrder />
+          </div>
         </div>
       </div>
-      <div className="row">
-        <div className="card horizontal col s11 m11 l11">
-          <UserOrder />
-        </div>
-      </div>
-    </div>
-  )
+    )
+  }
 }
 
 /**
@@ -64,13 +59,7 @@ const mapState = state => {
   }
 }
 
-const dispatch = dispatch => {
-  return {
-    updateUser: user => dispatch(updateUser(user))
-  }
-}
-
-export default withRouter(connect(mapState, dispatch)(UserHome))
+export default connect(mapState)(UserHome)
 
 /**
  * PROP TYPES

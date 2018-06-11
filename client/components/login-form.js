@@ -46,7 +46,6 @@ class AuthForm extends Component {
 
   render() {
     const {name, displayName, error} = this.props
-    console.log('props', this.props)
     return (
       <div>
         <form onSubmit={this.handleSubmit} name={name}>
