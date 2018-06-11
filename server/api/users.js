@@ -34,6 +34,7 @@ router.get('/:id', async (req, res, next) => {
 router.put('/:id', async (req, res, next) => {
   try {
     const user = await User.findById(req.params.id)
+    console.log('IM IN THE UPDATE USER ROUTE', user)
     const updated = await user.update(req.body)
     res.json(updated)
   } catch (err) {
