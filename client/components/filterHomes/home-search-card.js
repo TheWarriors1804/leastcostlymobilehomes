@@ -70,7 +70,7 @@ class HomeSearchCard extends Component {
               <select
                 name="quantity"
                 onChange={this.handleChange}
-                value={this.props.quantity ? this.props.quantity : 1}
+                defaultValue={this.props.quantity ? this.props.quantity : 1}
               >
                 <option value="1">1</option>
                 <option value="2">2</option>
