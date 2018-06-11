@@ -1,17 +1,34 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import {withRouter} from 'react-router'
 import {UserInfo, UserOrder, UserEdit} from '../index'
+import {updateUser} from '../../store/user'
 
 /**
  * COMPONENT
  */
 export const UserHome = props => {
   const {firstName, lastName, imageUrl} = props
+  let editing = true
 
-  const editing = true
+  const onEdit = () => {
+    console.log('clicked', editing)
+    props.updateUser(props.user)
+    editing = true
+  }
 
-  const userInfo = editing ? <UserEdit /> : <UserInfo />
+  const onSubmit = () => {
+    console.log('clicked', editing)
+    props.updateUser(props.user)
+    editing = false
+  }
+
+  const userInfo = editing ? (
+    <UserEdit onSubmit={onSubmit} />
+  ) : (
+    <UserInfo onEdit={onEdit} />
+  )
 
   return (
     <div>
@@ -27,7 +44,7 @@ export const UserHome = props => {
         </div>
       </div>
       <div className="row">
-        <div className="card horizontal col s10 m10 l10">
+        <div className="card horizontal col s11 m11 l11">
           <UserOrder />
         </div>
       </div>
@@ -42,11 +59,18 @@ const mapState = state => {
   return {
     firstName: state.user.firstName,
     lastName: state.user.lastName,
-    imageUrl: state.user.imageUrl
+    imageUrl: state.user.imageUrl,
+    user: state.user
   }
 }
 
-export default connect(mapState)(UserHome)
+const dispatch = dispatch => {
+  return {
+    updateUser: user => dispatch(updateUser(user))
+  }
+}
+
+export default withRouter(connect(mapState, dispatch)(UserHome))
 
 /**
  * PROP TYPES
