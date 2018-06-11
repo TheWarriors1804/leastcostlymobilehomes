@@ -1,7 +1,12 @@
 import {Link} from 'react-router-dom'
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {addItemLoggedIn, addItemGuest, removeItemLoggedIn, removeItemGuest} from '../../store/order'
+import {
+  addItemLoggedIn,
+  addItemGuest,
+  removeItemLoggedIn,
+  removeItemGuest
+} from '../../store/order'
 
 class HomeSearchCard extends Component {
   constructor(props) {
@@ -32,9 +37,9 @@ class HomeSearchCard extends Component {
   }
 
   handleRemove = event => {
-    this.props.user.id ?
-    this.props.removeItemLoggedIn( this.state.productId, this.props.user.id) :
-    this.props.removeItemGuest( this.state.productId)
+    this.props.user.id
+      ? this.props.removeItemLoggedIn(this.state.productId, this.props.user.id)
+      : this.props.removeItemGuest(this.state.productId)
     console.log('trying to handle remove')
   }
 
@@ -55,7 +60,7 @@ class HomeSearchCard extends Component {
     })
     return (
       <div className="row">
-        <div className="card horizontal col s12 m11 l9">
+        <div className="card horizontal col s12 m11 l10">
           <div className="card-image">
             <Link to={`/singleHome/${id}`}>
               <img src={imageUrl} />
@@ -102,7 +107,18 @@ class HomeSearchCard extends Component {
                   ? `Update Quantity`
                   : `Add to Cart`}
               </button>
-              {this.props.quantity ? <button type='remove' onClick ={event => this.handleRemove(event)}> Remove Item </button> : <div></div>}
+              {this.props.quantity ? (
+                <button
+                  type="remove"
+                  className="remove-item-btn"
+                  onClick={event => this.handleRemove(event)}
+                >
+                  {' '}
+                  Remove Item{' '}
+                </button>
+              ) : (
+                <div />
+              )}
             </div>
           </div>
         </div>
@@ -122,10 +138,9 @@ const mapDispatchToProps = dispatch => ({
     dispatch(addItemGuest(productId, quantity)),
   addItemLoggedIn: (userId, productId, quantity) =>
     dispatch(addItemLoggedIn(userId, productId, quantity)),
-    removeItemLoggedIn: (productId, userId) =>
+  removeItemLoggedIn: (productId, userId) =>
     dispatch(removeItemLoggedIn(productId, userId)),
-    removeItemGuest: (productId) =>
-    dispatch(removeItemGuest(productId))
+  removeItemGuest: productId => dispatch(removeItemGuest(productId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeSearchCard)
