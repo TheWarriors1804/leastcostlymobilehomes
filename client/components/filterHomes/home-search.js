@@ -24,6 +24,20 @@ export class HomeSearch extends React.Component {
   }
 
   render() {
+    const productsList = this.props.products
+      .filter(product => {
+        return (
+          (this.state.type === product.type || this.state.type === 'all') &&
+          (Number(this.state.price) >= product.price ||
+            this.state.price === 'all') &&
+          (Number(this.state.bedrooms) === product.bedrooms ||
+            this.state.bedrooms === 'all') &&
+          (Number(this.state.bathrooms) === product.bathrooms ||
+            this.state.bathrooms === 'all')
+        )
+      })
+      .map(product => <HomeSearchCard product={product} key={product.id} />)
+
     return (
       <div className="searchPageContainer row">
         <div className="homeFilter card col s12 m4 l3">
@@ -87,22 +101,9 @@ export class HomeSearch extends React.Component {
         </div>
         {/* <div className="col s12 m10 l11 searchTileContainer" /> */}
         <div className="col s12 m10 l11 searchTileContainer">
-          {this.props.products
-            .filter(product => {
-              return (
-                (this.state.type === product.type ||
-                  this.state.type === 'all') &&
-                (Number(this.state.price) >= product.price ||
-                  this.state.price === 'all') &&
-                (Number(this.state.bedrooms) === product.bedrooms ||
-                  this.state.bedrooms === 'all') &&
-                (Number(this.state.bathrooms) === product.bathrooms ||
-                  this.state.bathrooms === 'all')
-              )
-            })
-            .map(product => (
-              <HomeSearchCard product={product} key={product.id} />
-            ))}
+          {productsList.length
+            ? productsList
+            : `There are no results that match your filters.`}
         </div>
       </div>
     )
