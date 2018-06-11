@@ -8,10 +8,21 @@ import {UserInfo, UserOrder, UserEdit} from '../index'
  */
 export const UserHome = props => {
   const {firstName, lastName, imageUrl} = props
+  let editing = true
 
-  const editing = true
+  const onEdit = () => {
+    editing = false
+  }
 
-  const userInfo = editing ? <UserEdit /> : <UserInfo />
+  const onSubmit = () => {
+    editing = true
+  }
+
+  const userInfo = editing ? (
+    <UserEdit onSubmit={onSubmit} />
+  ) : (
+    <UserInfo onEdit={onEdit} />
+  )
 
   return (
     <div>

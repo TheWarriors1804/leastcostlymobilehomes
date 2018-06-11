@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-const UserEdit = props => {
+const UserInfo = props => {
   const {
     firstName,
     lastName,
@@ -111,6 +111,7 @@ const UserEdit = props => {
           <button
             type="button"
             className="btn waves-effect waves-light col offset-s6 s4"
+            onClick={props.onEdit}
           >
             Edit Information
           </button>
@@ -129,4 +130,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(UserEdit)
+export default connect(mapStateToProps)(UserInfo)
