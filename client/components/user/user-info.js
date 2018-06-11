@@ -21,16 +21,6 @@ const UserInfo = props => {
     console.log(event.target.value)
   }
 
-  const firstName1 = 'Robert'
-  const lName1 = 'Nkemdiche'
-  const email1 = 'Robert.N@gmail.com'
-  const address1 = "123 Albertson's Dr."
-  const address21 = ''
-  const city1 = 'San Francisco'
-  const stateAdd1 = 'California'
-  const zip1 = '94102'
-  console.log(props)
-
   return (
     <div className="row userInfo" onChange={handleChange}>
       <form className="col s12">
