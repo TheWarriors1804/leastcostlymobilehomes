@@ -8,7 +8,6 @@ const gotProducts = products => ({type: GET_ALL_PRODUCTS, products})
 
 export const getProducts = () => async dispatch => {
   const {data} = await axios.get(`/api/products`)
-  console.log(data)
   dispatch(gotProducts(data))
 }
 

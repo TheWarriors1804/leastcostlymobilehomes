@@ -3,19 +3,25 @@ import axios from 'axios'
 const ADD_ITEM = 'ADD_ITEM'
 const FETCH_CART = 'FETCH_CART'
 const COMPLETE_PURCHASE = 'COMPLETE_PURCHASE'
+const REMOVE_ITEM = 'REMOVE_ITEM'
 
 //add quantities for add item
 
 const completedPurchase = () => ({type: COMPLETE_PURCHASE})
-const addedItem = (productId, quantity) => ({type: ADD_ITEM, productId, quantity})
+const addedItem = (productId, quantity) => ({
+  type: ADD_ITEM,
+  productId,
+  quantity
+})
 const fetchedCart = cart => ({type: FETCH_CART, cart})
+const removeItem = productId => ({type: REMOVE_ITEM, productId})
 
 export const addItemLoggedIn = (
   userId,
   productId,
   quantity
 ) => async dispatch => {
-  await axios.post(`api/orders/${userId}/${productId}`, {quantity})
+  await axios.post(`/api/orders/${userId}/${productId}`, {quantity})
   dispatch(addedItem(productId, quantity))
 }
 
@@ -26,16 +32,26 @@ export const addItemGuest = (productId, quantity) => dispatch => {
   console.log('cart is', localStorage)
 }
 
+export const removeItemGuest = (productId) => dispatch => {
+  localStorage.removeItem(productId)
+  dispatch(removeItem(productId))
+}
+
+export const removeItemLoggedIn = (productId, userId) => async dispatch => {
+  await axios.delete(`/api/orders/${userId}/${productId}`)
+  dispatch(removeItem(productId))
+}
+
 // console.log('localStorage updates to:', localStorage)
 // dispatch(addedItem(productId, quantity))
 
 export const completePurchaseLoggedIn = userId => async dispatch => {
-  await axios.put(`api/orders/${userId}`)
+  await axios.put(`/api/orders/${userId}`)
   dispatch(completedPurchase())
 }
 
 export const completePurchaseGuest = (session, products) => async dispatch => {
-  await axios.post(`api/orders`, {session, products})
+  await axios.post(`/api/orders`, {session, products})
   dispatch(completedPurchase())
 }
 
@@ -49,15 +65,13 @@ export const fetchCartFromLocalStorage = () => dispatch => {
       newcart[key] = localStorage[key]
     }
   }
-  console.log('newcart',newcart)
   dispatch(fetchedCart(newcart))
-  console.log('localstorage in fetching cart from storage is:,', cart)
 }
 
 export const fetchCartFromDb = userId => async dispatch => {
-  const cart = await axios.get(`api/orders/cart/${userId}`)
+  const {data} = await axios.get(`/api/orders/cart/${userId}`)
   //the route above needs to output productId: quantity as keyvalues in an object
-  dispatch(fetchedCart(cart))
+  dispatch(fetchedCart(data))
 }
 
 const initialState = {}
@@ -76,6 +90,17 @@ export default function(state = initialState, action) {
     }
     case FETCH_CART: {
       return action.cart
+    }
+    case REMOVE_ITEM: {
+      let updated = {}
+      for(var key in state) {
+        if (key!==action.productId) {
+          updated[key] = state[key]
+        }
+      }
+      return {
+        ...updated
+      }
     }
     default:
       return state

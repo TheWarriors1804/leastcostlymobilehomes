@@ -1,7 +1,7 @@
 import {Link} from 'react-router-dom'
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {addItemLoggedIn, addItemGuest} from '../../store/order'
+import {addItemLoggedIn, addItemGuest, removeItemLoggedIn, removeItemGuest} from '../../store/order'
 
 class HomeSearchCard extends Component {
   constructor(props) {
@@ -19,14 +19,23 @@ class HomeSearchCard extends Component {
   }
 
   handleSubmit = event => {
-    console.log('state in submit', this.state)
     event.preventDefault()
-    if(this.props.user.id) {
-      this.props.addItemLoggedIn(this.props.user.id, this.state.productId, this.state.quantity)
+    if (this.props.user.id) {
+      this.props.addItemLoggedIn(
+        this.props.user.id,
+        this.state.productId,
+        this.state.quantity
+      )
     } else {
-      console.log('im a guest', this.props)
       this.props.addItemGuest(this.state.productId, this.state.quantity)
     }
+  }
+
+  handleRemove = event => {
+    this.props.user.id ?
+    this.props.removeItemLoggedIn( this.state.productId, this.props.user.id) :
+    this.props.removeItemGuest( this.state.productId)
+    console.log('trying to handle remove')
   }
 
   render() {
@@ -36,7 +45,6 @@ class HomeSearchCard extends Component {
       id,
       year,
       price,
-      manufacturer,
       model,
       imageUrl
     } = this.props.product
@@ -47,7 +55,7 @@ class HomeSearchCard extends Component {
     })
     return (
       <div className="row">
-        <div className="card horizontal col s12 m10 l8">
+        <div className="card horizontal col s12 m11 l9">
           <div className="card-image">
             <Link to={`/singleHome/${id}`}>
               <img src={imageUrl} />
@@ -63,7 +71,15 @@ class HomeSearchCard extends Component {
             </div>
             <div className="card-action">
               <span>Quantity: </span>
-              <select name='quantity' onChange={this.handleChange}>
+              <select
+                name="quantity"
+                onChange={this.handleChange}
+                defaultValue={
+                  this.props.order[this.state.productId]
+                    ? this.props.order[this.state.productId]
+                    : 1
+                }
+              >
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -77,30 +93,39 @@ class HomeSearchCard extends Component {
               </select>
               <button
                 type="submit"
-                className="btn waves-effect waves-light green"
-                onClick={(event) => this.handleSubmit(event)}
+                className={`btn waves-effect waves-light ${
+                  this.props.order[this.state.productId] ? `blue` : `green`
+                }`}
+                onClick={event => this.handleSubmit(event)}
               >
-                Add to Cart
+                {this.props.order[this.state.productId]
+                  ? `Update Quantity`
+                  : `Add to Cart`}
               </button>
+              {this.props.quantity ? <button type='remove' onClick ={event => this.handleRemove(event)}> Remove Item </button> : <div></div>}
             </div>
           </div>
         </div>
       </div>
     )
   }
-
 }
 
 const mapStateToProps = state => ({
   user: state.user,
-  products: state.products
+  products: state.products,
+  order: state.order
 })
 
 const mapDispatchToProps = dispatch => ({
   addItemGuest: (productId, quantity) =>
     dispatch(addItemGuest(productId, quantity)),
   addItemLoggedIn: (userId, productId, quantity) =>
-    dispatch(addItemLoggedIn(userId, productId, quantity))
+    dispatch(addItemLoggedIn(userId, productId, quantity)),
+    removeItemLoggedIn: (productId, userId) =>
+    dispatch(removeItemLoggedIn(productId, userId)),
+    removeItemGuest: (productId) =>
+    dispatch(removeItemGuest(productId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeSearchCard)

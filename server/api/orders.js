@@ -45,6 +45,21 @@ router.get('/cart/:userid', async (req, res, next) => {
   }
 })
 
+//get all orders for orderhistory
+router.get('/:userId/all', async (req, res, next) => {
+  try {
+    const orders = await Order.findAll({
+      where: {
+        userId: req.params.userId
+      },
+      include: [{model: Product}]
+    })
+    res.json(orders)
+  } catch (err) {
+    next(err)
+  }
+})
+
 //when no one is logged in, this post route creates a new order in the orders table on checkout.  the session id and order items will be pased through the req.body. status should be 'complete in req.body. each item id should be kept in an array on req.body.items
 router.post('/', async (req, res, next) => {
   const target = req.body
@@ -92,6 +107,7 @@ router.post('/:userid/:productid', async (req, res, next) => {
         }
       ]
     })
+    console.log('reached here')
     if (association[0].products[0]) {
       const orderitem = await OrderItem.findAll({
         where: {
@@ -99,15 +115,27 @@ router.post('/:userid/:productid', async (req, res, next) => {
           productId: newproduct.id
         }
       })
+      if (orderitem[0]) {
+        const updatedorderitem = await orderitem[0].update({
+          quantity: quantity
+        })
+        res.json(updatedorderitem)
+      } else {
+        const neworderitem = await OrderItem.create({
+          orderId: neworder[0].id,
+          productId: newproduct.id,
+          quantity: quantity
+        })
+        res.json(neworderitem)
+      }
       // const count = orderitem[0].quantity;
-      const updatedorderitem = await orderitem[0].update({
+    } else {
+      const neworderitem = await OrderItem.create({
+        orderId: neworder[0].id,
+        productId: newproduct.id,
         quantity: quantity
       })
-      res.json(updatedorderitem)
-    } else {
-      neworder[0].addProducts(newproduct)
-      newproduct.addOrders(neworder[0])
-      res.json(neworder[0])
+      res.json(neworderitem)
     }
   } catch (err) {
     next(err)
@@ -137,6 +165,22 @@ router.delete('/:userid', async (req, res, next) => {
     await order[0].destroy()
     res.status(204).end()
   } catch (err) {
+    next(err)
+  }
+})
+
+//this route allows logged in users to remove an item from their cart
+router.delete('/:userid/:productid', async (req, res, next) => {
+  try {
+    const order = await Order.findAll({
+      where: {userId: req.params.userid, complete: false}
+    })
+    const item = await OrderItem.findAll({
+      where: {orderId: order[0].id, productId: req.params.productid}
+    })
+    await item[0].destroy()
+    res.status(204).end()
+  } catch(err) {
     next(err)
   }
 })
