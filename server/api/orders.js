@@ -168,3 +168,19 @@ router.delete('/:userid', async (req, res, next) => {
     next(err)
   }
 })
+
+//this route allows logged in users to remove an item from their cart
+router.delete('/:userid/:productid', async (req, res, next) => {
+  try {
+    const order = await Order.findAll({
+      where: {userId: req.params.userid, complete: false}
+    })
+    const item = await OrderItem.findAll({
+      where: {orderId: order[0].id, productId: req.params.productid}
+    })
+    await item[0].destroy()
+    res.status(204).end()
+  } catch(err) {
+    next(err)
+  }
+})
