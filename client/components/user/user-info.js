@@ -94,7 +94,7 @@ const UserInfo = props => {
           <button
             type="button"
             className="btn waves-effect waves-light col offset-s6 s4"
-            onClick={props.handleSubmit}
+            onClick={props.handleEdit}
           >
             Edit Information
           </button>
@@ -106,7 +106,7 @@ const UserInfo = props => {
 
 const mapStateToProps = state => {
   return {
-    user: state.user
+    //user: state.user
   }
 }
 

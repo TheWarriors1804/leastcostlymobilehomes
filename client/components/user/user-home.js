@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {UserInfo, UserOrder, UserEdit} from '../index'
+import {updateUser} from '../../store/user'
 
 /**
  * COMPONENT
@@ -39,7 +40,16 @@ export class UserHome extends Component {
     })
   }
 
-  handleSubmit = () => {
+  handleSubmit = event => {
+    event.preventDefault()
+    this.setState(prevState => ({
+      editing: !prevState.editing
+    }))
+
+    this.props.updateUser(this.state.user)
+  }
+
+  handleEdit = () => {
     this.setState(prevState => ({
       editing: !prevState.editing
     }))
@@ -57,7 +67,7 @@ export class UserHome extends Component {
         user={user}
       />
     ) : (
-      <UserInfo handleSubmit={this.handleSubmit} />
+      <UserInfo handleEdit={this.handleEdit} user={user} />
     )
     const {firstName, lastName, imageUrl} = this.props
     return (
