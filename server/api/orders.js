@@ -45,6 +45,21 @@ router.get('/cart/:userid', async (req, res, next) => {
   }
 })
 
+//get all orders for orderhistory
+router.get('/:userId/all', async (req, res, next) => {
+  try {
+    const orders = await Order.findAll({
+      where: {
+        userId: req.params.userId
+      },
+      include: [{model: Product}]
+    })
+    res.json(orders)
+  } catch (err) {
+    next(err)
+  }
+})
+
 //when no one is logged in, this post route creates a new order in the orders table on checkout.  the session id and order items will be pased through the req.body. status should be 'complete in req.body. each item id should be kept in an array on req.body.items
 router.post('/', async (req, res, next) => {
   const target = req.body
@@ -107,14 +122,18 @@ router.post('/:userid/:productid', async (req, res, next) => {
         res.json(updatedorderitem)
       } else {
         const neworderitem = await OrderItem.create({
-          orderId: neworder[0].id, productId: newproduct.id, quantity: quantity
+          orderId: neworder[0].id,
+          productId: newproduct.id,
+          quantity: quantity
         })
         res.json(neworderitem)
       }
       // const count = orderitem[0].quantity;
     } else {
       const neworderitem = await OrderItem.create({
-        orderId: neworder[0].id, productId: newproduct.id, quantity: quantity
+        orderId: neworder[0].id,
+        productId: newproduct.id,
+        quantity: quantity
       })
       res.json(neworderitem)
     }
