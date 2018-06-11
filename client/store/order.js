@@ -1,11 +1,23 @@
 import axios from 'axios'
 
+/**
+ * ACTION TYPES
+ */
+
 const ADD_ITEM = 'ADD_ITEM'
 const FETCH_CART = 'FETCH_CART'
 const COMPLETE_PURCHASE = 'COMPLETE_PURCHASE'
 const REMOVE_ITEM = 'REMOVE_ITEM'
 
-//add quantities for add item
+/**
+ * INITIAL STATE
+ */
+
+const initialState = {}
+
+/**
+ * ACTION CREATORS
+ */
 
 const completedPurchase = () => ({type: COMPLETE_PURCHASE})
 const addedItem = (productId, quantity) => ({
@@ -15,6 +27,10 @@ const addedItem = (productId, quantity) => ({
 })
 const fetchedCart = cart => ({type: FETCH_CART, cart})
 const removeItem = productId => ({type: REMOVE_ITEM, productId})
+
+/**
+ * THUNK CREATORS
+ */
 
 export const addItemLoggedIn = (
   userId,
@@ -32,7 +48,7 @@ export const addItemGuest = (productId, quantity) => dispatch => {
   console.log('cart is', localStorage)
 }
 
-export const removeItemGuest = (productId) => dispatch => {
+export const removeItemGuest = productId => dispatch => {
   localStorage.removeItem(productId)
   dispatch(removeItem(productId))
 }
@@ -41,9 +57,6 @@ export const removeItemLoggedIn = (productId, userId) => async dispatch => {
   await axios.delete(`/api/orders/${userId}/${productId}`)
   dispatch(removeItem(productId))
 }
-
-// console.log('localStorage updates to:', localStorage)
-// dispatch(addedItem(productId, quantity))
 
 export const completePurchaseLoggedIn = userId => async dispatch => {
   await axios.put(`/api/orders/${userId}`)
@@ -58,7 +71,6 @@ export const completePurchaseGuest = (session, products) => async dispatch => {
 export const fetchCartFromLocalStorage = () => dispatch => {
   const cart = localStorage
   delete cart['loglevel:webpack-dev-server']
-  // const cart = localStorage
   const newcart = {}
   for (const key in localStorage) {
     if (localStorage.hasOwnProperty(key)) {
@@ -70,12 +82,12 @@ export const fetchCartFromLocalStorage = () => dispatch => {
 
 export const fetchCartFromDb = userId => async dispatch => {
   const {data} = await axios.get(`/api/orders/cart/${userId}`)
-  //the route above needs to output productId: quantity as keyvalues in an object
   dispatch(fetchedCart(data))
 }
 
-const initialState = {}
-//Store will have array of key-value pairs representing the item id and quantity
+/**
+ * REDUCER
+ */
 
 export default function(state = initialState, action) {
   switch (action.type) {
@@ -93,10 +105,12 @@ export default function(state = initialState, action) {
     }
     case REMOVE_ITEM: {
       let updated = {}
-      for(var key in state) {
-        if (key!==action.productId) {
+      for (var key in state) {
+        console.log('key is: ', key)
+        if (key != action.productId) {
           updated[key] = state[key]
         }
+        console.log('the new state after remove is', updated)
       }
       return {
         ...updated
