@@ -79,7 +79,7 @@ export default function(state = defaultUser, action) {
     case REMOVE_USER:
       return defaultUser
     case UPDATE_USER:
-      return action.updated
+      return action.user
     default:
       return state
   }
