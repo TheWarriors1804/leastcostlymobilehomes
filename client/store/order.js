@@ -3,6 +3,7 @@ import axios from 'axios'
 const ADD_ITEM = 'ADD_ITEM'
 const FETCH_CART = 'FETCH_CART'
 const COMPLETE_PURCHASE = 'COMPLETE_PURCHASE'
+const REMOVE_ITEM = 'REMOVE_ITEM'
 
 //add quantities for add item
 
@@ -13,6 +14,7 @@ const addedItem = (productId, quantity) => ({
   quantity
 })
 const fetchedCart = cart => ({type: FETCH_CART, cart})
+const removeItem = productId => ({type: REMOVE_ITEM, productId})
 
 export const addItemLoggedIn = (
   userId,
@@ -28,6 +30,16 @@ export const addItemGuest = (productId, quantity) => dispatch => {
   localStorage.setItem(productId, quantity)
   dispatch(addedItem(productId, quantity))
   console.log('cart is', localStorage)
+}
+
+export const removeItemGuest = (productId) => dispatch => {
+  localStorage.removeItem(productId)
+  dispatch(removeItem(productId))
+}
+
+export const removeItemLoggedIn = (productId, userId) => async dispatch => {
+  await axios.delete(`/api/orders/${userId}/${productId}`)
+  dispatch(removeItem(productId))
 }
 
 // console.log('localStorage updates to:', localStorage)
@@ -80,6 +92,17 @@ export default function(state = initialState, action) {
     }
     case FETCH_CART: {
       return action.cart
+    }
+    case REMOVE_ITEM: {
+      let updated = {}
+      for(var key in state) {
+        if (key!==action.productId) {
+          updated[key] = state[key]
+        }
+      }
+      return {
+        ...updated
+      }
     }
     default:
       return state
