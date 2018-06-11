@@ -8,13 +8,16 @@ import {
   UserHome,
   SingleHome,
   HomeSearch,
-  UserInfo,
-  HomePage
+  HomePage,
+  CheckOut
 } from './components'
-import {me} from './store'
-import CheckOut from './components/checkOut'
-import {getProducts} from './store/product'
-import {fetchCartFromDb, fetchCartFromLocalStorage} from './store/order'
+
+import {
+  me,
+  getProducts,
+  fetchCartFromDb,
+  fetchCartFromLocalStorage
+} from './store'
 
 /**
  * COMPONENT
@@ -36,8 +39,6 @@ class Routes extends Component {
   }
 
   render() {
-    const {isLoggedIn} = this.props
-
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
@@ -48,10 +49,9 @@ class Routes extends Component {
         <Route path="/homeSearch" component={HomeSearch} />
         <Route path="/userHome" component={UserHome} />
         <Route path="/checkout" component={CheckOut} />
-
-        {isLoggedIn && (
+        {/* Routes placed below are only available after logging in */}
+        {this.props.isLoggedIn && (
           <Switch>
-            {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
           </Switch>
         )}
