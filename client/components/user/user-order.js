@@ -1,13 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {HomeTitle, HomeInfo, HomeContent} from '../index'
+import {HomeUserInfo, HomeTitle, HomeContent} from '../index'
 
 /**
  * COMPONENT
  */
 export const UserOrder = props => {
   const handleSubmit = () => {}
+  console.log(props.products)
   const current = props.products
     ? props.products.find(product => {
         return product.id === +props.match.params.id
@@ -19,13 +20,17 @@ export const UserOrder = props => {
         <HomeTitle info={current} />
         <div className="flexContainer">
           <img src={current.imageUrl} className="homeImage" />
-          <HomeInfo info={current} handleSubmit={handleSubmit} />
+          <HomeUserInfo info={current} handleSubmit={handleSubmit} />
         </div>
         <HomeContent info={current} />
       </div>
     )
   } else {
-    return <div />
+    return (
+      <div>
+        <h2>No previous orders</h2>
+      </div>
+    )
   }
 }
 
@@ -34,9 +39,9 @@ export const UserOrder = props => {
  */
 const mapStateToProps = state => {
   return {
-    userId: state.user.userId,
-    productId: state.user.productId,
-    quantity: state.user.quantity
+    firstName: state.order,
+    lastName: state.order.lastName,
+    imageUrl: state.user.imageUrl
   }
 }
 
@@ -46,7 +51,7 @@ export default connect(mapStateToProps)(UserOrder)
  * PROP TYPES
  */
 UserOrder.propTypes = {
-  userId: PropTypes.string,
-  productId: PropTypes.string,
-  quantity: PropTypes.string
+  firstName: PropTypes.string,
+  lastName: PropTypes.string,
+  imageUrl: PropTypes.string
 }

@@ -14,6 +14,7 @@ export {default as CheckOut} from './checkOut'
 export {default as UserHome} from './user/user-home'
 export {default as UserInfo} from './user/user-info'
 export {default as UserOrder} from './user/user-order'
+export {default as HomeUserInfo} from './user/user-order-info'
 
 // Single home components
 
