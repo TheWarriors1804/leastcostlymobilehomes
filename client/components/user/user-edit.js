@@ -1,17 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-const UserInfo = props => {
-  const {
-    firstName,
-    lastName,
-    email,
-    address,
-    address2,
-    city,
-    stateAdd,
-    zip
-  } = props
+const UserEdit = props => {
+  const {firstName, lastName, email, address, address2, city, zip} = props
 
   const handleChange = event => {
     console.log(event.target.value)
@@ -182,7 +173,11 @@ const UserInfo = props => {
           <a href="delete the user" className="col s6 delete">
             Delete this user
           </a>
-          <button type="button" className="btn waves-effect waves-light col s4">
+          <button
+            type="button"
+            className="btn waves-effect waves-light col s4"
+            onClick={props.onSubmit}
+          >
             Submit Changes
           </button>
         </div>
@@ -200,4 +195,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(UserInfo)
+export default connect(mapStateToProps)(UserEdit)
