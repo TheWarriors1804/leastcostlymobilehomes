@@ -2,6 +2,7 @@ import {Link} from 'react-dom'
 import React from 'react'
 import {HomeSearchCard} from './index'
 import {connect} from 'react-redux'
+import {Redirect} from 'react-router-dom'
 
 const CheckOut = props => {
   console.log('order', props.order)
@@ -42,7 +43,7 @@ const CheckOut = props => {
         <button
           type="submit"
           className="btn waves-effect waves-light green"
-          onClick={event => console.log(event)}
+          onClick={<Redirect to="/checkout/checkoutForm" />}
         >
           Proceed with your order
         </button>
