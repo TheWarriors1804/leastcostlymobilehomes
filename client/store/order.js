@@ -59,9 +59,9 @@ export const fetchCartFromLocalStorage = () => dispatch => {
 }
 
 export const fetchCartFromDb = userId => async dispatch => {
-  const cart = await axios.get(`/api/orders/cart/${userId}`)
+  const {data} = await axios.get(`/api/orders/cart/${userId}`)
   //the route above needs to output productId: quantity as keyvalues in an object
-  dispatch(fetchedCart(cart))
+  dispatch(fetchedCart(data))
 }
 
 const initialState = {}
