@@ -1,16 +1,8 @@
-import {Link} from 'react-dom'
 import React from 'react'
 import {HomeSearchCard} from './index'
 import {connect} from 'react-redux'
-import {fetchCartFromDb, fetchCartFromLocalStorage} from '../store/order'
 
 class CheckOut extends React.Component {
-  componentDidMount() {
-    this.props.user.id
-      ? this.props.fetchCartFromDb(this.props.user.id)
-      : this.props.fetchCartFromLocalStorage()
-  }
-
   render() {
     const orderNum = Object.keys(this.props.order).reduce(
       (acc, curr) => acc + Number(this.props.order[curr]),
@@ -34,10 +26,6 @@ class CheckOut extends React.Component {
       })
 
     const tax = 0.08875
-
-    console.log('user', this.props.user, this.props.user.id)
-    console.log('localStorage', localStorage)
-    console.log('props', this.props)
 
     return (
       <div>
@@ -107,9 +95,4 @@ const mapStateToProps = state => ({
   products: state.product
 })
 
-const mapDispatchToProps = dispatch => ({
-  fetchCartFromDb: userId => dispatch(fetchCartFromDb(userId)),
-  fetchCartFromLocalStorage: () => dispatch(fetchCartFromLocalStorage())
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(CheckOut)
+export default connect(mapStateToProps)(CheckOut)
