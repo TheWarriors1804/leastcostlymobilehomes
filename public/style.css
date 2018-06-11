@@ -236,6 +236,11 @@ User CSS
   text-align: center;
 }
 
+.homepage-container .card-title {
+  color: white;
+  text-shadow: 2px 2px 5px #000;
+}
+
 .searchCardTitle {
   flex-direction: row;
   align-items: flex-end;
@@ -251,11 +256,28 @@ User CSS
   padding: 50px;
 }
 
-.card-title {
-  color: white;
-  text-shadow: 2px 2px 5px #000;
-}
-
 .homepage-cards {
   padding: 3vw;
+}
+
+/*Checkout styles*/
+
+.checkout-container button {
+  vertical-align: center;
+}
+
+.checkout-text {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.checkout-text h1 {
+  font-size: 3rem;
+}
+
+.checkout-text h2 {
+  font-size: 1.5rem;
+}
+
+.checkout-summary .card-content {
+  margin-left: 2vw;
 }
