@@ -9,20 +9,12 @@ const UserInfo = props => {
     address,
     address2,
     city,
-    stateAdd,
+    state,
     zip
   } = props
 
-  const handleChange = event => {
-    console.log(event.target.value)
-  }
-
-  const handleSubmit = event => {
-    console.log(event.target.value)
-  }
-
   return (
-    <div className="row userInfo" onChange={handleChange}>
+    <div className="row userInfo">
       <form className="col s12">
         <div className="row">
           <div className="input-field col s6">
@@ -86,7 +78,7 @@ const UserInfo = props => {
               State
             </label>
             <div className="infoTag">
-              <p>{stateAdd}</p>
+              <p>{state}</p>
             </div>
           </div>
           <div className="input-field col s6">
@@ -117,7 +109,11 @@ const mapStateToProps = state => {
     firstName: state.user.firstName,
     lastName: state.user.lastName,
     email: state.user.email,
-    address: state.user.address
+    address: state.user.address,
+    address2: state.user.address2,
+    city: state.user.city,
+    state: state.user.state,
+    zip: state.user.zip
   }
 }
 

@@ -8,18 +8,40 @@ import {UserInfo, UserOrder, UserEdit} from '../index'
  */
 export class UserHome extends Component {
   state = {
-    editing: false
+    editing: false,
+    user: {
+      firstName: '',
+      lastName: '',
+      email: '',
+      address: '',
+      address2: '',
+      city: '',
+      state: '',
+      zip: ''
+    }
   }
 
-  onSubmit = () => {
+  componentDidMount = () => {
+    //const user = this.props.user
+    console.log('before', this.props.user)
+    this.setState({
+      user: this.props.user
+    })
+    console.log('after', this.state)
+  }
+
+  onSubmit = user => {
     this.setState(prevState => ({
-      editing: !prevState.editing
+      editing: !prevState.editing,
+      user
     }))
   }
 
   render() {
-    const userInfo = this.state.editing ? (
-      <UserEdit onSubmit={this.onSubmit} />
+    const {editing, user} = this.state
+
+    const userInfo = editing ? (
+      <UserEdit onSubmit={this.onSubmit} user={user} />
     ) : (
       <UserInfo onSubmit={this.onSubmit} />
     )
@@ -52,14 +74,15 @@ export class UserHome extends Component {
  */
 const mapState = state => {
   return {
-    firstName: state.user.firstName,
-    lastName: state.user.lastName,
-    imageUrl: state.user.imageUrl,
     user: state.user
   }
 }
 
-export default connect(mapState)(UserHome)
+const mapDispatchToProps = dispatch => ({
+  updateUser: user => dispatch(updateUser(user))
+})
+
+export default connect(mapState, mapDispatchToProps)(UserHome)
 
 /**
  * PROP TYPES
