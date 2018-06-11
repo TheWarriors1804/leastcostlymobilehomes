@@ -39,6 +39,7 @@ export const auth = (email, password, method, cart, firstName, lastName) => {
       .then(
         res => {
           dispatch(getUser(res.data))
+          localStorage.clear()
           history.push('/home')
         },
         authError => {
@@ -59,7 +60,7 @@ export const logout = () => dispatch =>
     .catch(err => console.log(err))
 
 export const updateUser = user => async dispatch => {
-  const updated = await axios.put(`/api/users`, user)
+  const updated = await axios.put(`/api/users/${user.id}`, user)
   dispatch(updatedUser(updated))
 }
 

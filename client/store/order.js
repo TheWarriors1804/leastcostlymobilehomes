@@ -7,7 +7,11 @@ const COMPLETE_PURCHASE = 'COMPLETE_PURCHASE'
 //add quantities for add item
 
 const completedPurchase = () => ({type: COMPLETE_PURCHASE})
-const addedItem = productId => ({type: ADD_ITEM, productId})
+const addedItem = (productId, quantity) => ({
+  type: ADD_ITEM,
+  productId,
+  quantity
+})
 const fetchedCart = cart => ({type: FETCH_CART, cart})
 
 export const addItemLoggedIn = (
@@ -15,40 +19,47 @@ export const addItemLoggedIn = (
   productId,
   quantity
 ) => async dispatch => {
-  await axios.post(`api/orders/${userId}/${productId}`, {quantity})
+  await axios.post(`/api/orders/${userId}/${productId}`, {quantity})
   dispatch(addedItem(productId, quantity))
 }
 
 export const addItemGuest = (productId, quantity) => dispatch => {
-  localStorage.setItem('cart', {
-    ...localStorage.cart,
-    productId: localStorage.cart.product[productId]
-      ? localStorage.cart.product.id + quantity
-      : 1
-  })
+  console.log('entered addItemGuest', productId, quantity, localStorage)
+  localStorage.setItem(productId, quantity)
   dispatch(addedItem(productId, quantity))
+  console.log('cart is', localStorage)
 }
 
+// console.log('localStorage updates to:', localStorage)
+// dispatch(addedItem(productId, quantity))
+
 export const completePurchaseLoggedIn = userId => async dispatch => {
-  await axios.put(`api/orders/${userId}`)
+  await axios.put(`/api/orders/${userId}`)
   dispatch(completedPurchase())
 }
 
 export const completePurchaseGuest = (session, products) => async dispatch => {
-  await axios.post(`api/orders`, {session, products})
+  await axios.post(`/api/orders`, {session, products})
   dispatch(completedPurchase())
 }
 
 export const fetchCartFromLocalStorage = () => dispatch => {
-  // const cart = localStorage.cart
-  const cart = {2: 1, 3: 2, 4: 10}
-  dispatch(fetchedCart(cart))
+  const cart = localStorage
+  delete cart['loglevel:webpack-dev-server']
+  // const cart = localStorage
+  const newcart = {}
+  for (const key in localStorage) {
+    if (localStorage.hasOwnProperty(key)) {
+      newcart[key] = localStorage[key]
+    }
+  }
+  dispatch(fetchedCart(newcart))
 }
 
 export const fetchCartFromDb = userId => async dispatch => {
-  const cart = await axios.get(`api/orders/cart/${userId}`)
+  const {data} = await axios.get(`/api/orders/cart/${userId}`)
   //the route above needs to output productId: quantity as keyvalues in an object
-  dispatch(fetchedCart(cart))
+  dispatch(fetchedCart(data))
 }
 
 const initialState = {}
@@ -62,9 +73,7 @@ export default function(state = initialState, action) {
     case ADD_ITEM: {
       return {
         ...state,
-        [action.productId]: state.productId
-          ? state.productId + action.quantity
-          : 1
+        [action.productId]: action.quantity
       }
     }
     case FETCH_CART: {

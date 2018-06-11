@@ -32,9 +32,9 @@ class Routes extends Component {
         <Route path="/" exact component={HomePage} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
-        <Route path="/singleHome" component={SingleHome} />
+        <Route path="/singleHome/:id" component={SingleHome} />
         <Route path="/homeSearch" component={HomeSearch} />
-        <Route path="/userInfo" component={UserInfo} />
+        <Route path="/userHome" component={UserHome} />
         <Route path="/checkout" component={CheckOut} />
 
         {isLoggedIn && (

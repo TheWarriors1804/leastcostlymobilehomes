@@ -1,13 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {UserInfo, UserOrder} from '../index'
+import {UserInfo, UserOrder, UserEdit} from '../index'
 
 /**
  * COMPONENT
  */
 export const UserHome = props => {
   const {firstName, lastName, imageUrl} = props
+
+  const editing = true
+
+  const userInfo = editing ? <UserEdit /> : <UserInfo />
 
   return (
     <div>
@@ -19,9 +23,7 @@ export const UserHome = props => {
           <div className="card-image">
             <img src={imageUrl} />
           </div>
-          <div className="card-content">
-            <UserInfo />
-          </div>
+          <div className="card-content">{userInfo}</div>
         </div>
       </div>
       <div className="row">
