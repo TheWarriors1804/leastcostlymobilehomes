@@ -44,7 +44,7 @@ export const UserHome = props => {
         </div>
       </div>
       <div className="row">
-        <div className="card horizontal col s10 m10 l10">
+        <div className="card horizontal col s11 m11 l11">
           <UserOrder />
         </div>
       </div>
