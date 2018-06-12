@@ -94,7 +94,10 @@ export class UserHome extends Component {
                 <div className="card horizontal col s10 m10 l10 grey lighten-5">
                   <UserOrder
                     orderId={orderId}
-                    orderItems={this.props.user.orderHistory[orderId]}
+                    orderDate={this.props.user.orderHistory[orderId].orderDate}
+                    orderItems={
+                      this.props.user.orderHistory[orderId].orderItems
+                    }
                   />
                 </div>
               </div>

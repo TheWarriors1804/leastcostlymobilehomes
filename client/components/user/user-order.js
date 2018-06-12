@@ -7,7 +7,6 @@ import {HomeSearchCard} from '../index'
  * COMPONENT
  */
 export const UserOrder = props => {
-  // const handleSubmit = () => {}
   return (
     <div>
       <h1>ORDER NO. {props.orderId}</h1>
