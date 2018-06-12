@@ -91,7 +91,7 @@ export class HomeSearch extends React.Component {
                 <option defaultValue value="all">
                   View all
                 </option>
-                <option value="1">0</option>
+                <option value="0">0</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>

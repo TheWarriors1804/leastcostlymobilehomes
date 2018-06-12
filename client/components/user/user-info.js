@@ -9,20 +9,12 @@ const UserInfo = props => {
     address,
     address2,
     city,
-    stateAdd,
+    state,
     zip
-  } = props
-
-  const handleChange = event => {
-    console.log(event.target.value)
-  }
-
-  const handleSubmit = event => {
-    console.log(event.target.value)
-  }
+  } = props.user
 
   return (
-    <div className="row userInfo" onChange={handleChange}>
+    <div className="row userInfo">
       <form className="col s12">
         <div className="row">
           <div className="input-field col s6">
@@ -86,7 +78,7 @@ const UserInfo = props => {
               State
             </label>
             <div className="infoTag">
-              <p>{stateAdd}</p>
+              <p>{state}</p>
             </div>
           </div>
           <div className="input-field col s6">
@@ -102,7 +94,7 @@ const UserInfo = props => {
           <button
             type="button"
             className="btn waves-effect waves-light col offset-s6 s4"
-            onClick={props.onSubmit}
+            onClick={props.handleEdit}
           >
             Edit Information
           </button>
@@ -114,10 +106,7 @@ const UserInfo = props => {
 
 const mapStateToProps = state => {
   return {
-    firstName: state.user.firstName,
-    lastName: state.user.lastName,
-    email: state.user.email,
-    address: state.user.address
+    //user: state.user
   }
 }
 

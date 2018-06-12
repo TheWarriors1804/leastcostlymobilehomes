@@ -5,6 +5,7 @@ import order from './order';
 /**
  * ACTION TYPES
  */
+
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
 const UPDATE_USER = 'UPDATE_USER'
@@ -13,6 +14,7 @@ const FETCH_HISTORY = 'FETCH_HISTORY'
 /**
  * INITIAL STATE
  */
+
 const defaultUser = {}
 
 /**
@@ -27,15 +29,15 @@ const fetchedHistory = orderHistory => ({type: FETCH_HISTORY, orderHistory})
 /**
  * THUNK CREATORS
  */
+
 export const me = () => dispatch =>
   axios
     .get('/auth/me')
     .then(res => dispatch(getUser(res.data || defaultUser)))
     .catch(err => console.log(err))
 
-//thunk for login
-export const auth = (email, password, method, cart, firstName, lastName) => {
-  console.log('in the auth thunker', email, password, method, cart)
+//thunk for login and signup
+export const auth = (email, password, method, cart) => {
   return dispatch =>
     axios
       .post(`/auth/${method}`, {email, password, cart})
@@ -63,7 +65,9 @@ export const logout = () => dispatch =>
     .catch(err => console.log(err))
 
 export const updateUser = user => async dispatch => {
+  console.log('before thunk', user)
   const updated = await axios.put(`/api/users/${user.id}`, user)
+  console.log('after thunk', updated)
   dispatch(updatedUser(updated))
 }
 
@@ -75,8 +79,19 @@ export const deleteUser = id => async dispatch => {
 export const fetchOrderHistory = userId => async dispatch => {
   console.log('HAS REACHED THUNK')
   const orderHistory = await axios.get(`/api/orders/${userId}`)
-  console.log('orderHistory is: ', orderHistory.data)
-  dispatch(fetchedHistory(orderHistory.data))
+  let final = {}
+  if(orderHistory.data[0]) {
+  orderHistory.data.forEach(async (order) => {
+    const orderobj = {}
+    const orderitems = order.products
+    if(orderitems[0]) {
+    orderitems.forEach((item) => {
+      orderobj[item.id] = item.orderItem.quantity
+    })}
+    final[order.id] = orderobj
+  })}
+  console.log('final orderhistory is: ', final)
+  dispatch(fetchedHistory(final))
 
 }
 
@@ -93,9 +108,6 @@ export default function(state = defaultUser, action) {
     case UPDATE_USER:
       return action.user
     case FETCH_HISTORY:
-    console.log('WTF!?!?!?', {
-      ...state, orderHistory: action.orderHistory
-    })
       return {
         ...state, orderHistory: action.orderHistory
       }
