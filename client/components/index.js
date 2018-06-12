@@ -29,3 +29,8 @@ export {default as HomeContent} from './singleHome/home-content'
 
 export {default as HomeSearch} from './filterHomes/home-search'
 export {default as HomeSearchCard} from './filterHomes/home-search-card'
+
+// Stripe Components
+
+export {default as CheckOutForm} from './CheckoutForm'
+export {default as CardSection} from './CardSection'
