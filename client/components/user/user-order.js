@@ -16,7 +16,7 @@ export const UserOrder = props => {
     : []
   if (current) {
     const prodObj = props.products.id
-    console.log('inside:', prodObj)
+
     return (
       <div>
         <HomeTitle info={current} />
@@ -40,8 +40,6 @@ export const UserOrder = props => {
  * CONTAINER
  */
 const mapStateToProps = state => {
-  // console.log('state product:', state.product[0].id)
-  console.log('state:', state.product.id)
   return {
     products: state.product
   }

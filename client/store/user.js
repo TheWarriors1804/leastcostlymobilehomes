@@ -66,8 +66,8 @@ export const updateUser = user => async dispatch => {
   dispatch(updatedUser(res.data))
 }
 
-export const deleteUser = id => async dispatch => {
-  await axios.delete(`/api/users/${id}`)
+export const deleteUser = user => async dispatch => {
+  await axios.delete(`/api/users/${user}`)
   dispatch(removeUser())
 }
 
