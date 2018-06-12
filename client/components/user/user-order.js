@@ -7,11 +7,9 @@ import {HomeSearchCard} from '../index'
  * COMPONENT
  */
 export const UserOrder = props => {
-  // const handleSubmit = () => {}
-  const orderDate = '04/05/18'
   return (
     <div>
-      <h1>Order Placed {orderDate}</h1>
+      <h1>ORDER NO. {props.orderId}</h1>
       {Object.keys(props.orderItems).length && props.products.length ? (
         <div className="order-card-container">
           {Object.keys(props.orderItems).map(productId => (
