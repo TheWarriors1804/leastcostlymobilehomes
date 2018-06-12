@@ -37,10 +37,11 @@ class HomeSearchCard extends Component {
   }
 
   handleRemove = event => {
-    this.props.user.id
-      ? this.props.removeItemLoggedIn(this.state.productId, this.props.user.id)
-      : this.props.removeItemGuest(this.state.productId)
-    console.log('trying to handle remove')
+    // this.props.user.id ?
+    // this.props.removeItemLoggedIn( this.state.productId, this.props.user.id) :
+    // this.props.removeItemGuest( this.state.productId)
+    this.props.removeItemLoggedIn(this.state.productId, this.props.user.id)
+    console.log('trying to handle remove', this.props.order)
   }
 
   render() {
@@ -107,9 +108,10 @@ class HomeSearchCard extends Component {
                   ? `Update Quantity`
                   : `Add to Cart`}
               </button>
-              {this.props.quantity ? (
+              {this.props.order[this.state.productId] ? (
                 <button
                   type="remove"
+                  className="remove-item-btn"
                   onClick={event => this.handleRemove(event)}
                 >
                   {' '}
