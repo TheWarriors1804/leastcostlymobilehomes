@@ -30,8 +30,8 @@ const fetchedHistory = orderHistory => ({type: FETCH_HISTORY, orderHistory})
  * THUNK CREATORS
  */
 
-export const me = () => dispatch =>
-  axios
+export const me = () => async dispatch =>
+  await axios
     .get('/auth/me')
     .then(res => dispatch(getUser(res.data || defaultUser)))
     .catch(err => console.log(err))
@@ -65,10 +65,8 @@ export const logout = () => dispatch =>
     .catch(err => console.log(err))
 
 export const updateUser = user => async dispatch => {
-  console.log('before thunk', user)
-  const updated = await axios.put(`/api/users/${user.id}`, user)
-  console.log('after thunk', updated)
-  dispatch(updatedUser(updated))
+  const res = await axios.put(`/api/users/${user.id}`, user)
+  dispatch(updatedUser(res.data))
 }
 
 export const deleteUser = id => async dispatch => {

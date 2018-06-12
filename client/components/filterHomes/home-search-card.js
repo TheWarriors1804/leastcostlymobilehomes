@@ -41,7 +41,6 @@ class HomeSearchCard extends Component {
     // this.props.removeItemLoggedIn( this.state.productId, this.props.user.id) :
     // this.props.removeItemGuest( this.state.productId)
     this.props.removeItemLoggedIn(this.state.productId, this.props.user.id)
-    console.log('trying to handle remove', this.props.order)
   }
 
   render() {
@@ -108,7 +107,7 @@ class HomeSearchCard extends Component {
                   ? `Update Quantity`
                   : `Add to Cart`}
               </button>
-              {this.props.quantity ? (
+              {this.props.order[this.state.productId] ? (
                 <button
                   type="remove"
                   className="remove-item-btn"
