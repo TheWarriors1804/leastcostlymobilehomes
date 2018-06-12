@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {deleteUser} from '../../store/user'
 
 const UserEdit = props => {
   const {
@@ -14,6 +15,8 @@ const UserEdit = props => {
   } = props.user
 
   const handleChange = props.handleChange
+  const handleSubmit = props.handleSubmit
+  const handleClick = props.handleClick
 
   return (
     <div className="row userInfo" onChange={handleChange}>
@@ -125,13 +128,13 @@ const UserEdit = props => {
           </div>
         </div>
         <div className="row">
-          <a href="delete the user" className="col s6 delete">
+          <a href="#" onClick={handleClick} className="col s6 delete">
             Delete this user
           </a>
           <button
             type="button"
             className="btn waves-effect waves-light col s4"
-            onClick={props.handleSubmit}
+            onClick={handleSubmit}
           >
             Submit Changes
           </button>
@@ -141,10 +144,4 @@ const UserEdit = props => {
   )
 }
 
-const mapStateToProps = state => {
-  return {
-    //user: state.user
-  }
-}
-
-export default connect(mapStateToProps)(UserEdit)
+export default connect(null)(UserEdit)

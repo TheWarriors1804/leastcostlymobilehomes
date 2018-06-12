@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {UserInfo, UserOrder, UserEdit} from '../index'
-import {updateUser} from '../../store/user'
+import {updateUser, deleteUser} from '../../store/user'
 import {fetchOrderHistory} from '../../store'
 
 /**
@@ -30,6 +30,10 @@ export class UserHome extends Component {
     if (this.props.fetchOrderHistory) {
       this.props.fetchOrderHistory(this.props.user.id)
     }
+  }
+
+  handleClick = async () => {
+    await this.props.deleteUser(this.props.user)
   }
 
   handleChange = event => {
@@ -77,6 +81,7 @@ export class UserHome extends Component {
       <UserEdit
         handleSubmit={this.handleSubmit}
         handleChange={this.handleChange}
+        handleClick={this.handleClick}
         user={user}
       />
     ) : (
@@ -127,6 +132,7 @@ const mapState = state => {
 
 const mapDispatchToProps = dispatch => ({
   updateUser: user => dispatch(updateUser(user)),
+  deleteUser: user => dispatch(deleteUser(user.id)),
   fetchOrderHistory: userId => dispatch(fetchOrderHistory(userId))
 })
 

@@ -17,6 +17,7 @@ class CheckOut extends React.Component {
       (acc, curr) => acc + Number(this.props.order[curr]),
       0
     )
+    console.log('matt matt', this.props.order)
 
     const orderTotal =
       Object.keys(this.props.order).length && this.props.products.length

@@ -267,6 +267,48 @@ User CSS
   vertical-align: center;
 }
 
+.stripeCheckout {
+  margin: 0;
+  max-width: 800px;
+  box-sizing: border-box;
+  padding: 5px;
+  border: 1px solid gray;
+  box-shadow: 1px 3px grey;
+  margin-bottom: 8px;
+}
+
+.orderInfo {
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.orderItemsBox {
+  border: 1px solid gray;
+  box-shadow: 1px 3px grey;
+  margin: 20px;
+  padding: 5px;
+  max-width: 800px;
+}
+
+.orderInfoTitle {
+  margin: 0;
+  padding-left: 10px;
+  color: #fff;
+  background: #0d2c69;
+}
+
+.total {
+  border-top: 2px solid black;
+  font-size: 18px;
+}
+
+.orderInfoItem {
+  margin: 0;
+  padding: 0;
+  padding-left: 10px;
+}
+
 .checkout-text {
   font-family: 'Montserrat', sans-serif;
 }
