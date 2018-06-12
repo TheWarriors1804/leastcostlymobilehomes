@@ -6,7 +6,7 @@ import history from './history'
 import store from './store'
 import App from './app'
 import {StripeProvider} from 'react-stripe-elements'
-
+import Chatbot from './chatbot'
 // establishes socket connection
 import './socket'
 
@@ -14,7 +14,10 @@ ReactDOM.render(
   <Provider store={store}>
     <StripeProvider apiKey={process.env.STRIPE_CLIENT_ID}>
       <Router history={history}>
-        <App />
+        <div>
+          <App />
+          <Chatbot />
+        </div>
       </Router>
     </StripeProvider>
   </Provider>,
