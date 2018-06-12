@@ -3,7 +3,6 @@ import {CardElement, injectStripe, StripeElement} from 'react-stripe-elements'
 import {connect} from 'react-redux'
 import axios from 'axios'
 import Confirmation from './confirmation'
-import {connect} from 'react-redux'
 import {
   completePurchaseGuest,
   completePurchaseLoggedIn,
