@@ -8,24 +8,37 @@ import {
   UserHome,
   SingleHome,
   HomeSearch,
-  UserInfo,
-  HomePage
+  HomePage,
+  CheckOut
 } from './components'
-import {me} from './store'
-import CheckOut from './components/checkOut'
-import {getProducts} from './store/product'
+
+import {
+  me,
+  getProducts,
+  fetchCartFromDb,
+  fetchCartFromLocalStorage
+} from './store'
 
 /**
  * COMPONENT
  */
 class Routes extends Component {
-  componentDidMount() {
-    this.props.loadInitialData()
+  async componentDidMount() {
+    await this.props.loadInitialData()
+    this.props.user.id
+      ? this.props.fetchCartFromDb(this.props.user.id)
+      : this.props.fetchCartFromLocalStorage()
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.user.id !== nextProps.user.id) {
+      nextProps.user.id
+        ? this.props.fetchCartFromDb(nextProps.user.id)
+        : this.props.fetchCartFromLocalStorage()
+    }
   }
 
   render() {
-    const {isLoggedIn} = this.props
-
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
@@ -36,10 +49,9 @@ class Routes extends Component {
         <Route path="/singleHome/:id" component={SingleHome} />
         <Route path="/homeSearch" component={HomeSearch} />
         <Route path="/checkout" component={CheckOut} />
-
-        {isLoggedIn && (
+        {/* Routes placed below are only available after logging in */}
+        {this.props.isLoggedIn && (
           <Switch>
-            {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
           </Switch>
         )}
@@ -57,16 +69,20 @@ const mapState = state => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    order: state.order,
+    user: state.user
   }
 }
 
 const mapDispatch = dispatch => {
   return {
-    loadInitialData() {
+    loadInitialData: () => {
       dispatch(me())
       dispatch(getProducts())
-    }
+    },
+    fetchCartFromDb: userId => dispatch(fetchCartFromDb(userId)),
+    fetchCartFromLocalStorage: () => dispatch(fetchCartFromLocalStorage())
   }
 }
 
