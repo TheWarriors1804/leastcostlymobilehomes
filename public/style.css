@@ -299,9 +299,17 @@ User CSS
 }
 
 .order-card-container {
-  width: 100%;
+  padding: 0 0 4vw 4vw;
 }
 
 .order-card-container .card {
   height: auto;
+}
+
+.montserrat-text {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.greeting {
+  padding-left: 5vw;
 }
