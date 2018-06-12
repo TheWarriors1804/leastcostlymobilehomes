@@ -17,6 +17,7 @@ router.get('/:userid', async (req, res, next) => {
     const orders = await Order.findAll({
       where: {userId: req.params.userid}
     })
+    console.log('orderhistory route is: ', orders)
     res.json(orders)
   } catch (err) {
     next(err)

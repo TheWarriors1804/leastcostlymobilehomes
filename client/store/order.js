@@ -4,6 +4,7 @@ const ADD_ITEM = 'ADD_ITEM'
 const FETCH_CART = 'FETCH_CART'
 const COMPLETE_PURCHASE = 'COMPLETE_PURCHASE'
 const REMOVE_ITEM = 'REMOVE_ITEM'
+const FETCH_HISTORY = 'FETCH_HISTORY'
 
 //add quantities for add item
 
@@ -15,6 +16,7 @@ const addedItem = (productId, quantity) => ({
 })
 const fetchedCart = cart => ({type: FETCH_CART, cart})
 const removeItem = productId => ({type: REMOVE_ITEM, productId})
+const fetchedHistory = orderHistory => ({type: FETCH_HISTORY, orderHistory})
 
 export const addItemLoggedIn = (
   userId,
@@ -74,6 +76,13 @@ export const fetchCartFromDb = userId => async dispatch => {
   dispatch(fetchedCart(data))
 }
 
+export const fetchOrderHistory = userId => async dispatch => {
+  console.log('HAS REACHED THUNK')
+  const orderHistory = await axios.get(`/api/orders/${userId}`)
+  dispatch(fetchedHistory(orderHistory))
+
+}
+
 const initialState = {}
 //Store will have array of key-value pairs representing the item id and quantity
 
@@ -102,6 +111,12 @@ export default function(state = initialState, action) {
       }
       return {
         ...updated
+      }
+    }
+    case FETCH_HISTORY: {
+      console.log('new state after fetch history reducer is: ', {...state, orderHistory: action.orderHistory})
+      return {
+        ...state, orderHistory: action.orderHistory
       }
     }
     default:

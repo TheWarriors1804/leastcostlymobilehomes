@@ -1,5 +1,6 @@
 import axios from 'axios'
 import history from '../history'
+import order from './order';
 
 /**
  * ACTION TYPES
@@ -7,6 +8,7 @@ import history from '../history'
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
 const UPDATE_USER = 'UPDATE_USER'
+const FETCH_HISTORY = 'FETCH_HISTORY'
 
 /**
  * INITIAL STATE
@@ -17,9 +19,10 @@ const defaultUser = {}
  * ACTION CREATORS
  */
 
-const getUser = user => ({type: GET_USER, user})
+const getUser = (user) => ({type: GET_USER, user})
 const removeUser = () => ({type: REMOVE_USER})
 const updatedUser = user => ({type: UPDATE_USER, user})
+const fetchedHistory = orderHistory => ({type: FETCH_HISTORY, orderHistory})
 
 /**
  * THUNK CREATORS
@@ -69,17 +72,33 @@ export const deleteUser = id => async dispatch => {
   dispatch(removeUser())
 }
 
+export const fetchOrderHistory = userId => async dispatch => {
+  console.log('HAS REACHED THUNK')
+  const orderHistory = await axios.get(`/api/orders/${userId}`)
+  console.log('orderHistory is: ', orderHistory.data)
+  dispatch(fetchedHistory(orderHistory.data))
+
+}
+
 /**
  * REDUCER
  */
 export default function(state = defaultUser, action) {
   switch (action.type) {
     case GET_USER:
+      console.log('get user orderHistory is: ', action.orderHistory)
       return action.user
     case REMOVE_USER:
       return defaultUser
     case UPDATE_USER:
       return action.user
+    case FETCH_HISTORY:
+    console.log('WTF!?!?!?', {
+      ...state, orderHistory: action.orderHistory
+    })
+      return {
+        ...state, orderHistory: action.orderHistory
+      }
     default:
       return state
   }
