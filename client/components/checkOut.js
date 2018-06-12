@@ -7,12 +7,10 @@ import {fetchOrderHistory} from '../store/user'
 class CheckOut extends React.Component {
   // componentDidMount() {
   //   this.props.fetchOrderHistory(3)
-  //   console.log('in component did mount')
   // }
 
   render() {
     this.props.fetchOrderHistory(this.props.user.id)
-    console.log('the user is: ', this.props.user, this.props.orderHistory)
     const orderNum = Object.keys(this.props.order).reduce(
       (acc, curr) => acc + Number(this.props.order[curr]),
       0
@@ -40,13 +38,11 @@ class CheckOut extends React.Component {
     const orderHistory = this.props.orderHistory
     let uniqueHistory = []
     for (var key in orderHistory) {
-      console.log('key is', key)
       for (var nkey in orderHistory[key]) {
         uniqueHistory.push(nkey)
       }
     }
     uniqueHistory = [...new Set(uniqueHistory)]
-    console.log('uniqueHistory is', uniqueHistory)
 
     return (
       <div>

@@ -12,7 +12,7 @@ import './socket'
 
 ReactDOM.render(
   <Provider store={store}>
-    <StripeProvider apiKey="pk_test_9X4IBvMzsDVNp54SElJMMJ4o">
+    <StripeProvider apiKey={process.env.STRIPE_CLIENT_ID}>
       <Router history={history}>
         <div>
           <App />
