@@ -8,7 +8,6 @@ class CardSection extends React.Component {
     const createToken = await this.props.stripe.createToken({
       type: 'card'
     })
-    console.log('hit', createToken)
     const newRoute = await axios.post('/api/stripe', {
       token: createToken.token.id
     })

@@ -42,10 +42,8 @@ export const addItemLoggedIn = (
 }
 
 export const addItemGuest = (productId, quantity) => dispatch => {
-  console.log('entered addItemGuest', productId, quantity, localStorage)
   localStorage.setItem(productId, quantity)
   dispatch(addedItem(productId, quantity))
-  console.log('cart is', localStorage)
 }
 
 export const removeItemGuest = productId => dispatch => {
