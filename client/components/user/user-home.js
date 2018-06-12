@@ -27,7 +27,9 @@ export class UserHome extends Component {
     this.setState({
       user: this.props.user
     })
-    this.props.fetchOrderHistory(this.props.user.id)
+    if (this.props.fetchOrderHistory) {
+      this.props.fetchOrderHistory(this.props.user.id)
+    }
   }
 
   handleChange = event => {

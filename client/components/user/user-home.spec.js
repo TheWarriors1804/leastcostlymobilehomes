@@ -9,15 +9,15 @@ import {UserHome} from './user-home'
 const adapter = new Adapter()
 enzyme.configure({adapter})
 
-// describe('UserHome', () => {
-//   let userHome
-//   const user = {firstName: 'Cody', lastName: 'the Dog'}
+describe('UserHome', () => {
+  let userHome
+  const user = {firstName: 'Cody', lastName: 'the Dog'}
 
-//   beforeEach(() => {
-//     userHome = shallow(<UserHome user={user} />)
-//   })
+  beforeEach(() => {
+    userHome = shallow(<UserHome user={user} />)
+  })
 
-//   it('renders the name in an h3', () => {
-//     expect(userHome.find('h3').text()).to.be.equal('Welcome, Cody the Dog!')
-//   })
-// })
+  it('renders the name in an h3', () => {
+    expect(userHome.find('h3').text()).to.be.equal('Welcome, Cody the Dog!')
+  })
+})
