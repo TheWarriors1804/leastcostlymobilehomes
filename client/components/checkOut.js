@@ -2,9 +2,18 @@ import {Link} from 'react-router-dom'
 import React from 'react'
 import {HomeSearchCard} from './index'
 import {connect} from 'react-redux'
+import {fetchOrderHistory} from '../store/user'
 
 class CheckOut extends React.Component {
+
+  // componentDidMount() {
+  //   this.props.fetchOrderHistory(3)
+  //   console.log('in component did mount')
+  // }
+
   render() {
+    this.props.fetchOrderHistory(this.props.user.id)
+    console.log('the user is: ', this.props.user, this.props.orderHistory)
     const orderNum = Object.keys(this.props.order).reduce(
       (acc, curr) => acc + Number(this.props.order[curr]),
       0
@@ -115,7 +124,12 @@ class CheckOut extends React.Component {
 const mapStateToProps = state => ({
   user: state.user,
   order: state.order,
-  products: state.product
+  products: state.product,
+  orderHistory: state.user.orderHistory
 })
 
-export default connect(mapStateToProps)(CheckOut)
+const mapDispatchToProps = dispatch => ({
+  fetchOrderHistory: (userId) => dispatch(fetchOrderHistory(userId))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(CheckOut)
