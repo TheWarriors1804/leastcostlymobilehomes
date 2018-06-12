@@ -10,9 +10,10 @@ router.post('/', async (req, res, next) => {
       description: 'ok',
       source: token
     })
-    res.json(newCharge)
+    res.json('accepted')
   } catch (error) {
     console.error(error)
+    res.json('declined')
   }
 })
 
