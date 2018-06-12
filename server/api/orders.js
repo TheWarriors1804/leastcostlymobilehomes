@@ -15,7 +15,8 @@ router.get('/', async (req, res, next) => {
 router.get('/:userid', async (req, res, next) => {
   try {
     const orders = await Order.findAll({
-      where: {userId: req.params.userid}, include: [{all: true}]
+      where: {userId: req.params.userid, complete: true},
+      include: [{all: true}]
     })
     console.log('orderhistory route is: ', orders)
     res.json(orders)
@@ -23,7 +24,6 @@ router.get('/:userid', async (req, res, next) => {
     next(err)
   }
 })
-
 
 //get all the order products for the order for the user
 router.get('/:orderId', async (req, res, next) => {
@@ -34,14 +34,14 @@ router.get('/:orderId', async (req, res, next) => {
     })
     console.log('orderitems is: ', orderitems)
     let final = {}
-    if(orderitems[0]) {
-      orderitems.forEach((order) => {
+    if (orderitems[0]) {
+      orderitems.forEach(order => {
         final[order.productId] = order.quantity
       })
     }
     console.log('final is: ', final)
     res.json(final)
-  } catch(err) {
+  } catch (err) {
     next(err)
   }
 })
@@ -57,12 +57,13 @@ router.get('/cart/:userid', async (req, res, next) => {
       include: [{model: Product}]
     })
     const cart = {}
-    if(order[0]) {
-    order[0].products.map(product => {
-      const id = product.id
-      const value = product.orderItem.quantity
-      cart[id] = value
-    })}
+    if (order[0]) {
+      order[0].products.map(product => {
+        const id = product.id
+        const value = product.orderItem.quantity
+        cart[id] = value
+      })
+    }
     res.json(cart)
   } catch (err) {
     next(err)
