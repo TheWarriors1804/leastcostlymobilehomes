@@ -87,7 +87,7 @@ const mapDispatch = dispatch => {
     },
     fetchCartFromDb: userId => dispatch(fetchCartFromDb(userId)),
     fetchCartFromLocalStorage: () => dispatch(fetchCartFromLocalStorage()),
-    fetchOrderHistory: (userId) => dispatch(fetchOrderHistory(userId))
+    fetchOrderHistory: userId => dispatch(fetchOrderHistory(userId))
   }
 }
 
