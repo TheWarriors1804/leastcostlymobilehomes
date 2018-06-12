@@ -1,24 +1,25 @@
 import React from 'react'
-import {injectedStripe} from 'react-stripe-elements'
-
+import {Elements} from 'react-stripe-elements'
 import CardSection from './CardSection'
 
 class CheckoutForm extends React.Component {
-  handleSubmit = ev => {
-    ev.preventDefault()
-
-    this.props.stripe.createToken({name: 'Jesse Sullivan'}).then(({token}) => {
-      console.log('Recieved Stripe token:', token)
-    })
+  constructor(props) {
+    super(props)
   }
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <Elements>
         <CardSection />
-        <button type="button">Confirm order</button>
-      </form>
+      </Elements>
     )
   }
 }
 
-export default injectedStripe(CheckoutForm)
+// function mapStateToProducts(state) {
+//   return {
+//     order: {'2': 1, '3': 2},
+//     products: state.product
+//   }
+// }
+
+export default CheckoutForm

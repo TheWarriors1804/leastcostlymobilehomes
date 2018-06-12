@@ -1,8 +1,7 @@
-import {Link} from 'react-dom'
+import {Link} from 'react-router-dom'
 import React from 'react'
 import {HomeSearchCard} from './index'
 import {connect} from 'react-redux'
-import {Redirect} from 'react-router-dom'
 
 const CheckOut = props => {
   console.log('order', props.order)
@@ -40,13 +39,17 @@ const CheckOut = props => {
             {` items in your shopping cart.`}
           </h2>
         </div>
-        <button
-          type="submit"
-          className="btn waves-effect waves-light green"
-          onClick={<Redirect to="/checkout/checkoutForm" />}
-        >
-          Proceed with your order
-        </button>
+        <div>
+          <Link to="/checkout/checkoutForm">
+            <button
+              type="submit"
+              className="btn waves-effect waves-light green"
+              onClick={element => console.log(element)}
+            >
+              Proceed with your order
+            </button>
+          </Link>
+        </div>
       </div>
 
       <div className="checkout-summary row">
@@ -86,7 +89,6 @@ const CheckOut = props => {
 }
 
 const mapStateToProps = state => ({
-  // order: state.order,
   order: {'2': 1, '3': 2},
   products: state.product
 })

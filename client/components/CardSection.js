@@ -1,15 +1,29 @@
 import React from 'react'
-import {CardElement} from 'react-stripe-elements'
+import {CardElement, injectStripe} from 'react-stripe-elements'
+import axios from 'axios'
 
 class CardSection extends React.Component {
+  handleSubmit = async ev => {
+    ev.preventDefault()
+    const createToken = await this.props.stripe.createToken({
+      type: 'card'
+    })
+    console.log('hit', createToken)
+    const newRoute = await axios.post('/api/stripe', {
+      token: createToken.token.id
+    })
+  }
+
   render() {
     return (
-      <label>
-        Card Details
-        <CardElement style={{base: {fontSize: '18px'}}} />
-      </label>
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <CardElement />
+          <button type="submit">Confirm order</button>
+        </form>
+      </div>
     )
   }
 }
 
-export default CardSection
+export default injectStripe(CardSection)
