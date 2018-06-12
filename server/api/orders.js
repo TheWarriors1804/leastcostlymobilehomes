@@ -180,7 +180,7 @@ router.delete('/:userid/:productid', async (req, res, next) => {
     })
     await item[0].destroy()
     res.status(204).end()
-  } catch(err) {
+  } catch (err) {
     next(err)
   }
 })

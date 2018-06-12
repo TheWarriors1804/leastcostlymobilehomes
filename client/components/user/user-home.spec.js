@@ -11,9 +11,10 @@ enzyme.configure({adapter})
 
 describe('UserHome', () => {
   let userHome
+  const user = {firstName: 'Cody', lastName: 'the Dog'}
 
   beforeEach(() => {
-    userHome = shallow(<UserHome firstName="Cody" lastName="the Dog" />)
+    userHome = shallow(<UserHome user={user} />)
   })
 
   it('renders the name in an h3', () => {
