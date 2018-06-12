@@ -8,13 +8,15 @@ import {HomeUserInfo, HomeTitle, HomeContent} from '../index'
  */
 export const UserOrder = props => {
   const handleSubmit = () => {}
-  console.log(props.products)
-  const current = props.products
-    ? props.products.find(product => {
-        return product.id === +props.match.params.id
+  console.log('here:', props.products[0])
+  const current = props.products.orders
+    ? props.products.orders.find(product => {
+        return product.orders === +props.match.params.orders
       })
     : []
   if (current) {
+    const prodObj = props.products.id
+    console.log('inside:', prodObj)
     return (
       <div>
         <HomeTitle info={current} />
@@ -38,10 +40,13 @@ export const UserOrder = props => {
  * CONTAINER
  */
 const mapStateToProps = state => {
+  // console.log('state product:', state.product[0].id)
+  console.log('state:', state.product.id)
   return {
-    firstName: state.order,
-    lastName: state.order.lastName,
-    imageUrl: state.user.imageUrl
+    // productId: state.user.order.products.id,
+    // lastName: state.order.lastName,
+    // imageUrl: state.user.imageUrl,
+    products: state.product
   }
 }
 

@@ -2,11 +2,7 @@
 
 _Your source for the highest quality and least costly mobile homes_
 
-Looking to mix up a backend with express/sequelize and a frontend with react/redux? That's `boilermaker`!
-
-Follow along with the workshop to make your own! This canonical version can serve as a reference, or a starting point all on its own.
-
-## :shopping_trolley: Motivation
+# :shopping_trolley: Motivation
 
 Our group formulated this e-commerce site for our Grace Shopper project in Fullstack Academy of Code.
 
@@ -32,7 +28,7 @@ For the front-end, modular components were built and styled using the following:
 * :control_knobs: State Management System: React-Redux
 * :clipboard:Cascading Style Sheets: Materialize
 
-# :female-technologist::male-technologist: Owners/Collaborators
+# :female-technologist: :male-technologist: Owners/Collaborators
 
 * [Matt Ferguson](https://github.com/mdfergus/)
 * [Anton Holmes](https://github.com/antonholmes/)
