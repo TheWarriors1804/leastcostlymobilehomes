@@ -80,14 +80,14 @@ export const fetchOrderHistory = userId => async dispatch => {
   let final = {}
   if (orderHistory.data[0]) {
     orderHistory.data.forEach(async order => {
-      const orderobj = {}
-      const orderitems = order.products
-      if (orderitems[0]) {
-        orderitems.forEach(item => {
-          orderobj[item.id] = item.orderItem.quantity
+      const orderItems = {}
+      const orderProducts = order.products
+      if (orderProducts[0]) {
+        orderProducts.forEach(item => {
+          orderItems[item.id] = item.orderItem.quantity
         })
       }
-      final[order.id] = orderobj
+      final[order.id] = {orderItems, orderDate: order.purchaseDate}
     })
   }
   console.log('final orderhistory is: ', final)
