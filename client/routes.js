@@ -18,7 +18,8 @@ import {
   me,
   getProducts,
   fetchCartFromDb,
-  fetchCartFromLocalStorage
+  fetchCartFromLocalStorage,
+  fetchOrderHistory
 } from './store'
 
 /**
@@ -85,7 +86,8 @@ const mapDispatch = dispatch => {
       dispatch(getProducts())
     },
     fetchCartFromDb: userId => dispatch(fetchCartFromDb(userId)),
-    fetchCartFromLocalStorage: () => dispatch(fetchCartFromLocalStorage())
+    fetchCartFromLocalStorage: () => dispatch(fetchCartFromLocalStorage()),
+    fetchOrderHistory: userId => dispatch(fetchOrderHistory(userId))
   }
 }
 

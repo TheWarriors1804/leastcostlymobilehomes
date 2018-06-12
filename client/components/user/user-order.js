@@ -1,39 +1,35 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {HomeUserInfo, HomeTitle, HomeContent} from '../index'
+import {HomeSearchCard} from '../index'
 
 /**
  * COMPONENT
  */
 export const UserOrder = props => {
-  const handleSubmit = () => {}
-
-  const current = props.products.orders
-    ? props.products.orders.find(product => {
-        return product.orders === +props.match.params.orders
-      })
-    : []
-  if (current) {
-    const prodObj = props.products.id
-
-    return (
-      <div>
-        <HomeTitle info={current} />
-        <div className="flexContainer">
-          <img src={current.imageUrl} className="homeImage" />
-          <HomeUserInfo info={current} handleSubmit={handleSubmit} />
+  // const handleSubmit = () => {}
+  const orderDate = '04/05/18'
+  return (
+    <div>
+      <h1>Order Placed {orderDate}</h1>
+      {Object.keys(props.orderItems).length && props.products.length ? (
+        <div className="order-card-container">
+          {Object.keys(props.orderItems).map(productId => (
+            <HomeSearchCard
+              product={props.products.find(
+                product => product.id === Number(productId)
+              )}
+              key={productId}
+              quantity={props.orderItems[productId]}
+              complete={true}
+            />
+          ))}
         </div>
-        <HomeContent info={current} />
-      </div>
-    )
-  } else {
-    return (
-      <div>
-        <h2>No previous orders</h2>
-      </div>
-    )
-  }
+      ) : (
+        <div />
+      )}
+    </div>
+  )
 }
 
 /**
@@ -50,8 +46,8 @@ export default connect(mapStateToProps)(UserOrder)
 /**
  * PROP TYPES
  */
-UserOrder.propTypes = {
-  firstName: PropTypes.string,
-  lastName: PropTypes.string,
-  imageUrl: PropTypes.string
-}
+// UserOrder.propTypes = {
+//   firstName: PropTypes.string,
+//   lastName: PropTypes.string,
+//   imageUrl: PropTypes.string
+// }

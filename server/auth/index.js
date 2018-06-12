@@ -6,6 +6,7 @@ const {OrderItem} = require('../db/models/index')
 module.exports = router
 
 router.post('/login', (req, res, next) => {
+  console.log('REQ', req.body, req)
   User.findOne({
     where: {email: req.body.email},
     include: [{all: true, nested: true}]
