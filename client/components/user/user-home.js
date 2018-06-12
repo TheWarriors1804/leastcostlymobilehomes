@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {UserInfo, UserOrder, UserEdit} from '../index'
 import {updateUser} from '../../store/user'
+import {fetchOrderHistory} from '../../store'
 
 /**
  * COMPONENT
@@ -26,6 +27,7 @@ export class UserHome extends Component {
     this.setState({
       user: this.props.user
     })
+    this.props.fetchOrderHistory(this.props.user.id)
   }
 
   handleChange = event => {
@@ -83,11 +85,29 @@ export class UserHome extends Component {
             <div className="card-content">{userInfo}</div>
           </div>
         </div>
-        <div className="row">
-          <div className="card horizontal col s10 m10 l10 teal lighten-5">
-            <UserOrder orderId={3} orderItems={{'2': 1, '3': 3, '4': 1}} />
-          </div>
-        </div>
+
+        {console.log('user with orders?', this.props.user)}
+        {this.props.user.orderHistory ? (
+          Object.keys(this.props.user.orderHistory).length ? (
+            Object.keys(this.props.user.orderHistory).map(orderId => (
+              <div className="row" key={orderId}>
+                <div className="card horizontal col s10 m10 l10 grey lighten-5">
+                  <UserOrder
+                    orderId={orderId}
+                    orderDate={this.props.user.orderHistory[orderId].orderDate}
+                    orderItems={
+                      this.props.user.orderHistory[orderId].orderItems
+                    }
+                  />
+                </div>
+              </div>
+            ))
+          ) : (
+            <div>No Previous Orders</div>
+          )
+        ) : (
+          <div />
+        )}
       </div>
     )
   }
@@ -103,7 +123,8 @@ const mapState = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  updateUser: user => dispatch(updateUser(user))
+  updateUser: user => dispatch(updateUser(user)),
+  fetchOrderHistory: userId => dispatch(fetchOrderHistory(userId))
 })
 
 export default connect(mapState, mapDispatchToProps)(UserHome)

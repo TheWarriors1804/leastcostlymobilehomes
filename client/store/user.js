@@ -1,6 +1,5 @@
 import axios from 'axios'
 import history from '../history'
-import order from './order';
 
 /**
  * ACTION TYPES
@@ -21,7 +20,7 @@ const defaultUser = {}
  * ACTION CREATORS
  */
 
-const getUser = (user) => ({type: GET_USER, user})
+const getUser = user => ({type: GET_USER, user})
 const removeUser = () => ({type: REMOVE_USER})
 const updatedUser = user => ({type: UPDATE_USER, user})
 const fetchedHistory = orderHistory => ({type: FETCH_HISTORY, orderHistory})
@@ -78,19 +77,20 @@ export const fetchOrderHistory = userId => async dispatch => {
   console.log('HAS REACHED THUNK')
   const orderHistory = await axios.get(`/api/orders/${userId}`)
   let final = {}
-  if(orderHistory.data[0]) {
-  orderHistory.data.forEach(async (order) => {
-    const orderobj = {}
-    const orderitems = order.products
-    if(orderitems[0]) {
-    orderitems.forEach((item) => {
-      orderobj[item.id] = item.orderItem.quantity
-    })}
-    final[order.id] = orderobj
-  })}
+  if (orderHistory.data[0]) {
+    orderHistory.data.forEach(async order => {
+      const orderItems = {}
+      const orderProducts = order.products
+      if (orderProducts[0]) {
+        orderProducts.forEach(item => {
+          orderItems[item.id] = item.orderItem.quantity
+        })
+      }
+      final[order.id] = {orderItems, orderDate: order.purchaseDate}
+    })
+  }
   console.log('final orderhistory is: ', final)
   dispatch(fetchedHistory(final))
-
 }
 
 /**
@@ -107,7 +107,8 @@ export default function(state = defaultUser, action) {
       return action.user
     case FETCH_HISTORY:
       return {
-        ...state, orderHistory: action.orderHistory
+        ...state,
+        orderHistory: action.orderHistory
       }
     default:
       return state
