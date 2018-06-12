@@ -77,7 +77,7 @@ export class UserHome extends Component {
           Welcome, {firstName} {lastName}!
         </h3>
         <div className="row">
-          <div className="card horizontal col s11 m11 l11">
+          <div className="card horizontal col s10 m10 l10">
             <div className="card-image">
               <img src={imageUrl} />
             </div>
@@ -85,8 +85,8 @@ export class UserHome extends Component {
           </div>
         </div>
         <div className="row">
-          <div className="card horizontal col s11 m11 l11">
-            <UserOrder />
+          <div className="card horizontal col s10 m10 l10 teal lighten-5">
+            <UserOrder orderId={3} orderItems={{'2': 1, '3': 3, '4': 1}} />
           </div>
         </div>
       </div>

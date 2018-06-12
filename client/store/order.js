@@ -73,7 +73,10 @@ export const fetchCartFromLocalStorage = () => dispatch => {
   delete cart['loglevel:webpack-dev-server']
   const newcart = {}
   for (const key in localStorage) {
-    if (localStorage.hasOwnProperty(key)) {
+    if (
+      localStorage.hasOwnProperty(key) &&
+      key !== '__stripe-js-v3-features__'
+    ) {
       newcart[key] = localStorage[key]
     }
   }

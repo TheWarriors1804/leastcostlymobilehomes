@@ -297,3 +297,11 @@ User CSS
   border-bottom: 1px solid rgb(102, 158, 242);
   cursor: pointer;
 }
+
+.order-card-container {
+  width: 100%;
+}
+
+.order-card-container .card {
+  height: auto;
+}
