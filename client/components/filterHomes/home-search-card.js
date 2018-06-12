@@ -60,7 +60,7 @@ class HomeSearchCard extends Component {
     })
     return (
       <div className="row">
-        <div className="card horizontal col s12 m11 l9">
+        <div className="card horizontal col s12 m11 l10">
           <div className="card-image">
             <Link to={`/singleHome/${id}`}>
               <img src={imageUrl} />

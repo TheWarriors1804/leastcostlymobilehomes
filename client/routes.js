@@ -8,20 +8,26 @@ import {
   UserHome,
   SingleHome,
   HomeSearch,
-  UserInfo,
-  HomePage
+  HomePage,
+  CheckOut
 } from './components'
-import {me} from './store'
-import CheckOut from './components/checkOut'
-import {getProducts} from './store/product'
-import {fetchCartFromDb, fetchCartFromLocalStorage} from './store/order'
+
+import {
+  me,
+  getProducts,
+  fetchCartFromDb,
+  fetchCartFromLocalStorage
+} from './store'
 
 /**
  * COMPONENT
  */
 class Routes extends Component {
-  componentDidMount() {
-    this.props.loadInitialData()
+  async componentDidMount() {
+    await this.props.loadInitialData()
+    this.props.user.id
+      ? this.props.fetchCartFromDb(this.props.user.id)
+      : this.props.fetchCartFromLocalStorage()
   }
 
   componentWillReceiveProps(nextProps) {
@@ -33,22 +39,19 @@ class Routes extends Component {
   }
 
   render() {
-    const {isLoggedIn} = this.props
-
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
         <Route path="/" exact component={HomePage} />
+        {/* <Route path="/userHome" exact component={UserHome} /> */}
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route path="/singleHome/:id" component={SingleHome} />
         <Route path="/homeSearch" component={HomeSearch} />
-        <Route path="/userHome" component={UserHome} />
         <Route path="/checkout" component={CheckOut} />
-
-        {isLoggedIn && (
+        {/* Routes placed below are only available after logging in */}
+        {this.props.isLoggedIn && (
           <Switch>
-            {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
           </Switch>
         )}
