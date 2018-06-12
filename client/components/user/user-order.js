@@ -8,7 +8,7 @@ import {HomeUserInfo, HomeTitle, HomeContent} from '../index'
  */
 export const UserOrder = props => {
   const handleSubmit = () => {}
-  console.log('here:', props.products[0])
+
   const current = props.products.orders
     ? props.products.orders.find(product => {
         return product.orders === +props.match.params.orders
@@ -43,9 +43,6 @@ const mapStateToProps = state => {
   // console.log('state product:', state.product[0].id)
   console.log('state:', state.product.id)
   return {
-    // productId: state.user.order.products.id,
-    // lastName: state.order.lastName,
-    // imageUrl: state.user.imageUrl,
     products: state.product
   }
 }

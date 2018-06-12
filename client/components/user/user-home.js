@@ -44,8 +44,7 @@ export class UserHome extends Component {
     event.preventDefault()
     this.handleEdit()
 
-    const update = await this.props.updateUser(this.state.user)
-    console.log('update: ', update)
+    await this.props.updateUser(this.state.user)
   }
 
   handleEdit = () => {
@@ -56,6 +55,7 @@ export class UserHome extends Component {
 
   render() {
     const {editing, user} = this.state
+    const {firstName, lastName, imageUrl} = user
 
     if (!this.props.user) {
       return <h3>Loading User Info...</h3>
@@ -70,7 +70,6 @@ export class UserHome extends Component {
     ) : (
       <UserInfo handleEdit={this.handleEdit} user={user} />
     )
-    const {firstName, lastName, imageUrl} = this.state.user
     return (
       <div>
         <h3>
