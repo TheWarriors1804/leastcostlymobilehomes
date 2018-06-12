@@ -7,18 +7,16 @@ import {fetchOrderHistory} from '../store/user'
 class CheckOut extends React.Component {
   componentDidMount() {
     console.log('in component mount', this.props)
-    // this.props.fetchOrderHistory(this.props.user.id)
+    this.props.fetchOrderHistory(this.props.user.id)
   }
 
   render() {
-    this.props.fetchOrderHistory(this.props.user.id)
-    console.log('the user is: ', this.props.user, this.props.orderHistory)
+    //this.props.fetchOrderHistory(this.props.user.id)
 
     const orderNum = Object.keys(this.props.order).reduce(
       (acc, curr) => acc + Number(this.props.order[curr]),
       0
     )
-    console.log('matt matt', this.props.order)
 
     const orderTotal =
       Object.keys(this.props.order).length && this.props.products.length

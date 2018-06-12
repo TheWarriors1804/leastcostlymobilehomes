@@ -62,16 +62,17 @@ export class UserHome extends Component {
   }
 
   render() {
-    const orderHistoryExists = this.props.user.orderHistory
-      ? !!Object.keys(this.props.user.orderHistory).length
+    const {editing, user} = this.state
+    const {firstName, lastName, imageUrl} = user
+    const {orderHistory} = this.props.user
+
+    const orderHistoryExists = orderHistory
+      ? !!Object.keys(orderHistory).length
       : false
 
     const sortedOrders = orderHistoryExists
-      ? Object.keys(this.props.user.orderHistory).sort((a, b) => b - a)
+      ? Object.keys(orderHistory).sort((a, b) => b - a)
       : null
-
-    const {editing, user} = this.state
-    const {firstName, lastName, imageUrl} = user
 
     if (!this.props.user) {
       return <h3>Loading User Info...</h3>
@@ -148,5 +149,10 @@ export default connect(mapState, mapDispatchToProps)(UserHome)
 UserHome.propTypes = {
   firstName: PropTypes.string,
   lastName: PropTypes.string,
-  imageUrl: PropTypes.string
+  imageUrl: PropTypes.string,
+  address: PropTypes.string,
+  address2: PropTypes.string,
+  state: PropTypes.string,
+  city: PropTypes.string,
+  zip: PropTypes.string
 }
