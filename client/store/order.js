@@ -60,7 +60,7 @@ export const completePurchaseLoggedIn = (userId, history) => async dispatch => {
   await axios.put(`/api/orders/${userId}`)
   console.log('USER PURCHASE COMPLETED')
   dispatch(completedPurchase())
-  history.push(`/`)
+  history.push(`/home`)
 }
 
 export const completePurchaseGuest = (products, history) => async dispatch => {
@@ -68,7 +68,7 @@ export const completePurchaseGuest = (products, history) => async dispatch => {
   await axios.post(`/api/orders`, {products})
   console.log('GUEST PURCHASE COMPLETED')
   dispatch(completedPurchase())
-  history.push(`/`)
+  history.push(`/home`)
 }
 
 export const fetchCartFromLocalStorage = () => dispatch => {
