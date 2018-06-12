@@ -28,6 +28,9 @@ class Routes extends Component {
     this.props.user.id
       ? this.props.fetchCartFromDb(this.props.user.id)
       : this.props.fetchCartFromLocalStorage()
+    if (this.props.isLoggedIn) {
+      console.log('this.props.isLoggedIn')
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -39,6 +42,7 @@ class Routes extends Component {
   }
 
   render() {
+    console.log('isLoggedIn', this.props.isLoggedIn)
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
