@@ -122,11 +122,21 @@ hr {
   padding-left: 10px;
 }
 
+.homeMain {
+  justify-content: flex-start;
+}
+
 .homeInfo {
-  width: 200px;
+  width: 220px;
   height: auto;
-  border: 1px solid #000;
-  padding-bottom: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.infoAdd > select {
+  margin: 10px;
+  margin-left: 20px;
 }
 
 select {
@@ -149,6 +159,9 @@ select {
 
 .homeImage {
   height: 350px;
+  box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-left: 10vw;
+  margin-right: 10vw;
 }
 
 .homeDescrip {

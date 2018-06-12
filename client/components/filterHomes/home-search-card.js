@@ -51,6 +51,7 @@ class HomeSearchCard extends Component {
       year,
       price,
       model,
+      manufacturer,
       imageUrl
     } = this.props.product
 
@@ -68,8 +69,13 @@ class HomeSearchCard extends Component {
           </div>
           <div className="card-stacked">
             <div className="card-content">
-              <div>Model: {model}</div>
-              <div>Price: {formatPrice}</div>
+              <div className="flexContainer searchCardTitle">
+                <div className="flexContainer searchCardTitle">
+                  <div className="manufacturer">{manufacturer + ' - '}</div>
+                  <div>{model}</div>
+                </div>
+                <div>{formatPrice}</div>
+              </div>
               <div>Bedrooms: {bedrooms}</div>
               <div>Bathrooms: {bathrooms}</div>
               <div>Year: {year}</div>

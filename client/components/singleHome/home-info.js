@@ -58,8 +58,8 @@ class HomeInfo extends Component {
           <div className="title">Location</div>
           <div className="content">{location}</div>
         </div>
-        <div className="flexContainer">
-          <div className="info">
+        <div className="">
+          <div className="info infoAdd">
             <span>Quantity:</span>
             <select name="quantity" onChange={this.handleChange}>
               <option value="1">1</option>
@@ -74,7 +74,7 @@ class HomeInfo extends Component {
               <option value="10">10</option>
             </select>
             <button
-              // type="submit"
+              type="button"
               className="btn waves-effect waves-light green"
               onClick={event => this.handleSubmit(event)}
             >
