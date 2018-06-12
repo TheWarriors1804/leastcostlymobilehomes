@@ -18,7 +18,6 @@ router.get('/:userid', async (req, res, next) => {
       where: {userId: req.params.userid},
       include: [{all: true}]
     })
-    console.log('orderhistory route is: ', orders)
     res.json(orders)
   } catch (err) {
     next(err)
