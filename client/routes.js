@@ -14,11 +14,14 @@ import {
 
 import CheckoutForm from './components/CheckoutForm'
 
+import Confirmation from './components/confirmation'
+
 import {
   me,
   getProducts,
   fetchCartFromDb,
-  fetchCartFromLocalStorage
+  fetchCartFromLocalStorage,
+  fetchOrderHistory
 } from './store'
 
 /**
@@ -52,6 +55,7 @@ class Routes extends Component {
         <Route path="/homeSearch" component={HomeSearch} />
         <Route path="/checkout" exact component={CheckOut} />
         <Route path="/checkout/checkoutForm" component={CheckoutForm} />
+        <Route path="/confirmation" component={Confirmation} />
         {/* Routes placed below are only available after logging in */}
         {this.props.isLoggedIn && (
           <Switch>
@@ -85,7 +89,8 @@ const mapDispatch = dispatch => {
       dispatch(getProducts())
     },
     fetchCartFromDb: userId => dispatch(fetchCartFromDb(userId)),
-    fetchCartFromLocalStorage: () => dispatch(fetchCartFromLocalStorage())
+    fetchCartFromLocalStorage: () => dispatch(fetchCartFromLocalStorage()),
+    fetchOrderHistory: userId => dispatch(fetchOrderHistory(userId))
   }
 }
 

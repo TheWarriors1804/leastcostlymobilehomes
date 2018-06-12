@@ -13,13 +13,15 @@ export const HomePage = props => {
       </div>
       <div className="homepage-content row">
         <div className="col s12 m8 offset-m2">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
+          Committed to excellence since 1977, Least Costly Mobile Homes Direct
+          is dedicated to providing our customers with the highest quality and
+          least costly mobile homes. We source our homes directly from
+          manufacturers, bypassing middle men and passing along cost savings.
+          You will not be disappointed with one of our tiny, single wide, or
+          double wide homes! Not sure which home is right for you? Chat with us
+          by pressing the blue button at the bottom right of the screen! Our
+          dedicated employees are available to talk about your new home 24/7,
+          365 days a year!
         </div>
       </div>
       <div className="homepage-cards row">
@@ -31,8 +33,10 @@ export const HomePage = props => {
             </div>
             <div className="card-content">
               <p>
-                We believe in offering quality mobile homes at affordable
-                prices.
+                At Least Costly Mobile Homes Direct, we believe in offering
+                quality mobile homes at impossible-to-beat prices. Find a lower
+                price for your dream mobile home? We'll beat the competitor's
+                prices!
               </p>
             </div>
             <div className="card-action">
@@ -61,13 +65,15 @@ export const HomePage = props => {
           <div className="card">
             <div className="card-image">
               <img src="https://static1.squarespace.com/static/556def68e4b0fb59709c7d04/5934305837c581fea8458aa5/593433d9d2b85729114d95a9/1496608025080/DSCF4278.jpg?format=1500w" />
-              <span className="card-title">Featured Home</span>
+              <span className="card-title">Featured Home - The Ironclad</span>
             </div>
             <div className="card-content">
               <p>
                 {' '}
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                This sleek and modern tiny house won't stand up to canon balls
+                like the Civil War ships that inspired its name, but the 40-year
+                warranty metal siding and roofing are incredibly durable and low
+                maintenance.
               </p>
             </div>
             <div className="card-action">

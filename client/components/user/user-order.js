@@ -1,51 +1,40 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {HomeUserInfo, HomeTitle, HomeContent} from '../index'
+import {HomeSearchCard} from '../index'
 
 /**
  * COMPONENT
  */
 export const UserOrder = props => {
-  const handleSubmit = () => {}
-  console.log('here:', props.products[0])
-  const current = props.products.orders
-    ? props.products.orders.find(product => {
-        return product.orders === +props.match.params.orders
-      })
-    : []
-  if (current) {
-    const prodObj = props.products.id
-    console.log('inside:', prodObj)
-    return (
-      <div>
-        <HomeTitle info={current} />
-        <div className="flexContainer">
-          <img src={current.imageUrl} className="homeImage" />
-          <HomeUserInfo info={current} handleSubmit={handleSubmit} />
+  return (
+    <div className="checkout-text order-card-container">
+      <h1>ORDER NO. {props.orderId}</h1>
+      <h2>Placed {Date(props.orderDate)}</h2>
+      {Object.keys(props.orderItems).length && props.products.length ? (
+        <div>
+          {Object.keys(props.orderItems).map(productId => (
+            <HomeSearchCard
+              product={props.products.find(
+                product => product.id === Number(productId)
+              )}
+              key={productId}
+              quantity={props.orderItems[productId]}
+              complete={true}
+            />
+          ))}
         </div>
-        <HomeContent info={current} />
-      </div>
-    )
-  } else {
-    return (
-      <div>
-        <h2>No previous orders</h2>
-      </div>
-    )
-  }
+      ) : (
+        <div />
+      )}
+    </div>
+  )
 }
 
 /**
  * CONTAINER
  */
 const mapStateToProps = state => {
-  // console.log('state product:', state.product[0].id)
-  console.log('state:', state.product.id)
   return {
-    // productId: state.user.order.products.id,
-    // lastName: state.order.lastName,
-    // imageUrl: state.user.imageUrl,
     products: state.product
   }
 }
@@ -55,8 +44,8 @@ export default connect(mapStateToProps)(UserOrder)
 /**
  * PROP TYPES
  */
-UserOrder.propTypes = {
-  firstName: PropTypes.string,
-  lastName: PropTypes.string,
-  imageUrl: PropTypes.string
-}
+// UserOrder.propTypes = {
+//   firstName: PropTypes.string,
+//   lastName: PropTypes.string,
+//   imageUrl: PropTypes.string
+// }

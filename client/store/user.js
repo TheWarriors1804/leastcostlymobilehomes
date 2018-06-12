@@ -1,5 +1,6 @@
 import axios from 'axios'
 import history from '../history'
+import order from './order'
 
 /**
  * ACTION TYPES
@@ -8,6 +9,7 @@ import history from '../history'
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
 const UPDATE_USER = 'UPDATE_USER'
+const FETCH_HISTORY = 'FETCH_HISTORY'
 
 /**
  * INITIAL STATE
@@ -22,13 +24,14 @@ const defaultUser = {}
 const getUser = user => ({type: GET_USER, user})
 const removeUser = () => ({type: REMOVE_USER})
 const updatedUser = user => ({type: UPDATE_USER, user})
+const fetchedHistory = orderHistory => ({type: FETCH_HISTORY, orderHistory})
 
 /**
  * THUNK CREATORS
  */
 
-export const me = () => dispatch =>
-  axios
+export const me = () => async dispatch =>
+  await axios
     .get('/auth/me')
     .then(res => dispatch(getUser(res.data || defaultUser)))
     .catch(err => console.log(err))
@@ -62,15 +65,31 @@ export const logout = () => dispatch =>
     .catch(err => console.log(err))
 
 export const updateUser = user => async dispatch => {
-  console.log('before thunk', user)
-  const updated = await axios.put(`/api/users/${user.id}`, user)
-  console.log('after thunk', updated)
-  dispatch(updatedUser(updated))
+  const res = await axios.put(`/api/users/${user.id}`, user)
+  dispatch(updatedUser(res.data))
 }
 
-export const deleteUser = id => async dispatch => {
-  await axios.delete(`/api/users/${id}`)
+export const deleteUser = user => async dispatch => {
+  await axios.delete(`/api/users/${user}`)
   dispatch(removeUser())
+}
+
+export const fetchOrderHistory = userId => async dispatch => {
+  const orderHistory = await axios.get(`/api/orders/${userId}`)
+  let final = {}
+  if (orderHistory.data[0]) {
+    orderHistory.data.forEach(async order => {
+      const orderItems = {}
+      const orderProducts = order.products
+      if (orderProducts[0]) {
+        orderProducts.forEach(item => {
+          orderItems[item.id] = item.orderItem.quantity
+        })
+      }
+      final[order.id] = {orderItems, orderDate: order.purchaseDate}
+    })
+  }
+  dispatch(fetchedHistory(final))
 }
 
 /**
@@ -84,6 +103,11 @@ export default function(state = defaultUser, action) {
       return defaultUser
     case UPDATE_USER:
       return action.user
+    case FETCH_HISTORY:
+      return {
+        ...state,
+        orderHistory: action.orderHistory
+      }
     default:
       return state
   }

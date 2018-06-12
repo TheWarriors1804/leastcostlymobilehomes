@@ -6,18 +6,18 @@ import history from './history'
 import store from './store'
 import App from './app'
 import {StripeProvider} from 'react-stripe-elements'
-
+import Chatbot from './chatbot'
 // establishes socket connection
 import './socket'
 
 ReactDOM.render(
   <Provider store={store}>
-    <StripeProvider
-      apiKey="pk_test_9X4IBvMzsDVNp54SElJMMJ4o
-"
-    >
+    <StripeProvider apiKey="pk_test_9X4IBvMzsDVNp54SElJMMJ4o">
       <Router history={history}>
-        <App />
+        <div>
+          <App />
+          <Chatbot />
+        </div>
       </Router>
     </StripeProvider>
   </Provider>,

@@ -2,13 +2,21 @@ import {Link} from 'react-router-dom'
 import React from 'react'
 import {HomeSearchCard} from './index'
 import {connect} from 'react-redux'
+import {fetchOrderHistory} from '../store/user'
 
 class CheckOut extends React.Component {
+  componentDidMount() {
+    this.props.fetchOrderHistory(this.props.user.id)
+  }
+
   render() {
+    console.log('the user is: ', this.props.user, this.props.orderHistory)
+
     const orderNum = Object.keys(this.props.order).reduce(
       (acc, curr) => acc + Number(this.props.order[curr]),
       0
     )
+    console.log('matt matt', this.props.order)
 
     const orderTotal =
       Object.keys(this.props.order).length && this.props.products.length
@@ -28,6 +36,15 @@ class CheckOut extends React.Component {
 
     const tax = 0.08875
 
+    const orderHistory = this.props.orderHistory
+    let uniqueHistory = []
+    for (var key in orderHistory) {
+      for (var nkey in orderHistory[key]) {
+        uniqueHistory.push(nkey)
+      }
+    }
+    uniqueHistory = [...new Set(uniqueHistory)]
+
     return (
       <div>
         <div className="checkout-container row valign-wrapper">
@@ -40,30 +57,19 @@ class CheckOut extends React.Component {
             </h2>
           </div>
           {Object.keys(this.props.order)[0] ? (
-            <button
-              type="submit"
-              className="btn waves-effect waves-light green"
-              onClick={event => console.log(event)}
-            >
-              Proceed with your order
-            </button>
+            <Link to="/checkout/checkoutForm">
+              <button
+                type="submit"
+                className="btn waves-effect waves-light green"
+                onClick={element => console.log(element)}
+              >
+                Proceed with your order
+              </button>
+            </Link>
           ) : (
             <div />
           )}
         </div>
-
-        <div>
-          <Link to="/checkout/checkoutForm">
-            <button
-              type="submit"
-              className="btn waves-effect waves-light green"
-              onClick={element => console.log(element)}
-            >
-              Proceed with your order
-            </button>
-          </Link>
-        </div>
-        {/* </div> */}
 
         {Object.keys(this.props.order)[0] ? (
           <div>
@@ -94,7 +100,6 @@ class CheckOut extends React.Component {
                           product => product.id === Number(productId)
                         )}
                         key={productId}
-                        quantity={this.props.order[productId]}
                       />
                     ))
                   ) : (
@@ -105,7 +110,23 @@ class CheckOut extends React.Component {
             </div>
           </div>
         ) : (
-          <div />
+          <div>
+            {uniqueHistory[0] ? (
+              <div>
+                <h2>Add Your Past Orders to Cart</h2>
+                {uniqueHistory.map(item => (
+                  <HomeSearchCard
+                    product={this.props.products.find(
+                      product => product.id === Number(item)
+                    )}
+                    key={item}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div />
+            )}
+          </div>
         )}
       </div>
     )
@@ -115,7 +136,12 @@ class CheckOut extends React.Component {
 const mapStateToProps = state => ({
   user: state.user,
   order: state.order,
-  products: state.product
+  products: state.product,
+  orderHistory: state.user.orderHistory
 })
 
-export default connect(mapStateToProps)(CheckOut)
+const mapDispatchToProps = dispatch => ({
+  fetchOrderHistory: userId => dispatch(fetchOrderHistory(userId))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(CheckOut)

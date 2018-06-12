@@ -20,28 +20,17 @@ class AuthForm extends Component {
 
   handleSubmit(evt) {
     evt.preventDefault()
-    // this.props.getCart()
-    // console.log('cart begotten', this.props)
-    // const cart = this.props.cart
-    console.log('handling submit', this.props)
-    // this.setState({
-    //   cart: cart
-    // })
-    console.log('new state', this.props.cart)
     this.setState({
       cart: this.props.cart
     })
     const formName = evt.target.name
     const email = evt.target.email.value
     const password = evt.target.password.value
-    console.log('this.state.cart', this.props.cart)
     this.props.auth(email, password, formName, this.props.cart)
-    console.log('submit handled', this.state)
   }
 
   handleChange(evt) {
     this.props.getCart()
-    console.log('cart begotten', this.props)
   }
 
   render() {

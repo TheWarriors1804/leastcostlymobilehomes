@@ -37,11 +37,10 @@ class HomeSearchCard extends Component {
   }
 
   handleRemove = event => {
-    // this.props.user.id ?
-    // this.props.removeItemLoggedIn( this.state.productId, this.props.user.id) :
-    // this.props.removeItemGuest( this.state.productId)
-    this.props.removeItemLoggedIn(this.state.productId, this.props.user.id)
-    console.log('trying to handle remove', this.props.order)
+    this.props.user.id
+      ? this.props.removeItemLoggedIn(this.state.productId, this.props.user.id)
+      : this.props.removeItemGuest(this.state.productId)
+    // this.props.removeItemLoggedIn(this.state.productId, this.props.user.id)
   }
 
   render() {
@@ -74,53 +73,63 @@ class HomeSearchCard extends Component {
               <div>Bedrooms: {bedrooms}</div>
               <div>Bathrooms: {bathrooms}</div>
               <div>Year: {year}</div>
-            </div>
-            <div className="card-action">
-              <span>Quantity: </span>
-              <select
-                name="quantity"
-                onChange={this.handleChange}
-                defaultValue={
-                  this.props.order[this.state.productId]
-                    ? this.props.order[this.state.productId]
-                    : 1
-                }
-              >
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-              </select>
-              <button
-                type="submit"
-                className={`btn waves-effect waves-light ${
-                  this.props.order[this.state.productId] ? `blue` : `green`
-                }`}
-                onClick={event => this.handleSubmit(event)}
-              >
-                {this.props.order[this.state.productId]
-                  ? `Update Quantity`
-                  : `Add to Cart`}
-              </button>
-              {this.props.order[this.state.productId] ? (
-                <button
-                  type="remove"
-                  className="remove-item-btn"
-                  onClick={event => this.handleRemove(event)}
-                >
-                  {' '}
-                  Remove Item{' '}
-                </button>
+              {this.props.quantity ? (
+                <div>Quantity: {this.props.quantity}</div>
               ) : (
                 <div />
               )}
             </div>
+
+            {!this.props.quantity ? (
+              <div className="card-action">
+                <span>Quantity: </span>
+                <select
+                  name="quantity"
+                  onChange={this.handleChange}
+                  defaultValue={
+                    this.props.order[this.state.productId]
+                      ? this.props.order[this.state.productId]
+                      : 1
+                  }
+                >
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                </select>
+                <button
+                  type="submit"
+                  className={`btn waves-effect waves-light ${
+                    this.props.order[this.state.productId] ? `blue` : `green`
+                  }`}
+                  onClick={event => this.handleSubmit(event)}
+                >
+                  {this.props.order[this.state.productId]
+                    ? `Update Quantity`
+                    : `Add to Cart`}
+                </button>
+                {this.props.order[this.state.productId] ? (
+                  <button
+                    type="remove"
+                    className="remove-item-btn"
+                    onClick={event => this.handleRemove(event)}
+                  >
+                    {' '}
+                    Remove Item{' '}
+                  </button>
+                ) : (
+                  <div />
+                )}
+              </div>
+            ) : (
+              <div />
+            )}
           </div>
         </div>
       </div>

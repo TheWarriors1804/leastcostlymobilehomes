@@ -2,7 +2,8 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {UserInfo, UserOrder, UserEdit} from '../index'
-import {updateUser} from '../../store/user'
+import {updateUser, deleteUser} from '../../store/user'
+import {fetchOrderHistory} from '../../store'
 
 /**
  * COMPONENT
@@ -26,6 +27,13 @@ export class UserHome extends Component {
     this.setState({
       user: this.props.user
     })
+    if (this.props.fetchOrderHistory) {
+      this.props.fetchOrderHistory(this.props.user.id)
+    }
+  }
+
+  handleClick = async () => {
+    await this.props.deleteUser(this.props.user)
   }
 
   handleChange = event => {
@@ -44,8 +52,7 @@ export class UserHome extends Component {
     event.preventDefault()
     this.handleEdit()
 
-    const update = await this.props.updateUser(this.state.user)
-    console.log('update: ', update)
+    await this.props.updateUser(this.state.user)
   }
 
   handleEdit = () => {
@@ -55,7 +62,16 @@ export class UserHome extends Component {
   }
 
   render() {
+    const orderHistoryExists = this.props.user.orderHistory
+      ? !!Object.keys(this.props.user.orderHistory).length
+      : false
+
+    const sortedOrders = orderHistoryExists
+      ? Object.keys(this.props.user.orderHistory).sort((a, b) => b - a)
+      : null
+
     const {editing, user} = this.state
+    const {firstName, lastName, imageUrl} = user
 
     if (!this.props.user) {
       return <h3>Loading User Info...</h3>
@@ -65,30 +81,45 @@ export class UserHome extends Component {
       <UserEdit
         handleSubmit={this.handleSubmit}
         handleChange={this.handleChange}
+        handleClick={this.handleClick}
         user={user}
       />
     ) : (
       <UserInfo handleEdit={this.handleEdit} user={user} />
     )
-    const {firstName, lastName, imageUrl} = this.state.user
     return (
       <div>
-        <h3>
-          Welcome, {firstName} {lastName}!
+        <h3 className="montserrat-text greeting">
+          Welcome{`, ${firstName}`} {lastName}!
         </h3>
         <div className="row">
-          <div className="card horizontal col s11 m11 l11">
+          <div className="card horizontal col s12 m10 l10 offset-m1 offset-l1">
             <div className="card-image">
               <img src={imageUrl} />
             </div>
             <div className="card-content">{userInfo}</div>
           </div>
         </div>
-        <div className="row">
-          <div className="card horizontal col s11 m11 l11">
-            <UserOrder />
+
+        {orderHistoryExists ? (
+          sortedOrders.map(orderId => (
+            <div className="row" key={orderId}>
+              <div className="card horizontal col s12 m10 l10 offset-m1 offset-l1">
+                <UserOrder
+                  orderId={orderId}
+                  orderDate={this.props.user.orderHistory[orderId].orderDate}
+                  orderItems={this.props.user.orderHistory[orderId].orderItems}
+                />
+              </div>
+            </div>
+          ))
+        ) : (
+          <div className="row">
+            <div className="col s12 m10 l10 offset-m1 offset-l1 montserrat-text no-orders-text">
+              No Previous Orders
+            </div>
           </div>
-        </div>
+        )}
       </div>
     )
   }
@@ -104,7 +135,9 @@ const mapState = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  updateUser: user => dispatch(updateUser(user))
+  updateUser: user => dispatch(updateUser(user)),
+  deleteUser: user => dispatch(deleteUser(user.id)),
+  fetchOrderHistory: userId => dispatch(fetchOrderHistory(userId))
 })
 
 export default connect(mapState, mapDispatchToProps)(UserHome)
