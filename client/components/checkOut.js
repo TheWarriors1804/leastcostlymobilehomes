@@ -5,7 +5,6 @@ import {connect} from 'react-redux'
 import {fetchOrderHistory} from '../store/user'
 
 class CheckOut extends React.Component {
-
   // componentDidMount() {
   //   this.props.fetchOrderHistory(3)
   //   console.log('in component did mount')
@@ -37,6 +36,17 @@ class CheckOut extends React.Component {
 
     const tax = 0.08875
 
+    const orderHistory = this.props.orderHistory
+    let uniqueHistory = []
+    for (var key in orderHistory) {
+      console.log('key is', key)
+      for (var nkey in orderHistory[key]) {
+        uniqueHistory.push(nkey)
+      }
+    }
+    uniqueHistory = [...new Set(uniqueHistory)]
+    console.log('uniqueHistory is', uniqueHistory)
+
     return (
       <div>
         <div className="checkout-container row valign-wrapper">
@@ -49,30 +59,19 @@ class CheckOut extends React.Component {
             </h2>
           </div>
           {Object.keys(this.props.order)[0] ? (
-            <button
-              type="submit"
-              className="btn waves-effect waves-light green"
-              onClick={event => console.log(event)}
-            >
-              Proceed with your order
-            </button>
+            <Link to="/checkout/checkoutForm">
+              <button
+                type="submit"
+                className="btn waves-effect waves-light green"
+                onClick={element => console.log(element)}
+              >
+                Proceed with your order
+              </button>
+            </Link>
           ) : (
             <div />
           )}
         </div>
-
-        <div>
-          <Link to="/checkout/checkoutForm">
-            <button
-              type="submit"
-              className="btn waves-effect waves-light green"
-              onClick={element => console.log(element)}
-            >
-              Proceed with your order
-            </button>
-          </Link>
-        </div>
-        {/* </div> */}
 
         {Object.keys(this.props.order)[0] ? (
           <div>
@@ -103,7 +102,6 @@ class CheckOut extends React.Component {
                           product => product.id === Number(productId)
                         )}
                         key={productId}
-                        quantity={this.props.order[productId]}
                       />
                     ))
                   ) : (
@@ -114,7 +112,23 @@ class CheckOut extends React.Component {
             </div>
           </div>
         ) : (
-          <div />
+          <div>
+            {uniqueHistory[0] ? (
+              <div>
+                <h2>Add Your Past Orders to Cart</h2>
+                {uniqueHistory.map(item => (
+                  <HomeSearchCard
+                    product={this.props.products.find(
+                      product => product.id === Number(item)
+                    )}
+                    key={item}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div />
+            )}
+          </div>
         )}
       </div>
     )
@@ -129,7 +143,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  fetchOrderHistory: (userId) => dispatch(fetchOrderHistory(userId))
+  fetchOrderHistory: userId => dispatch(fetchOrderHistory(userId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CheckOut)
