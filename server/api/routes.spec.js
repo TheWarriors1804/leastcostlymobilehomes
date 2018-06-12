@@ -75,7 +75,6 @@ describe('User GET Product Routes', () => {
         .expect(200)
         .then(res => {
           expect(res.body).to.be.an('array')
-          console.log('console.log', res.body)
           expect(res.body[0].price).to.be.equal('500.99')
         })
     })

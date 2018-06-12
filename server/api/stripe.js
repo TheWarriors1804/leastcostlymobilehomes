@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const stripe = require('stripe')('sk_test_zkwLj0ec90vCHNOxjvQny1fc')
+const stripe = require('stripe')(process.env.STRIPE_CLIENT_ID)
 
 router.post('/', async (req, res, next) => {
   try {
