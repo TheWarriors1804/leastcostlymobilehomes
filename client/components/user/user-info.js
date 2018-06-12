@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-const UserEdit = props => {
+const UserInfo = props => {
   const {
     firstName,
     lastName,
@@ -9,29 +9,12 @@ const UserEdit = props => {
     address,
     address2,
     city,
-    stateAdd,
+    state,
     zip
-  } = props
-
-  const handleChange = event => {
-    console.log(event.target.value)
-  }
-
-  const handleSubmit = event => {
-    console.log(event.target.value)
-  }
-
-  const firstName1 = 'Robert'
-  const lName1 = 'Nkemdiche'
-  const email1 = 'Robert.N@gmail.com'
-  const address1 = "123 Albertson's Dr."
-  const address21 = ''
-  const city1 = 'San Francisco'
-  const stateAdd1 = 'California'
-  const zip1 = '94102'
+  } = props.user
 
   return (
-    <div className="row userInfo" onChange={handleChange}>
+    <div className="row userInfo">
       <form className="col s12">
         <div className="row">
           <div className="input-field col s6">
@@ -39,7 +22,7 @@ const UserEdit = props => {
               First Name
             </label>
             <div className="infoTag">
-              <p>{firstName1}</p>
+              <p>{firstName}</p>
             </div>
           </div>
           <div className="input-field col s6">
@@ -47,7 +30,7 @@ const UserEdit = props => {
               Last Name
             </label>
             <div className="infoTag">
-              <p>{lName1}</p>
+              <p>{lastName}</p>
             </div>
           </div>
         </div>
@@ -57,17 +40,17 @@ const UserEdit = props => {
               Email
             </label>
             <div className="infoTag">
-              <p>{email1}</p>
+              <p>{email}</p>
             </div>
           </div>
         </div>
         <div className="row">
           <div className="input-field col s6">
-            <label htmlFor="address1" className="active">
-              Address 1
+            <label htmlFor="address" className="active">
+              Address
             </label>
             <div className="infoTag">
-              <p>{address1}</p>
+              <p>{address}</p>
             </div>
           </div>
           <div className="input-field col s6">
@@ -75,7 +58,7 @@ const UserEdit = props => {
               Address 2
             </label>
             <div className="infoTag">
-              <p>{address21}</p>
+              <p>{address2}</p>
             </div>
           </div>
         </div>
@@ -85,7 +68,7 @@ const UserEdit = props => {
               Town / City
             </label>
             <div className="infoTag">
-              <p>{city1}</p>
+              <p>{city}</p>
             </div>
           </div>
         </div>
@@ -95,7 +78,7 @@ const UserEdit = props => {
               State
             </label>
             <div className="infoTag">
-              <p>{stateAdd1}</p>
+              <p>{state}</p>
             </div>
           </div>
           <div className="input-field col s6">
@@ -103,7 +86,7 @@ const UserEdit = props => {
               Zip Code
             </label>
             <div className="infoTag">
-              <p>{zip1}</p>
+              <p>{zip}</p>
             </div>
           </div>
         </div>
@@ -111,6 +94,7 @@ const UserEdit = props => {
           <button
             type="button"
             className="btn waves-effect waves-light col offset-s6 s4"
+            onClick={props.handleEdit}
           >
             Edit Information
           </button>
@@ -122,11 +106,8 @@ const UserEdit = props => {
 
 const mapStateToProps = state => {
   return {
-    firstName: state.user.firstName,
-    lastName: state.user.lastName,
-    email: state.user.email,
-    address: state.user.address
+    //user: state.user
   }
 }
 
-export default connect(mapStateToProps)(UserEdit)
+export default connect(mapStateToProps)(UserInfo)

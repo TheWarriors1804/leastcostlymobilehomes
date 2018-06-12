@@ -92,7 +92,7 @@ hr {
 }
 
 .cartIcon {
-  margin-right: 30px;
+  margin-left: 30px;
   height: 40px;
 }
 
@@ -201,6 +201,7 @@ User CSS
 
 .searchPageContainer {
   display: flex;
+  margin-top: 10px;
 }
 
 .searchFilterContainer {
@@ -236,6 +237,11 @@ User CSS
   text-align: center;
 }
 
+.homepage-container .card-title {
+  color: white;
+  text-shadow: 2px 2px 5px #000;
+}
+
 .searchCardTitle {
   flex-direction: row;
   align-items: flex-end;
@@ -251,11 +257,43 @@ User CSS
   padding: 50px;
 }
 
-.card-title {
-  color: white;
-  text-shadow: 2px 2px 5px #000;
-}
-
 .homepage-cards {
   padding: 3vw;
+}
+
+/*Checkout styles*/
+
+.checkout-container button {
+  vertical-align: center;
+}
+
+.checkout-text {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.checkout-text h1 {
+  font-size: 3rem;
+}
+
+.checkout-text h2 {
+  font-size: 1.5rem;
+}
+
+.checkout-summary .card-content {
+  margin-left: 2vw;
+}
+
+.badge {
+  margin-right: 20px;
+}
+
+.remove-item-btn {
+  margin: 20px 0px 0px 20px;
+  background: none;
+  color: rgb(102, 158, 242);
+  border: none;
+  padding: 0;
+  /*border is optional*/
+  border-bottom: 1px solid rgb(102, 158, 242);
+  cursor: pointer;
 }
