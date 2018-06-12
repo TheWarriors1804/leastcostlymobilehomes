@@ -1,4 +1,4 @@
-const {db, User, Order, Product} = require('./models/index')
+const {db, User, Order, Product, OrderItem} = require('./models/index')
 
 const users = [
   {
@@ -8,6 +8,9 @@ const users = [
     email: 'dolores@westworld.com',
     phone: '555-389-2341',
     address: '3 Sweetwater',
+    state: 'Utah',
+    city: 'Westworld',
+    zip: '06660',
     password: 'abernathy'
   },
   {
@@ -17,6 +20,10 @@ const users = [
     email: 'teddy@westworld.com',
     phone: '555-230-3691',
     address: '8 Sweetwater',
+    address2: 'Apt 3',
+    state: 'Utah',
+    city: 'Westworld',
+    zip: '06660',
     password: 'flood'
   },
   {
@@ -26,6 +33,10 @@ const users = [
     email: 'maeve@westworld.com',
     phone: '555-923-1283',
     address: '2 Sweetwater',
+    address2: 'Ground floor',
+    state: 'Utah',
+    city: 'Westworld',
+    zip: '06660',
     password: 'millay'
   },
   {
@@ -35,22 +46,32 @@ const users = [
     email: 'bernard@westworld.com',
     phone: '555-023-1102',
     address: '9 Corporate',
+    address2: 'Suite 4',
+    state: 'Utah',
+    city: 'Westworld',
+    zip: '06660',
     password: 'lowe'
   }
 ]
 
 const orders = [
   {
-    userId: 2,
+    userId: 1,
     complete: true,
     initiatedDate: '2018-06-03 12:40:23',
     purchaseDate: '2018-06-04 10:20:20'
   },
   {
-    userId: 3,
-    complete: false,
+    userId: 1,
+    complete: true,
     initiatedDate: '2018-06-03 09:40:13',
     purchaseDate: '2018-06-04 08:20:20'
+  },
+  {
+    userId: 3,
+    complete: false,
+    initiatedDate: '2018-06-02 10:40:23',
+    purchaseDate: '2018-06-04 09:50:20'
   },
   {
     userId: 1,
@@ -256,54 +277,63 @@ const products = [
   }
 ]
 
-// const orderItems = [
-//   {
-//     orderId: 1,
-//     productId: 5
-//   },
-//   {
-//     orderId: 1,
-//     productId: 3
-//   },
-//   {
-//     orderId: 2,
-//     productId: 10
-//   },
-//   {
-//     orderId: 3,
-//     productId: 5
-//   },
-//   {
-//     orderId: 4,
-//     productId: 9
-//   },
-//   {
-//     orderId: 4,
-//     productId: 2
-//   },
-//   {
-//     orderId: 4,
-//     productId: 6
-//   },
-//   {
-//     orderId: 4,
-//     productId: 7
-//   },
-//   {
-//     orderId: 5,
-//     productId: 1
-//   },
-//   {
-//     orderId: 5,
-//     productId: 12
-//   }
-// ]
+const orderItems = [
+  {
+    orderId: 1,
+    productId: 5,
+    quantity: 1
+  },
+  {
+    orderId: 1,
+    productId: 3,
+    quantity: 10
+  },
+  {
+    orderId: 2,
+    productId: 10,
+    quantity: 3
+  },
+  {
+    orderId: 3,
+    productId: 5,
+    quantity: 2
+  },
+  {
+    orderId: 4,
+    productId: 9,
+    quantity: 1
+  },
+  {
+    orderId: 4,
+    productId: 2
+  },
+  {
+    orderId: 4,
+    productId: 6,
+    quantity: 3
+  },
+  {
+    orderId: 4,
+    productId: 7,
+    quantity: 2
+  },
+  {
+    orderId: 5,
+    productId: 1,
+    quantity: 1
+  },
+  {
+    orderId: 5,
+    productId: 11,
+    quantity: 1
+  }
+]
 
 const seed = async () => {
   await Promise.all(users.map(user => User.create(user)))
   await Promise.all(orders.map(order => Order.create(order)))
-  // await Promise.all(orderItems.map(orderitem => orderItem.create(orderitem)))
   await Promise.all(products.map(product => Product.create(product)))
+  await Promise.all(orderItems.map(item => OrderItem.create(item)))
   console.log('db seeding completed')
 }
 
