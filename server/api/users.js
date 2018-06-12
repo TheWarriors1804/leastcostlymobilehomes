@@ -43,6 +43,7 @@ router.put('/:id', async (req, res, next) => {
 // delete user
 router.delete('/:id', async (req, res, next) => {
   try {
+    console.log('delete express', req.params.id)
     await User.destroy({
       where: {
         id: req.params.id
