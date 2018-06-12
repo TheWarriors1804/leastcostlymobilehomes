@@ -106,11 +106,9 @@ export default function(state = initialState, action) {
     case REMOVE_ITEM: {
       let updated = {}
       for (var key in state) {
-        console.log('key is: ', key)
         if (key != action.productId) {
           updated[key] = state[key]
         }
-        console.log('the new state after remove is', updated)
       }
       return {
         ...updated
