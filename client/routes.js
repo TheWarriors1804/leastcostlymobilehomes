@@ -12,6 +12,8 @@ import {
   CheckOut
 } from './components'
 
+import CheckoutForm from './components/CheckoutForm'
+
 import {
   me,
   getProducts,
@@ -48,7 +50,8 @@ class Routes extends Component {
         <Route path="/signup" component={Signup} />
         <Route path="/singleHome/:id" component={SingleHome} />
         <Route path="/homeSearch" component={HomeSearch} />
-        <Route path="/checkout" component={CheckOut} />
+        <Route path="/checkout" exact component={CheckOut} />
+        <Route path="/checkout/checkoutForm" component={CheckoutForm} />
         {/* Routes placed below are only available after logging in */}
         {this.props.isLoggedIn && (
           <Switch>

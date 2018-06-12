@@ -107,7 +107,7 @@ class HomeSearchCard extends Component {
                   ? `Update Quantity`
                   : `Add to Cart`}
               </button>
-              {this.props.quantity ? (
+              {this.props.order[this.state.productId] ? (
                 <button
                   type="remove"
                   className="remove-item-btn"
