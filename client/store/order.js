@@ -42,10 +42,8 @@ export const addItemLoggedIn = (
 }
 
 export const addItemGuest = (productId, quantity) => dispatch => {
-  console.log('entered addItemGuest', productId, quantity, localStorage)
   localStorage.setItem(productId, quantity)
   dispatch(addedItem(productId, quantity))
-  console.log('cart is', localStorage)
 }
 
 export const removeItemGuest = productId => dispatch => {
@@ -58,14 +56,19 @@ export const removeItemLoggedIn = (productId, userId) => async dispatch => {
   dispatch(removeItem(productId))
 }
 
-export const completePurchaseLoggedIn = userId => async dispatch => {
+export const completePurchaseLoggedIn = (userId, history) => async dispatch => {
   await axios.put(`/api/orders/${userId}`)
+  console.log('USER PURCHASE COMPLETED')
   dispatch(completedPurchase())
+  history.push(`/home`)
 }
 
-export const completePurchaseGuest = (session, products) => async dispatch => {
-  await axios.post(`/api/orders`, {session, products})
+export const completePurchaseGuest = (products, history) => async dispatch => {
+  console.log('in guest thunk, products: ', products)
+  await axios.post(`/api/orders`, {products})
+  console.log('GUEST PURCHASE COMPLETED')
   dispatch(completedPurchase())
+  history.push(`/home`)
 }
 
 export const fetchCartFromLocalStorage = () => dispatch => {

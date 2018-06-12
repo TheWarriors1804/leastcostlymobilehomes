@@ -14,6 +14,8 @@ import {
 
 import CheckoutForm from './components/CheckoutForm'
 
+import Confirmation from './components/confirmation'
+
 import {
   me,
   getProducts,
@@ -53,6 +55,7 @@ class Routes extends Component {
         <Route path="/homeSearch" component={HomeSearch} />
         <Route path="/checkout" exact component={CheckOut} />
         <Route path="/checkout/checkoutForm" component={CheckoutForm} />
+        <Route path="/confirmation" component={Confirmation} />
         {/* Routes placed below are only available after logging in */}
         {this.props.isLoggedIn && (
           <Switch>

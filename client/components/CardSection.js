@@ -2,17 +2,45 @@ import React from 'react'
 import {CardElement, injectStripe, StripeElement} from 'react-stripe-elements'
 import {connect} from 'react-redux'
 import axios from 'axios'
+import Confirmation from './confirmation'
+import {
+  completePurchaseGuest,
+  completePurchaseLoggedIn,
+  fetchCartFromLocalStorage
+} from '../store/order'
+import {withRouter} from 'react-router-dom'
 
 class CardSection extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      result: ''
+    }
+  }
+
   handleSubmit = async ev => {
     ev.preventDefault()
+    if (!this.props.user.id) {
+      this.props.fetchCartFromLocalStorage()
+    }
     const createToken = await this.props.stripe.createToken({
       type: 'card'
     })
-    console.log('hit', createToken)
     const newRoute = await axios.post('/api/stripe', {
       token: createToken.token.id
     })
+    console.log('new route is', newRoute)
+    if (newRoute.data === 'declined') {
+      this.setState({result: 'fail'})
+    }
+    if (newRoute.data === 'accepted') {
+      this.props.user.id
+        ? this.props.completePurchaseLoggedIn(
+            this.props.user.id,
+            this.props.history
+          )
+        : this.props.completePurchaseGuest(this.props.order, this.props.history)
+    }
   }
 
   render() {
@@ -55,6 +83,7 @@ class CardSection extends React.Component {
         iconColor: '#fa755a'
       }
     }
+
     return (
       <div>
         <div className="orderItemsBox">
@@ -83,14 +112,38 @@ class CardSection extends React.Component {
             Confirm order
           </button>
         </form>
+        {this.state.result === 'fail' ? (
+          <div>Uh oh! Your card has been declined, please check and retry.</div>
+        ) : (
+          <div />
+        )}
       </div>
     )
   }
 }
 
-const mapStateToProps = state => ({
-  order: state.order,
-  products: state.product
-})
 
-export default connect(mapStateToProps)(injectStripe(CardSection))
+const mapState = (state, ownProps) => {
+  return {
+    order: state.order,
+    user: state.user,
+    history: ownProps.history,
+    products: state.product
+  }
+}
+
+const mapDispatch = (dispatch, ownProps) => {
+  console.log('OWNPROPS IS: ', ownProps)
+  return {
+    completePurchaseGuest: (order, history) =>
+      dispatch(completePurchaseGuest(order, history)),
+    completePurchaseLoggedIn: (userId, history) =>
+      dispatch(completePurchaseLoggedIn(userId, history)),
+    fetchCartFromLocalStorage: () => dispatch(fetchCartFromLocalStorage())
+  }
+}
+
+export default withRouter(
+  connect(mapState, mapDispatch)(injectStripe(CardSection))
+)
+

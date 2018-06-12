@@ -26,7 +26,6 @@ class HomeInfo extends Component {
         this.state.quantity
       )
     } else {
-      console.log('im a guest', this.props)
       this.props.addItemGuest(this.state.productId, this.state.quantity)
     }
   }
