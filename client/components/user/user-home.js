@@ -58,6 +58,14 @@ export class UserHome extends Component {
   }
 
   render() {
+    const orderHistoryExists = this.props.user.orderHistory
+      ? !!Object.keys(this.props.user.orderHistory).length
+      : false
+
+    const sortedOrders = orderHistoryExists
+      ? Object.keys(this.props.user.orderHistory).sort((a, b) => b - a)
+      : null
+
     const {editing, user} = this.state
     const {firstName, lastName, imageUrl} = user
 
@@ -76,11 +84,11 @@ export class UserHome extends Component {
     )
     return (
       <div>
-        <h3>
-          Welcome, {firstName} {lastName}!
+        <h3 className="montserrat-text greeting">
+          Welcome{`, ${firstName}`} {lastName}!
         </h3>
         <div className="row">
-          <div className="card horizontal col s10 m10 l10">
+          <div className="card horizontal col s12 m10 l10 offset-m1 offset-l1">
             <div className="card-image">
               <img src={imageUrl} />
             </div>
@@ -88,27 +96,20 @@ export class UserHome extends Component {
           </div>
         </div>
 
-        {console.log('user with orders?', this.props.user)}
-        {this.props.user.orderHistory ? (
-          Object.keys(this.props.user.orderHistory).length ? (
-            Object.keys(this.props.user.orderHistory).map(orderId => (
-              <div className="row" key={orderId}>
-                <div className="card horizontal col s10 m10 l10 grey lighten-5">
-                  <UserOrder
-                    orderId={orderId}
-                    orderDate={this.props.user.orderHistory[orderId].orderDate}
-                    orderItems={
-                      this.props.user.orderHistory[orderId].orderItems
-                    }
-                  />
-                </div>
+        {orderHistoryExists ? (
+          sortedOrders.map(orderId => (
+            <div className="row" key={orderId}>
+              <div className="card horizontal col s12 m10 l10 offset-m1 offset-l1">
+                <UserOrder
+                  orderId={orderId}
+                  orderDate={this.props.user.orderHistory[orderId].orderDate}
+                  orderItems={this.props.user.orderHistory[orderId].orderItems}
+                />
               </div>
-            ))
-          ) : (
-            <div>No Previous Orders</div>
-          )
+            </div>
+          ))
         ) : (
-          <div />
+          <div>No Previous Orders</div>
         )}
       </div>
     )
