@@ -1,3 +1,4 @@
+import {Link} from 'react-router-dom'
 import React from 'react'
 import {HomeSearchCard} from './index'
 import {connect} from 'react-redux'
@@ -50,6 +51,19 @@ class CheckOut extends React.Component {
             <div />
           )}
         </div>
+
+        <div>
+          <Link to="/checkout/checkoutForm">
+            <button
+              type="submit"
+              className="btn waves-effect waves-light green"
+              onClick={element => console.log(element)}
+            >
+              Proceed with your order
+            </button>
+          </Link>
+        </div>
+        {/* </div> */}
 
         {Object.keys(this.props.order)[0] ? (
           <div>
