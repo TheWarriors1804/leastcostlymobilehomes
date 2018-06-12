@@ -53,7 +53,8 @@ export const HomePage = props => {
             <div className="card-content">
               <p>
                 We have the largest selection of mobile homes nationwide. Choose
-                between tiny homes, single wide, and double wide homes.
+                between tiny homes, single wide, and double wide homes. Not sure
+                which home to choose? Talk to one of our associates today!
               </p>
             </div>
             <div className="card-action">
