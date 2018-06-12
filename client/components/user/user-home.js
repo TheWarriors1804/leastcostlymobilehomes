@@ -114,7 +114,11 @@ export class UserHome extends Component {
             </div>
           ))
         ) : (
-          <div>No Previous Orders</div>
+          <div className="row">
+            <div className="col s12 m10 l10 offset-m1 offset-l1 montserrat-text no-orders-text">
+              No Previous Orders
+            </div>
+          </div>
         )}
       </div>
     )
