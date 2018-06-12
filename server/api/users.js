@@ -1,6 +1,5 @@
 const router = require('express').Router()
 const {User} = require('../db/models')
-const {Product} = require('../db/models/product')
 module.exports = router
 
 router.get('/', (req, res, next) => {
@@ -44,6 +43,7 @@ router.put('/:id', async (req, res, next) => {
 // delete user
 router.delete('/:id', async (req, res, next) => {
   try {
+    console.log('delete express', req.params.id)
     await User.destroy({
       where: {
         id: req.params.id

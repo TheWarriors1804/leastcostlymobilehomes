@@ -5,7 +5,6 @@ const request = require('supertest')
 const db = require('../db')
 const app = require('../index')
 const User = db.model('user')
-const Product = db.model('product')
 
 describe('Initial user tests', () => {
   beforeEach(() => {

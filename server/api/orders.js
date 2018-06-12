@@ -18,7 +18,6 @@ router.get('/:userid', async (req, res, next) => {
       where: {userId: req.params.userid, complete: true},
       include: [{all: true}]
     })
-    console.log('orderhistory route is: ', orders)
     res.json(orders)
   } catch (err) {
     next(err)
@@ -27,19 +26,16 @@ router.get('/:userid', async (req, res, next) => {
 
 //get all the order products for the order for the user
 router.get('/:orderId', async (req, res, next) => {
-  console.log('entered /:orderId')
   try {
     const orderitems = await OrderItem.findAll({
       where: {orderId: req.params.orderId}
     })
-    console.log('orderitems is: ', orderitems)
     let final = {}
     if (orderitems[0]) {
       orderitems.forEach(order => {
         final[order.productId] = order.quantity
       })
     }
-    console.log('final is: ', final)
     res.json(final)
   } catch (err) {
     next(err)
@@ -87,10 +83,10 @@ router.get('/:userId/all', async (req, res, next) => {
 
 //when no one is logged in, this post route creates a new order in the orders table on checkout.  the session id and order items will be pased through the req.body. status should be 'complete in req.body. each item id should be kept in an array on req.body.items
 router.post('/', async (req, res, next) => {
-  const target = req.body
+  const target = req.body.products
+  console.log('in the post route', target)
   try {
     const makeorder = await Order.create({
-      sessionId: 'test4',
       complete: true
     })
     for (const key in target) {
@@ -112,7 +108,6 @@ router.post('/', async (req, res, next) => {
 
 //when the user is logged in, this post route is used to create the order for the user and add products to the order
 router.post('/:userid/:productid', async (req, res, next) => {
-  console.log('in the route', req.body.quantity)
   const quantity = req.body.quantity
   try {
     const neworder = await Order.findOrCreate({
@@ -132,7 +127,6 @@ router.post('/:userid/:productid', async (req, res, next) => {
         }
       ]
     })
-    console.log('reached here')
     if (association[0].products[0]) {
       const orderitem = await OrderItem.findAll({
         where: {

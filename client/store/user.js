@@ -1,5 +1,6 @@
 import axios from 'axios'
 import history from '../history'
+import order from './order'
 
 /**
  * ACTION TYPES
@@ -68,13 +69,12 @@ export const updateUser = user => async dispatch => {
   dispatch(updatedUser(res.data))
 }
 
-export const deleteUser = id => async dispatch => {
-  await axios.delete(`/api/users/${id}`)
+export const deleteUser = user => async dispatch => {
+  await axios.delete(`/api/users/${user}`)
   dispatch(removeUser())
 }
 
 export const fetchOrderHistory = userId => async dispatch => {
-  console.log('HAS REACHED THUNK')
   const orderHistory = await axios.get(`/api/orders/${userId}`)
   let final = {}
   if (orderHistory.data[0]) {
@@ -89,7 +89,6 @@ export const fetchOrderHistory = userId => async dispatch => {
       final[order.id] = {orderItems, orderDate: order.purchaseDate}
     })
   }
-  console.log('final orderhistory is: ', final)
   dispatch(fetchedHistory(final))
 }
 
@@ -99,7 +98,6 @@ export const fetchOrderHistory = userId => async dispatch => {
 export default function(state = defaultUser, action) {
   switch (action.type) {
     case GET_USER:
-      console.log('get user orderHistory is: ', action.orderHistory)
       return action.user
     case REMOVE_USER:
       return defaultUser

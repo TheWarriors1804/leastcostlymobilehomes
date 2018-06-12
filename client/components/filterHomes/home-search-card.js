@@ -37,10 +37,10 @@ class HomeSearchCard extends Component {
   }
 
   handleRemove = event => {
-    // this.props.user.id ?
-    // this.props.removeItemLoggedIn( this.state.productId, this.props.user.id) :
-    // this.props.removeItemGuest( this.state.productId)
-    this.props.removeItemLoggedIn(this.state.productId, this.props.user.id)
+    this.props.user.id
+      ? this.props.removeItemLoggedIn(this.state.productId, this.props.user.id)
+      : this.props.removeItemGuest(this.state.productId)
+    // this.props.removeItemLoggedIn(this.state.productId, this.props.user.id)
   }
 
   render() {
