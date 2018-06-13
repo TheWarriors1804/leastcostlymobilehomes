@@ -2,7 +2,7 @@
 
 _Your source for the highest quality and least costly mobile homes_
 
-# :shopping_trolley: Motivation
+# 🛒 Motivation
 
 Our group formulated this e-commerce site for our Grace Shopper project in Fullstack Academy of Code.
 
