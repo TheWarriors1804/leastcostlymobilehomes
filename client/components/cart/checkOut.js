@@ -104,23 +104,7 @@ class CheckOut extends React.Component {
             </div>
           </div>
         ) : (
-          <div>
-            {uniqueHistory[0] ? (
-              <div>
-                <h2>Add Your Past Orders to Cart</h2>
-                {uniqueHistory.map(item => (
-                  <HomeSearchCard
-                    product={this.props.products.find(
-                      product => product.id === Number(item)
-                    )}
-                    key={item}
-                  />
-                ))}
-              </div>
-            ) : (
-              <div />
-            )}
-          </div>
+          <div />
         )}
       </div>
     )
