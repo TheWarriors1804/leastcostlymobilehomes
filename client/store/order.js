@@ -58,15 +58,12 @@ export const removeItemLoggedIn = (productId, userId) => async dispatch => {
 
 export const completePurchaseLoggedIn = (userId, history) => async dispatch => {
   await axios.put(`/api/orders/${userId}`)
-  console.log('USER PURCHASE COMPLETED')
   dispatch(completedPurchase())
   history.push(`/home`)
 }
 
 export const completePurchaseGuest = (products, history) => async dispatch => {
-  console.log('in guest thunk, products: ', products)
   await axios.post(`/api/orders`, {products})
-  console.log('GUEST PURCHASE COMPLETED')
   dispatch(completedPurchase())
   history.push(`/home`)
 }

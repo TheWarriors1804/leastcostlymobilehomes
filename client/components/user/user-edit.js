@@ -1,5 +1,4 @@
 import React from 'react'
-import {connect} from 'react-redux'
 
 const UserEdit = props => {
   Object.keys(props.user).forEach(key => {

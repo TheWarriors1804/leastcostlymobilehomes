@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {UserInfo, UserOrder, UserEdit} from '../index'
 import {updateUser, deleteUser} from '../../store/user'
@@ -39,10 +38,11 @@ export class UserHome extends Component {
   handleChange = event => {
     const id = event.target.id
     const value = event.target.value
+    const oldState = this.state.user
 
     this.setState({
       user: {
-        ...this.state.user,
+        ...oldState,
         [id]: value
       }
     })
@@ -71,7 +71,7 @@ export class UserHome extends Component {
       : false
 
     const sortedOrders = orderHistoryExists
-      ? Object.keys(orderHistory).sort((a, b) => b - a)
+      ? Object.keys(orderHistory).sort((first, next) => next - first)
       : null
 
     if (!this.props.user) {
@@ -142,17 +142,3 @@ const mapDispatchToProps = dispatch => ({
 })
 
 export default connect(mapState, mapDispatchToProps)(UserHome)
-
-/**
- * PROP TYPES
- */
-UserHome.propTypes = {
-  firstName: PropTypes.string,
-  lastName: PropTypes.string,
-  imageUrl: PropTypes.string,
-  address: PropTypes.string,
-  address2: PropTypes.string,
-  state: PropTypes.string,
-  city: PropTypes.string,
-  zip: PropTypes.string
-}

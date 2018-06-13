@@ -1,78 +1,61 @@
-import {Link} from 'react-router-dom'
 import React from 'react'
-import {HomeSearchCard} from './index'
+import {HomeSearchCard, CartHeader} from '../index'
 import {connect} from 'react-redux'
-import {fetchOrderHistory} from '../store/user'
+import {fetchOrderHistory} from '../../store/user'
 
 class CheckOut extends React.Component {
   componentDidMount() {
-    console.log('in component mount', this.props)
-    this.props.fetchOrderHistory(this.props.user.id)
+    const user = this.props.user
+    if (user.id) {
+      this.props.fetchOrderHistory(user.id)
+    }
   }
 
-  render() {
-    //this.props.fetchOrderHistory(this.props.user.id)
+  orderTotal = (order, products, orderKeys) =>
+    orderKeys.length && products.length
+      ? orderKeys.reduce((acc, productId) => {
+          const product = products.find(
+            currProd => Number(productId) === currProd.id
+          )
+          return acc + product.price * order[productId]
+        }, 0)
+      : 0
 
-    const orderNum = Object.keys(this.props.order).reduce(
-      (acc, curr) => acc + Number(this.props.order[curr]),
+  formatPrice = price =>
+    Number(price).toLocaleString('en', {
+      style: 'currency',
+      currency: 'USD'
+    })
+
+  render() {
+    const order = this.props.order
+    const products = this.props.products
+    const orderKeys = Object.keys(order)
+
+    const orderNum = orderKeys.reduce(
+      (acc, curr) => acc + Number(order[curr]),
       0
     )
 
-    const orderTotal =
-      Object.keys(this.props.order).length && this.props.products.length
-        ? Object.keys(this.props.order).reduce((acc, productId) => {
-            const product = this.props.products.find(
-              currProd => Number(productId) === currProd.id
-            )
-            return acc + product.price * this.props.order[productId]
-          }, 0)
-        : 0
-
-    const formatPrice = price =>
-      Number(price).toLocaleString('en', {
-        style: 'currency',
-        currency: 'USD'
-      })
-
     const tax = 0.08875
-
     const orderHistory = this.props.orderHistory
-    console.log('NEW ORDERHISTORY IS: ', this.props.orderHistory)
+
     let uniqueHistory = []
     for (var key in orderHistory) {
-      for (var nkey in orderHistory[key]) {
-        uniqueHistory.push(nkey)
+      if (orderHistory.hasOwnProperty(key)) {
+        for (var nkey in orderHistory[key]) {
+          uniqueHistory.push(nkey)
+        }
       }
     }
+
     uniqueHistory = [...new Set(uniqueHistory)]
 
     return (
       <div>
-        <div className="checkout-container row valign-wrapper">
-          <div className="checkout-text col s12 m6 offset-m1">
-            <h1>SHOPPING CART</h1>
-            <h2>
-              {`You have `}
-              {orderNum}
-              {` ${orderNum === 1 ? `item` : `items`} in your shopping cart.`}
-            </h2>
-          </div>
-          {Object.keys(this.props.order)[0] ? (
-            <Link to="/checkout/checkoutForm">
-              <button
-                type="submit"
-                className="btn waves-effect waves-light green"
-                onClick={element => console.log(element)}
-              >
-                Proceed with your order
-              </button>
-            </Link>
-          ) : (
-            <div />
-          )}
-        </div>
+        <CartHeader orderNum={orderNum} orderKeys={orderKeys} />
 
-        {Object.keys(this.props.order)[0] ? (
+        {orderKeys[0] ? (
           <div>
             <div className="checkout-summary row">
               <div className="col s12 m10 offset-m1">
@@ -80,10 +63,21 @@ class CheckOut extends React.Component {
                   <div className="card-content checkout-text">
                     <span className="card-title">ORDER SUMMARY</span>
                     <div>
-                      <div>Subtotal: {formatPrice(orderTotal)}</div>
+                      <div>
+                        Subtotal:{' '}
+                        {this.formatPrice(
+                          this.orderTotal(order, products, orderKeys)
+                        )}
+                      </div>
                       <div>Tax: {tax * 100}%</div>
                       <div>Shipping: FREE</div>
-                      <div>Total: {formatPrice(orderTotal * (1 + tax))}</div>
+                      <div>
+                        Total:{' '}
+                        {this.formatPrice(
+                          this.orderTotal(order, products, orderKeys) *
+                            (1 + tax)
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -93,11 +87,10 @@ class CheckOut extends React.Component {
               <div className="col s12 m10 offset-m1">
                 <h2>View or modify order</h2>
                 <div className="checkout-orders">
-                  {Object.keys(this.props.order).length &&
-                  this.props.products.length ? (
-                    Object.keys(this.props.order).map(productId => (
+                  {orderKeys.length && products.length ? (
+                    orderKeys.map(productId => (
                       <HomeSearchCard
-                        product={this.props.products.find(
+                        product={products.find(
                           product => product.id === Number(productId)
                         )}
                         key={productId}

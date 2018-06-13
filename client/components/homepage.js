@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 
-export const HomePage = props => {
+export const HomePage = () => {
   return (
     <div className="homepage-container">
       <div className="homepage-header">
