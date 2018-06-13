@@ -1,8 +1,12 @@
 import React from 'react'
-import {connect} from 'react-redux'
-import {deleteUser} from '../../store/user'
 
 const UserEdit = props => {
+  Object.keys(props.user).forEach(key => {
+    if (props.user[key] === null) {
+      props.user[key] = ''
+    }
+  })
+
   const {
     firstName,
     lastName,
@@ -14,9 +18,7 @@ const UserEdit = props => {
     zip
   } = props.user
 
-  const handleChange = props.handleChange
-  const handleSubmit = props.handleSubmit
-  const handleClick = props.handleClick
+  const {handleChange, handleClick, handleSubmit} = props
 
   return (
     <div className="row userInfo" onChange={handleChange}>
@@ -144,4 +146,4 @@ const UserEdit = props => {
   )
 }
 
-export default connect(null)(UserEdit)
+export default UserEdit

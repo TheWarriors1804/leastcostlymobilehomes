@@ -2,7 +2,6 @@ const User = require('./user')
 const Order = require('./order')
 const Product = require('./product')
 const OrderItem = require('./orderItem')
-const Sequelize = require('sequelize')
 const db = require('../db')
 
 /**

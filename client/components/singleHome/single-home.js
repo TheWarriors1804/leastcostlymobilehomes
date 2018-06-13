@@ -18,7 +18,7 @@ export const SingleHome = props => {
     return (
       <div>
         <HomeTitle info={current} />
-        <div className="flexContainer">
+        <div className="flexContainer homeMain">
           <img src={current.imageUrl} className="homeImage" />
           <HomeInfo info={current} handleSubmit={handleSubmit} />
         </div>

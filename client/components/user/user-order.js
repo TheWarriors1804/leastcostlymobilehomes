@@ -40,12 +40,3 @@ const mapStateToProps = state => {
 }
 
 export default connect(mapStateToProps)(UserOrder)
-
-/**
- * PROP TYPES
- */
-// UserOrder.propTypes = {
-//   firstName: PropTypes.string,
-//   lastName: PropTypes.string,
-//   imageUrl: PropTypes.string
-// }

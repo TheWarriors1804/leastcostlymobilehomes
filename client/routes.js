@@ -9,12 +9,10 @@ import {
   SingleHome,
   HomeSearch,
   HomePage,
-  CheckOut
+  CheckOut,
+  Confirmation
 } from './components'
-
-import CheckoutForm from './components/CheckoutForm'
-
-import Confirmation from './components/confirmation'
+import CheckoutForm from './components/cart/CheckoutForm'
 
 import {
   me,

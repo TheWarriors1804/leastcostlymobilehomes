@@ -29,7 +29,7 @@ class AuthForm extends Component {
     this.props.auth(email, password, formName, this.props.cart)
   }
 
-  handleChange(evt) {
+  handleChange() {
     this.props.getCart()
   }
 
@@ -107,6 +107,5 @@ export default connect(mapState, mapDispatch)(AuthForm)
 AuthForm.propTypes = {
   name: PropTypes.string.isRequired,
   displayName: PropTypes.string.isRequired,
-  // handleSubmit: PropTypes.func.isRequired,
   error: PropTypes.object
 }

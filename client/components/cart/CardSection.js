@@ -2,12 +2,11 @@ import React from 'react'
 import {CardElement, injectStripe, StripeElement} from 'react-stripe-elements'
 import {connect} from 'react-redux'
 import axios from 'axios'
-import Confirmation from './confirmation'
 import {
   completePurchaseGuest,
   completePurchaseLoggedIn,
   fetchCartFromLocalStorage
-} from '../store/order'
+} from '../../store/order'
 import {withRouter} from 'react-router-dom'
 
 class CardSection extends React.Component {
@@ -26,20 +25,25 @@ class CardSection extends React.Component {
     const createToken = await this.props.stripe.createToken({
       type: 'card'
     })
-    const newRoute = await axios.post('/api/stripe', {
-      token: createToken.token.id
-    })
-    console.log('new route is', newRoute)
-    if (newRoute.data === 'declined') {
-      this.setState({result: 'fail'})
-    }
-    if (newRoute.data === 'accepted') {
-      this.props.user.id
-        ? this.props.completePurchaseLoggedIn(
-            this.props.user.id,
-            this.props.history
-          )
-        : this.props.completePurchaseGuest(this.props.order, this.props.history)
+    if (createToken.token) {
+      const newRoute = await axios.post('/api/stripe', {
+        token: createToken.token.id
+      })
+
+      if (newRoute.data === 'declined') {
+        this.setState({result: 'fail'})
+      }
+      if (newRoute.data === 'accepted') {
+        this.props.user.id
+          ? this.props.completePurchaseLoggedIn(
+              this.props.user.id,
+              this.props.history
+            )
+          : this.props.completePurchaseGuest(
+              this.props.order,
+              this.props.history
+            )
+      }
     }
   }
 
@@ -91,7 +95,7 @@ class CardSection extends React.Component {
           {orderNew.map(ele => (
             <div key={ele.id} className="flexContainer orderInfo">
               <p className="orderInfoItem">
-                {ele.model + ' -   Quantaty: ' + order[ele.id] + '    '}
+                {ele.model + ' -   Quantity: ' + order[ele.id] + '    '}
               </p>
               {formatPrice(ele.price)}
             </div>
@@ -131,8 +135,7 @@ const mapState = (state, ownProps) => {
   }
 }
 
-const mapDispatch = (dispatch, ownProps) => {
-  console.log('OWNPROPS IS: ', ownProps)
+const mapDispatch = dispatch => {
   return {
     completePurchaseGuest: (order, history) =>
       dispatch(completePurchaseGuest(order, history)),

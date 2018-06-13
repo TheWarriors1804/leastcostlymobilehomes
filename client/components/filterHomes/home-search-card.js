@@ -36,11 +36,10 @@ class HomeSearchCard extends Component {
     }
   }
 
-  handleRemove = event => {
+  handleRemove = () => {
     this.props.user.id
       ? this.props.removeItemLoggedIn(this.state.productId, this.props.user.id)
       : this.props.removeItemGuest(this.state.productId)
-    // this.props.removeItemLoggedIn(this.state.productId, this.props.user.id)
   }
 
   render() {
@@ -51,6 +50,7 @@ class HomeSearchCard extends Component {
       year,
       price,
       model,
+      manufacturer,
       imageUrl
     } = this.props.product
 
@@ -68,8 +68,13 @@ class HomeSearchCard extends Component {
           </div>
           <div className="card-stacked">
             <div className="card-content">
-              <div>Model: {model}</div>
-              <div>Price: {formatPrice}</div>
+              <div className="flexContainer searchCardTitle">
+                <div className="flexContainer searchCardTitle">
+                  <div className="manufacturer">{manufacturer + ' - '}</div>
+                  <div>{model}</div>
+                </div>
+                <div>{formatPrice}</div>
+              </div>
               <div>Bedrooms: {bedrooms}</div>
               <div>Bathrooms: {bathrooms}</div>
               <div>Year: {year}</div>
@@ -116,7 +121,7 @@ class HomeSearchCard extends Component {
                 </button>
                 {this.props.order[this.state.productId] ? (
                   <button
-                    type="remove"
+                    type="button"
                     className="remove-item-btn"
                     onClick={event => this.handleRemove(event)}
                   >
