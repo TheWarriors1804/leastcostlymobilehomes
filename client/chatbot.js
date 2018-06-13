@@ -19,7 +19,7 @@ const Chatbot = () => {
       <ThemeProvider theme={theme}>
         <ChatBot
           floating="true"
-          botAvatar="connor.jpeg"
+          botAvatar="connor.jpg"
           steps={[
             {
               id: '0',

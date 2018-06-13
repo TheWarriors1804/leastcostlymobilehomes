@@ -1,8 +1,7 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {HomeSearchCard} from '../index'
-import {Link} from 'react-router-dom'
+
 /**
  * COMPONENT
  */
@@ -62,16 +61,18 @@ export class HomeSearch extends React.Component {
                 <span>Tiny Home</span>
               </label>
             </form>
-            <form>
+
+            <form action="#">
               <div>Maximum Price</div>
-              <select name="price" onChange={event => this.onChange(event)}>
-                <option defaultValue value="all">
-                  View all
-                </option>
-                <option value="60000">$60,000</option>
-                <option value="80000">$80,000</option>
-                <option value="100000">$100,000</option>
-              </select>
+              <p className="range-field">
+                <input
+                  type="range"
+                  onChange={event => this.onChange(event)}
+                  name="price"
+                  min="60000"
+                  max="100000"
+                />
+              </p>
             </form>
             <form>
               <div>Bedrooms</div>
@@ -120,10 +121,3 @@ const mapState = state => {
 }
 
 export default connect(mapState)(HomeSearch)
-
-/**
- * PROP TYPES
- */
-// SingleHome.propTypes = {
-//   email: PropTypes.string
-// };

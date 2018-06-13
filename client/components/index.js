@@ -8,7 +8,8 @@ export {default as Navbar} from './navbar'
 export {default as HomePage} from './homepage'
 export {default as Login} from './login-form'
 export {default as Signup} from './signup-form'
-export {default as CheckOut} from './checkOut'
+export {default as CheckOut} from './cart/checkOut'
+export {default as CartHeader} from './cart/cart-header'
 
 // User components
 
@@ -32,5 +33,6 @@ export {default as HomeSearchCard} from './filterHomes/home-search-card'
 
 // Stripe Components
 
-export {default as CheckOutForm} from './CheckoutForm'
-export {default as CardSection} from './CardSection'
+export {default as CheckOutForm} from './cart/CheckoutForm'
+export {default as Confirmation} from './cart/confirmation'
+export {default as CardSection} from './cart/CardSection'

@@ -1,6 +1,5 @@
 import axios from 'axios'
 import history from '../history'
-import order from './order'
 
 /**
  * ACTION TYPES
@@ -78,7 +77,7 @@ export const fetchOrderHistory = userId => async dispatch => {
   const orderHistory = await axios.get(`/api/orders/${userId}`)
   let final = {}
   if (orderHistory.data[0]) {
-    orderHistory.data.forEach(async order => {
+    orderHistory.data.forEach(order => {
       const orderItems = {}
       const orderProducts = order.products
       if (orderProducts[0]) {

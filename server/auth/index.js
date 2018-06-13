@@ -16,8 +16,6 @@ router.post('/login', (req, res, next) => {
       } else if (!user.correctPassword(req.body.password)) {
         res.status(401).send('Incorrect password')
       } else {
-        //add localStorage to db here
-        // const cart = localStorage.cart
         const cart = req.body.cart
         const userorder = await Order.findAll({
           where: {userId: user.id, complete: false},
@@ -29,35 +27,39 @@ router.post('/login', (req, res, next) => {
             complete: false
           })
           for (var key in cart) {
-            await OrderItem.create({
-              productId: key,
-              orderId: neworder.id,
-              quantity: cart[key]
-            })
+            if (cart.hasOwnProperty(key)) {
+              await OrderItem.create({
+                productId: key,
+                orderId: neworder.id,
+                quantity: cart[key]
+              })
+            }
           }
         } else {
           for (const id in cart) {
-            let flag = false
-            userorder[0].dataValues.products.forEach(async product => {
-              if (id == product.dataValues.id) {
-                flag = true
-                const userorderitem = await OrderItem.findAll({
-                  where: {
-                    orderId: userorder[0].id,
-                    productId: product.dataValues.id
-                  }
-                })
-                const updated = await userorderitem[0].update({
+            if (cart.hasOwnProperty(id)) {
+              let flag = false
+              userorder[0].dataValues.products.forEach(async product => {
+                if (id == product.dataValues.id) {
+                  flag = true
+                  const userorderitem = await OrderItem.findAll({
+                    where: {
+                      orderId: userorder[0].id,
+                      productId: product.dataValues.id
+                    }
+                  })
+                  await userorderitem[0].update({
+                    quantity: cart[id]
+                  })
+                }
+              })
+              if (flag === false) {
+                await OrderItem.create({
+                  orderId: userorder[0].id,
+                  productId: id,
                   quantity: cart[id]
                 })
               }
-            })
-            if (flag === false) {
-              const neworderitem = await OrderItem.create({
-                orderId: userorder[0].id,
-                productId: id,
-                quantity: cart[id]
-              })
             }
           }
         }
