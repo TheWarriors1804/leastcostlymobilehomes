@@ -75,6 +75,7 @@ export const deleteUser = user => async dispatch => {
 }
 
 export const fetchOrderHistory = userId => async dispatch => {
+  console.log('in fetch order history thunk')
   const orderHistory = await axios.get(`/api/orders/${userId}`)
   let final = {}
   if (orderHistory.data[0]) {

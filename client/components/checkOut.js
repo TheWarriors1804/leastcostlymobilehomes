@@ -5,13 +5,21 @@ import {connect} from 'react-redux'
 import {fetchOrderHistory} from '../store/user'
 
 class CheckOut extends React.Component {
+  // componentWillReceiveProps(nextProps) {
+  //   if(nextProps !== this.props) {
+  //   this.props.fetchOrderHistory(this.props.user.id)}
+  //   console.log('component receive')
+  // }
   componentDidMount() {
     console.log('in component mount', this.props)
-    // this.props.fetchOrderHistory(this.props.user.id)
+    if (this.props.fetchOrderHistory && this.props.user.id) {
+      this.props.fetchOrderHistory(this.props.user.id)
+      console.log('after mount', this.props.user)
+    }
   }
 
   render() {
-    this.props.fetchOrderHistory(this.props.user.id)
+    // this.props.fetchOrderHistory(this.props.user.id)
     console.log('the user is: ', this.props.user, this.props.orderHistory)
 
     const orderNum = Object.keys(this.props.order).reduce(
@@ -39,15 +47,19 @@ class CheckOut extends React.Component {
     const tax = 0.08875
 
     const orderHistory = this.props.orderHistory
-    console.log('NEW ORDERHISTORY IS: ', this.props.orderHistory)
-    let uniqueHistory = []
-    for (var key in orderHistory) {
-      for (var nkey in orderHistory[key]) {
-        uniqueHistory.push(nkey)
-      }
-    }
-    uniqueHistory = [...new Set(uniqueHistory)]
+      ? this.props.orderHistory.orderItems
+      : null
 
+    console.log('NEW ORDERHISTORY IS: ', this.props.orderHistory)
+    // let uniqueHistory = []
+    // for (var key in this.props.orderHistory.orderItems) {
+    //   for (var nkey in this.props.orderHistory.orderItems) {
+    //     uniqueHistory.push(nkey)
+    //   }
+    // }
+    // uniqueHistory = [...new Set(uniqueHistory)]
+
+    // console.log('this.props.order is: ', uniqueHistory)
     return (
       <div>
         <div className="checkout-container row valign-wrapper">
@@ -59,7 +71,7 @@ class CheckOut extends React.Component {
               {` ${orderNum === 1 ? `item` : `items`} in your shopping cart.`}
             </h2>
           </div>
-          {Object.keys(this.props.order)[0] ? (
+          {Object.keys(this.props.order).length > 0 ? (
             <Link to="/checkout/checkoutForm">
               <button
                 type="submit"
@@ -74,7 +86,7 @@ class CheckOut extends React.Component {
           )}
         </div>
 
-        {Object.keys(this.props.order)[0] ? (
+        {Object.keys(this.props.order).length > 0 ? (
           <div>
             <div className="checkout-summary row">
               <div className="col s12 m10 offset-m1">
@@ -114,7 +126,7 @@ class CheckOut extends React.Component {
           </div>
         ) : (
           <div>
-            {uniqueHistory[0] ? (
+            {/* {uniqueHistory[0] ? (
               <div>
                 <h2>Add Your Past Orders to Cart</h2>
                 {uniqueHistory.map(item => (
@@ -128,7 +140,7 @@ class CheckOut extends React.Component {
               </div>
             ) : (
               <div />
-            )}
+            )} */}
           </div>
         )}
       </div>
