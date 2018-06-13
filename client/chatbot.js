@@ -55,12 +55,15 @@ const Chatbot = () => {
             },
             {
               id: '6',
-              message: `Q: How do you know if there's a snowman in your bed?`,
-              trigger: '7'
+              message: `Knock Knock`,
+              options: [
+                {value: 1, label: `Who's there?`, trigger: '7'},
+                {value: 2, label: `Who's there?`, trigger: '7'}
+              ]
             },
             {
               id: '7',
-              message: `A: You wake up wet!`,
+              message: `Least Costly Mobile Homes Direct!`,
               trigger: '5'
             },
             {
