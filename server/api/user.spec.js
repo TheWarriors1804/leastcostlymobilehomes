@@ -53,26 +53,6 @@ describe('Initial user tests', () => {
     })
   })
 
-  // describe('/api/users/:id', () => {
-  //   const teddyEmail = 'teddy@westworld.com'
-  //   beforeEach(() => {
-  //     return User.create({
-  //       firstName: 'Teddy',
-  //       lastName: 'Flood',
-  //       email: teddyEmail
-  //     })
-  //   })
-
-  //   it('GET /api/users/:id', () => {
-  //     return request(app)
-  //       .get('/api/users/1')
-  //       .expect(200)
-  //       .then(res => {
-  //         expect(res.body[0]).to.be.an('object')
-  //         expect(res.body[0].email).to.be.equal(teddyEmail)
-  //       })
-  //   })
-  // })
   describe('User GET User routes', () => {
     beforeEach(() => {
       return db.sync({force: true})
