@@ -21,13 +21,17 @@ describe('User GET Product Routes', () => {
     })
 
     it('GET /api/products', () => {
-      return request(app)
-        .get('/api/products')
-        .expect(200)
-        .then(res => {
-          expect(res.body).to.be.an('array')
-          expect(res.body[0].price).to.be.equal('500.00')
-        })
+      try {
+        return request(app)
+          .get('/api/products')
+          .expect(200)
+          .then(res => {
+            expect(res.body).to.be.an('array')
+            expect(res.body[0].price).to.be.equal('500.00')
+          })
+      } catch (err) {
+        console.log(err)
+      }
     })
   })
 

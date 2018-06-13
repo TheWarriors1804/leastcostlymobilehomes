@@ -8,7 +8,7 @@ const Order = db.model('order')
 
 describe('Order routes', () => {
   beforeEach(() => {
-    db.sync({force: true})
+    return db.sync({force: true})
   })
 
   describe('/api/orders', () => {
