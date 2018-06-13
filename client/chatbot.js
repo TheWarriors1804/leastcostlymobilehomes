@@ -109,17 +109,32 @@ const Chatbot = () => {
             },
             {
               id: '16',
-              message: 'Click here to see our Single Wide homes',
-              end: true
+              component: (
+                <div>
+                  Click <a href="/singleHome/2">here </a> to see our featured
+                  Single Wide home
+                </div>
+              ),
+              floating: false
             },
             {
               id: '17',
-              message: 'Click here to see our Double Wide homes',
+              component: (
+                <div>
+                  Click <a href="/singleHome/3">here </a> to see our featured
+                  Double Wide home
+                </div>
+              ),
               end: true
             },
             {
               id: '18',
-              message: 'Click here to see our Tiny Homes',
+              component: (
+                <div>
+                  Click <a href="/singleHome/10">here </a> to see our featured
+                  Tiny Home
+                </div>
+              ),
               end: true
             },
             {
