@@ -53,24 +53,50 @@ describe('Initial user tests', () => {
     })
   })
 
-  describe('/api/users/:id', () => {
-    const teddyEmail = 'teddy@westworld.com'
+  // describe('/api/users/:id', () => {
+  //   const teddyEmail = 'teddy@westworld.com'
+  //   beforeEach(() => {
+  //     return User.create({
+  //       firstName: 'Teddy',
+  //       lastName: 'Flood',
+  //       email: teddyEmail
+  //     })
+  //   })
+
+  //   it('GET /api/users/:id', () => {
+  //     return request(app)
+  //       .get('/api/users/1')
+  //       .expect(200)
+  //       .then(res => {
+  //         expect(res.body[0]).to.be.an('object')
+  //         expect(res.body[0].email).to.be.equal(teddyEmail)
+  //       })
+  //   })
+  // })
+  describe('User GET User routes', () => {
     beforeEach(() => {
-      return User.create({
-        firstName: 'Teddy',
-        lastName: 'Flood',
-        email: teddyEmail
-      })
+      return db.sync({force: true})
     })
 
-    it('GET /api/users/:id', () => {
-      return request(app)
-        .get('/api/users/1')
-        .expect(200)
-        .then(res => {
-          expect(res.body).to.be.an('object')
-          expect(res.body.email).to.be.equal(teddyEmail)
+    describe('/api/users/', () => {
+      const doloresEmail = 'dolores@westworld.com'
+      beforeEach(() => {
+        return User.create({
+          firstName: 'Dolores',
+          lastName: 'Abernathy',
+          email: doloresEmail
         })
-    })
-  })
+      })
+
+      it('GET /api/users', () => {
+        return request(app)
+          .get('/api/users')
+          .expect(200)
+          .then(res => {
+            expect(res.body).to.be.an('array')
+            expect(res.body[0].email).to.be.equal(doloresEmail)
+          })
+      })
+    }) // end describe('/api/users')
+  }) // end describe('User routes')
 })

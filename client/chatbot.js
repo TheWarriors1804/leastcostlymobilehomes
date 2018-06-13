@@ -50,45 +50,82 @@ const Chatbot = () => {
               id: '5',
               options: [
                 {value: 1, label: 'Tell me a joke', trigger: '6'},
-                {value: 2, label: 'Help me shop a home', trigger: '8'}
+                {value: 2, label: 'Help me shop a home', trigger: '14'}
               ]
             },
             {
               id: '6',
-              message: `Q: How do you know if there's a snowman in your bed?`,
+              message: `Knock Knock`,
               trigger: '7'
             },
             {
               id: '7',
-              message: `A: You wake up wet!`,
-              trigger: '5'
+              options: [{value: 1, label: `Who's there?`, trigger: '8'}]
             },
             {
               id: '8',
-              message: 'What kind of home are you looking for?',
+              message: 'You know',
               trigger: '9'
             },
             {
               id: '9',
-              options: [
-                {value: 1, label: 'Single Wide', trigger: '10'},
-                {value: 2, label: 'Double Wide', trigger: '11'},
-                {value: 3, label: 'Tiny Home', trigger: '12'}
-              ]
+              options: [{value: 1, label: `You know who?`, trigger: 10}]
             },
             {
               id: '10',
+              message:
+                'I know the best source for the least costly mobile homes, direct!',
+              trigger: '11'
+            },
+            {
+              id: '11',
+              message: 'Do you want me to introduce you to them?',
+              trigger: '12'
+            },
+            {
+              id: '12',
+              options: [
+                {value: 1, label: 'Yes, please!', trigger: '13'},
+                {value: 2, label: 'No, thanks.', trigger: '19'}
+              ]
+            },
+            {
+              id: '13',
+              message: `You're right where you should be!`,
+              trigger: '14'
+            },
+            {
+              id: '14',
+              message: 'What kind of home are you looking for?',
+              trigger: '15'
+            },
+            {
+              id: '15',
+              options: [
+                {value: 1, label: 'Single Wide', trigger: '16'},
+                {value: 2, label: 'Double Wide', trigger: '17'},
+                {value: 3, label: 'Tiny Home', trigger: '18'}
+              ]
+            },
+            {
+              id: '16',
               message: 'Click here to see our Single Wide homes',
               end: true
             },
             {
-              id: '11',
+              id: '17',
               message: 'Click here to see our Double Wide homes',
               end: true
             },
             {
-              id: '12',
+              id: '18',
               message: 'Click here to see our Tiny Homes',
+              end: true
+            },
+            {
+              id: '19',
+              message:
+                'Thanks for visiting Least Costly Mobile Homes Direct, have a good day!',
               end: true
             }
           ]}

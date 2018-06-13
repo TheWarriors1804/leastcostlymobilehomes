@@ -2,7 +2,7 @@
 
 _Your source for the highest quality and least costly mobile homes_
 
-# :shopping_trolley: Motivation
+# 🛒 Motivation
 
 Our group formulated this e-commerce site for our Grace Shopper project in Fullstack Academy of Code.
 
@@ -28,7 +28,7 @@ For the front-end, modular components were built and styled using the following:
 * :control_knobs: State Management System: React-Redux
 * :clipboard:Cascading Style Sheets: Materialize
 
-# :female-technologist: :male-technologist: Owners/Collaborators
+# 👩‍💻 👨‍💻 Owners/Collaborators
 
 * [Matt Ferguson](https://github.com/mdfergus/)
 * [Anton Holmes](https://github.com/antonholmes/)
