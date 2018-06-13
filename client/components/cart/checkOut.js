@@ -40,17 +40,6 @@ class CheckOut extends React.Component {
     const tax = 0.08875
     const orderHistory = this.props.orderHistory
 
-    let uniqueHistory = []
-    for (var key in orderHistory) {
-      if (orderHistory.hasOwnProperty(key)) {
-        for (var nkey in orderHistory[key]) {
-          uniqueHistory.push(nkey)
-        }
-      }
-    }
-
-    uniqueHistory = [...new Set(uniqueHistory)]
-
     return (
       <div>
         <CartHeader orderNum={orderNum} orderKeys={orderKeys} />
@@ -105,21 +94,6 @@ class CheckOut extends React.Component {
           </div>
         ) : (
           <div>
-            {uniqueHistory[0] ? (
-              <div>
-                <h2>Add Your Past Orders to Cart</h2>
-                {uniqueHistory.map(item => (
-                  <HomeSearchCard
-                    product={this.props.products.find(
-                      product => product.id === Number(item)
-                    )}
-                    key={item}
-                  />
-                ))}
-              </div>
-            ) : (
-              <div />
-            )}
           </div>
         )}
       </div>
