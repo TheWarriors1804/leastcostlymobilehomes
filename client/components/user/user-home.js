@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {UserInfo, UserOrder, UserEdit} from '../index'
 import {updateUser, deleteUser} from '../../store/user'
@@ -39,10 +38,11 @@ export class UserHome extends Component {
   handleChange = event => {
     const id = event.target.id
     const value = event.target.value
+    const oldState = this.state.user
 
     this.setState({
       user: {
-        ...this.state.user,
+        ...oldState,
         [id]: value
       }
     })
@@ -62,16 +62,17 @@ export class UserHome extends Component {
   }
 
   render() {
-    const orderHistoryExists = this.props.user.orderHistory
-      ? !!Object.keys(this.props.user.orderHistory).length
+    const {editing, user} = this.state
+    const {firstName, lastName, imageUrl} = user
+    const {orderHistory} = this.props.user
+
+    const orderHistoryExists = orderHistory
+      ? !!Object.keys(orderHistory).length
       : false
 
     const sortedOrders = orderHistoryExists
-      ? Object.keys(this.props.user.orderHistory).sort((a, b) => b - a)
+      ? Object.keys(orderHistory).sort((first, next) => next - first)
       : null
-
-    const {editing, user} = this.state
-    const {firstName, lastName, imageUrl} = user
 
     if (!this.props.user) {
       return <h3>Loading User Info...</h3>
@@ -141,12 +142,3 @@ const mapDispatchToProps = dispatch => ({
 })
 
 export default connect(mapState, mapDispatchToProps)(UserHome)
-
-/**
- * PROP TYPES
- */
-UserHome.propTypes = {
-  firstName: PropTypes.string,
-  lastName: PropTypes.string,
-  imageUrl: PropTypes.string
-}
