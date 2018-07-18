@@ -31,11 +31,10 @@ For the front-end, modular components were built and styled using the following:
 # 👩‍💻 👨‍💻 Owners/Collaborators
 
 * [Matt Ferguson](https://github.com/mdfergus/)
-* [Anton Holmes](https://github.com/antonholmes/)
 * [Teresa Li](https://github.com/teresay/)
 * [Jesse Sullivan](https://github.com/Delune/)
 * [Jenny Wang](https://github.com/jennysihua/)
 
 # :satellite: Deployment
 
-LCMHD:tm: was deployed using Heroku, and is accessible through: https://leastcostlymobilehomesdirect.herokuapp.com/homeSearch
+LCMHD:tm: was deployed using Heroku, and is accessible through: https://leastcostlymobilehomesdirect.herokuapp.com/
